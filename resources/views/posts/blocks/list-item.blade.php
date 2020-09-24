@@ -6,8 +6,8 @@
             <small class="text-muted">Last updated 3 mins ago</small>
         </p>
 
-        <div class="button-group">
-            <a class="btn btn-primary" href="{{route('posts.edit', ['post' => $post->id])}}" role="button">Edit</a>
+        <div class="button-group d-flex justify-content-end">
+            <a class="btn btn-primary mr-1" href="{{route('posts.edit', ['post' => $post->id])}}" role="button">Edit</a>
             <form method="POST" action="{{route('posts.destroy', ['post' => $post->id])}}">
                 @csrf
                 @method('DELETE')
