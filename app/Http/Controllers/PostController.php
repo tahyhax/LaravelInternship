@@ -44,9 +44,7 @@ class PostController extends Controller
            '_token'
         ]);
         $data['user_id'] = 1626;
-////        dd($data);
-//        $post = new Post;
-//        dd($request->all());
+
         Post::create($data);
 
         return redirect()->route('posts.index')
@@ -84,8 +82,6 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-//        $data = $request->all();
-//        dd($data);
         $post->update($request->all());
         return redirect()->route('posts.show', ['post' => $post->id])
             ->with('success', 'Post updated successfully.');

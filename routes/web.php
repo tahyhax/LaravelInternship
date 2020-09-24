@@ -18,4 +18,3 @@ Route::get('/', function () {
 });
 
 Route::resource('posts', \App\Http\Controllers\PostController::class);
-//Route::resource('comments', \App\Models\Post::class);

@@ -12,13 +12,6 @@ class Post extends Model
     protected $fillable = [
         'title', 'body' , 'user_id',
     ];
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
