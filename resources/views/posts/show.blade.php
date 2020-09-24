@@ -1,4 +1,7 @@
 @extends('layouts.app')
+
+@section('title', 'Post show')
+
 @section('content')
     <div class="card mb-3">
         <div class="card-body">

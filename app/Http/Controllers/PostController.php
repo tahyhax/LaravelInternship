@@ -87,7 +87,7 @@ class PostController extends Controller
 //        $data = $request->all();
 //        dd($data);
         $post->update($request->all());
-        return redirect()->route('posts.index')
+        return redirect()->route('posts.show', ['post' => $post->id])
             ->with('success', 'Post updated successfully.');
     }
 

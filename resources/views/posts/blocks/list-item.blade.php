@@ -5,5 +5,10 @@
         <p class="card-text">
             <small class="text-muted">Last updated 3 mins ago</small>
         </p>
+
+        <div class="button-group">
+            <a class="btn btn-primary" href="{{route('posts.edit', ['post' => $post->id])}}" role="button">Edit</a>
+            <a class="btn btn-danger" href="{{route('posts.destroy', ['post' => $post->id])}}" role="button">Delete</a>
+        </div>
     </div>
 </div>
