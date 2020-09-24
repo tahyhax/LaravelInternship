@@ -13,6 +13,12 @@ class Post extends Model
         'title', 'body' , 'user_id',
     ];
 
+    //TODO непонятно чегоне зочет работать
+    protected $casts = [
+        'created_at' => 'datetime:d/m/Y',
+        'updated_at' => 'datetime:d/m/Y',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
