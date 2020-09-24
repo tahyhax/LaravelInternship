@@ -43,7 +43,7 @@ class PostController extends Controller
         $data = Arr::except($request->all(), [
            '_token'
         ]);
-        $data['user_id'] = 1626;
+        $data['user_id'] = 1; //TODO как правильно сохранять  relation data //Typo hardcode
 
         Post::create($data);
 
