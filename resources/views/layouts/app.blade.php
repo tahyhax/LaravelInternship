@@ -14,7 +14,6 @@
 
 <div class="container">
     @yield('content')
-    @include('blocks.footer')
 </div>
 
 
