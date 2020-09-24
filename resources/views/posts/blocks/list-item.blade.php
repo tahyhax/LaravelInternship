@@ -14,11 +14,11 @@
     </div>
     <div class="card-footer">
         <div class="button-group d-flex justify-content-end">
-            <a class="btn btn-primary mr-1" href="{{route('posts.edit', ['post' => $post->id])}}" role="button">Edit</a>
             <form method="POST" action="{{route('posts.destroy', ['post' => $post->id])}}">
                 @csrf
                 @method('DELETE')
-                <button  type="submit" class="btn btn-danger">Delete</button>
+                <a class="btn btn-primary mr-1" href="{{route('posts.edit', ['post' => $post->id])}}" role="button">Edit</a>
+                <button  type="submit" class="btn btn-danger" onclick="return confirm('Sure Want Delete?')">Delete</button>
             </form>
         </div>
     </div>
