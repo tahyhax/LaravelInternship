@@ -10,7 +10,7 @@
                 Updated: <small class="text-muted">{{ $post->updated_at->isoFormat('DD/MM/Y hh:mm') }}</small>
             @endif
         </div>
-        <p class="card-text">{{$post->body}}</p>
+        <p class="card-text">{!! $post->body !!}</p>
     </div>
     <div class="card-footer">
         <div class="button-group d-flex justify-content-end">
