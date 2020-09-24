@@ -4,5 +4,5 @@
 </div>
 <div class="form-group">
     <label for="body">Body</label>
-    <textarea class="form-control" id="body" name="body" rows="3" placeholder="post body" >{{$post->body}}</textarea>
+    <textarea class="form-control" id="body" name="body" rows="10" placeholder="post body" >{{$post->body}}</textarea>
 </div>
