@@ -1,7 +1,7 @@
 <div class="card mb-3">
     <div class="card-body">
 
-        <h5 class="card-title mb-1"><a href="{{route('posts.show', ['post' => $post->id])}}">{{$post->title}}</a></h5>
+        <h5 class="card-title mb-1"><a href="{{route('posts.show', ['post' => $post->slug])}}">{{$post->title}}</a></h5>
         <div class="mb-1">
             Creator: <small class="text-muted">{{$post->user->name}}</small>
             {{--// NOTE временно сделано пока не разберуcь почему на работает $casts--}}
@@ -15,10 +15,10 @@
     @auth
         <div class="card-footer">
             <div class="button-group d-flex justify-content-end">
-                <form method="POST" action="{{route('posts.destroy', ['post' => $post->id])}}">
+                <form method="POST" action="{{route('posts.destroy', ['post' => $post->slug])}}">
                     @csrf
                     @method('DELETE')
-                    <a class="btn btn-primary mr-1" href="{{route('posts.edit', ['post' => $post->id])}}" role="button">Edit</a>
+                    <a class="btn btn-primary mr-1" href="{{route('posts.edit', ['post' => $post->slug])}}" role="button">Edit</a>
                     <button  type="submit" class="btn btn-danger" onclick="return confirm('Sure Want Delete?')">Delete</button>
                 </form>
             </div>

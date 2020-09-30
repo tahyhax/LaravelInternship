@@ -19,11 +19,23 @@ class Post extends Model
         'updated_at' => 'datetime:d/m/Y',
     ];
 
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+
+//    public function getDateByHuman($field)
+//    {
+//       return $this->{$field}->diffForHumans();
+//    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }
