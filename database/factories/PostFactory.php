@@ -23,10 +23,15 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+        $title = $this->faker->text(30);
+        $slug = Str::slug($title, '-');
+
         return [
-            'title' => $this->faker->text(30),
+            'title' => $title,
             'body' => $this->faker->paragraphs(3, true),
-            'user_id' =>  User::factory()
+            'slug'=> $slug,
+            'user_id' =>  User::factory(),
+            'views' => $this->faker->biasedNumberBetween()
 
         ];
     }
