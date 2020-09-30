@@ -10,14 +10,12 @@
 </head>
 <body>
 
-@include('blocks.navbar', ['companyName' => 'InternShipPhp'])
+@include('blocks.header', ['companyName' => 'InternShipPhp'])
 @include('blocks.notice.message-session')
 
 <div class="container">
     @yield('content')
 </div>
-
-
 
 <script src="{{mix('js/app.js')}}"></script>
 
