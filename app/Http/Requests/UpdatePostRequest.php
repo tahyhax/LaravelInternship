@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class UpdatePostRequest extends FormRequest
 {
@@ -17,6 +19,13 @@ class UpdatePostRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'slug' => Str::slug($this->title),
+        ]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -25,23 +34,13 @@ class UpdatePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:100',
+            'title' => sprintf(
+                'required|max:100|min:3|%s', Rule::unique('posts', 'title')->ignore($this->post)
+            ),
+//            'slug' => sprintf(
+//                'required|max:100|min:3|%s', Rule::unique('posts', 'slug')->ignore($this->post)
+//            ),
             'body' => 'required',
         ];
     }
-
-//    public function getFromData()
-//    {
-//        $data = $this->request->all();
-//
-//        $data = Arr::except($data, [
-//            '_token',
-//            '_method'
-//        ]);
-//
-////        $data['user_id'] = Auth::id();
-//
-//        return $data;
-//
-//    }
 }
