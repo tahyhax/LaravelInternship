@@ -9,6 +9,8 @@
             @if($post->created_at != $post->updated_at)
                 Updated: <small class="text-muted">{{ $post->updated_at->diffForHumans() }}</small>
             @endif
+            Views: <small class="text-muted">{{ $post->views }}</small>
+
         </div>
         <p class="card-text">{!! $post->body !!}</p>
     </div>

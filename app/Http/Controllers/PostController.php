@@ -56,6 +56,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $post->increment('views',1); //TODO если заморочится можно сделать черзе EVENT
         return view('posts.show', ['post' => $post]);
     }
 
