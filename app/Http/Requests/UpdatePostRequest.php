@@ -37,9 +37,10 @@ class UpdatePostRequest extends FormRequest
             'title' => sprintf(
                 'required|max:100|min:3|%s', Rule::unique('posts', 'title')->ignore($this->post)
             ),
-//            'slug' => sprintf(
-//                'required|max:100|min:3|%s', Rule::unique('posts', 'slug')->ignore($this->post)
-//            ),
+            //note незнаю  как правильно оставлять валидацию  на slug или нет
+            'slug' => sprintf(
+                'required|max:100|min:3|%s', Rule::unique('posts', 'slug')->ignore($this->post)
+            ),
             'body' => 'required',
         ];
     }
