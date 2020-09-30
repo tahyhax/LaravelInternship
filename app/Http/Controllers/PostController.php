@@ -41,11 +41,11 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $data = Arr::except($request->all(), [
-           '_token'
-        ]);
+
         $data['user_id'] = Auth::id(); //TODO как правильно сохранять  relation data //Typo hardcode
 
+//        $post = new Post();
+//        $data['slug'] = $this->createSlug();
         Post::create($data);
 
         return redirect()->route('posts.index')
@@ -84,7 +84,8 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, Post $post)
     {
         $post->update($request->all());
-        return redirect()->route('posts.show', ['post' => $post->id])
+
+        return redirect()->route('posts.show', ['post' => $post->slug])
             ->with('success', 'Post updated successfully.');
     }
 
