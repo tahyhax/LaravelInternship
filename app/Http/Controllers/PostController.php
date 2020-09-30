@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -43,7 +44,7 @@ class PostController extends Controller
         $data = Arr::except($request->all(), [
            '_token'
         ]);
-        $data['user_id'] = 1; //TODO как правильно сохранять  relation data //Typo hardcode
+        $data['user_id'] = Auth::id(); //TODO как правильно сохранять  relation data //Typo hardcode
 
         Post::create($data);
 
@@ -88,10 +89,9 @@ class PostController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param Post $post
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Post $post)
     {
