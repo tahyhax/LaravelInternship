@@ -1,6 +1,6 @@
 @include('posts.blocks.form.errors')
 
-<form method="POST" action="{{route('posts.update',['post' => $post->id])}}">
+<form method="POST" action="{{route('posts.update',['post' => $post->slug])}}">
     @csrf
     @method('PUT')
     @include('posts.blocks.form.fields', ['post' => $post])
