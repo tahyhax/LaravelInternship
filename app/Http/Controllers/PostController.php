@@ -34,18 +34,14 @@ class PostController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StorePostRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StorePostRequest $request)
     {
-
+        $data = $request->all();
         $data['user_id'] = Auth::id(); //TODO как правильно сохранять  relation data //Typo hardcode
 
-//        $post = new Post();
-//        $data['slug'] = $this->createSlug();
         Post::create($data);
 
         return redirect()->route('posts.index')
