@@ -1,5 +1,5 @@
 
-@extends('layouts.app')
+@extends('front.layouts.app')
 @section('title', 'Welcome to laravel')
 @section('content')
     <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
