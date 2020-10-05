@@ -64,8 +64,9 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Register') }}
+                                        {{ __('Sing up') }}
                                     </button>
+                                    <a class="btn btn-outline-primary" href="{{ route('login') }}">Sign in</a>
                                 </div>
                             </div>
                         </form>
