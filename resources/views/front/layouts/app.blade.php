@@ -10,8 +10,7 @@
 </head>
 <body>
 
-@include('front.layouts.blocks.header', ['companyName' => 'InternShipPhp'])
-@include('front.blocks.notice.message-session')
+@include('front.layouts.partials._header', ['companyName' => 'InternShipPhp'])
 
 <div class="container">
     @yield('content')
