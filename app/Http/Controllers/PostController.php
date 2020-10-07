@@ -19,7 +19,9 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::latest()->paginate(10);
-        return view('posts.index', ['posts' => $posts]);
+        return view('front.posts.index', ['posts' => $posts]);
+
+
     }
 
     /**
@@ -30,7 +32,7 @@ class PostController extends Controller
     public function create()
     {
         $post = new Post();
-        return view('posts.create', ['post' => $post]);
+        return view('front.posts.create', ['post' => $post]);
     }
 
     /**
@@ -44,7 +46,7 @@ class PostController extends Controller
 
         Post::create($data);
 
-        return redirect()->route('posts.index')
+        return redirect()->route('front.posts.index')
             ->with('success', 'Post created successfully.');
     }
 
@@ -57,7 +59,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $post->increment('views',1); //TODO если заморочится можно сделать черзе EVENT
-        return view('posts.show', ['post' => $post]);
+        return view('front.posts.show', ['post' => $post]);
     }
 
     /**
@@ -68,7 +70,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.edit', ['post' => $post]);
+        return view('front.posts.edit', ['post' => $post]);
     }
 
     /**
@@ -82,7 +84,7 @@ class PostController extends Controller
     {
         $post->update($request->all());
 
-        return redirect()->route('posts.show', ['post' => $post->slug])
+        return redirect()->route('front.posts.show', ['post' => $post->slug])
             ->with('success', 'Post updated successfully.');
     }
 
@@ -94,6 +96,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
+        return redirect()->route('front.posts.index')->with('success', 'Post deleted successfully.');
     }
 }
