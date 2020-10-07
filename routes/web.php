@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', \App\Http\Controllers\Front\MainController::class)->name('main.index');
+
+Route::get('/category/{category:slug}', [\App\Http\Controllers\Front\CategoryController::class, 'show'])
+    ->name('category.show');
+
+Route::get('/category/{category:slug}/{product:slug}', [\App\Http\Controllers\Front\ProductController::class, 'show'])
+    ->name('products.show');
+
 
 //Route::resource('posts', \App\Http\Controllers\PostController::class);
 
@@ -28,4 +33,9 @@ Route::middleware('auth')->group(function() {
     Route::delete('posts/{post}', [\App\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');
     Route::post('posts', [\App\Http\Controllers\PostController::class, 'store'])->name('posts.store');
     Route::put('posts/{post}', [\App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
+});
+
+
+Route::prefix('admin')->name('Dashboard')->name('admin.')->group(function() {
+
 });
