@@ -46,10 +46,11 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category, Product $product)
+    public function show(Product $product)
     {
-        return view('front.products.show')->with(
-            compact(['product','category'])
+        $product->load('brand');
+        return view('front.products.index')->with(
+            compact(['product'])
         );
     }
 
