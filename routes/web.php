@@ -18,7 +18,7 @@ Route::get('/', \App\Http\Controllers\Front\MainController::class)->name('main.i
 Route::get('/category/{category:slug}', [\App\Http\Controllers\Front\CategoryController::class, 'show'])
     ->name('category.show');
 
-Route::get('/category/{category:slug}/{product:slug}', [\App\Http\Controllers\Front\ProductController::class, 'show'])
+Route::get('/product/{product:slug}', [\App\Http\Controllers\Front\ProductController::class, 'show'])
     ->name('products.show');
 
 
