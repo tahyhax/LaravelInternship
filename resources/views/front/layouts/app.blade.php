@@ -13,7 +13,14 @@
 @include('front.layouts.partials._header', ['companyName' => 'InternShipPhp'])
 
 <div class="container">
-    @yield('content')
+
+    <div class="row">
+        @yield('sidebar-left')
+        @yield('content')
+
+    </div>
+    <!-- /.row -->
+
 </div>
 
 <script src="{{mix('js/app.js')}}"></script>
