@@ -1,11 +1,14 @@
 <div class="card h-100">
-    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+    <a href="{{route('products.show', [
+                'product' => $product->slug,
+            ])}}">
+        <img class="card-img-top" src="http://placehold.it/700x400" alt="image-title">
+    </a>
     <div class="card-body">
         <h4 class="card-title">
-            {{--<a href="{{route('products.show', [--}}
-                {{--'category' => $category->slug,--}}
-                {{--'product' => $product->slug,--}}
-            {{--])}}">{{$product->name}}</a>--}}
+            <a href="{{route('products.show', [
+                'product' => $product->slug,
+            ])}}">{{$product->name}}</a>
         </h4>
         <h5>{{$product->price}}</h5>
         <p class="card-text">
@@ -13,6 +16,9 @@
         </p>
     </div>
     <div class="card-footer">
-        {{--<small class="text-muted">★ ★ ★ ★ ☆</small>--}}
+        <div class="d-flex justify-content-end">
+            <a href="javascript:void(0);"
+               class="btn btn-success btn-lg">{{__('Add to cart (:price)', ['price'=> $product->price])}}</a>
+        </div>
     </div>
 </div>
