@@ -17,10 +17,7 @@
         <div class="row">
             @foreach($category->products as $product)
                 <div class="col-lg-4 col-md-6 mb-4">
-                    @include('front.main.partials._products-list-item', [
-                    'category' => $category,
-                    'product' => $product
-                    ])
+                    <x-the-product-card :product="$product"></x-the-product-card>
                 </div>
             @endforeach
         </div>
