@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use App\Providers\Views\BladeStatements;
 
 class AppServiceProvider extends ServiceProvider
 {
+    use BladeStatements;
     /**
      * Register any application services.
      *
@@ -14,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 
     /**
@@ -24,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->bootBladeStatements();
+
         Paginator::defaultView('front.blocks.pagination');
 
         Paginator::defaultSimpleView('front.blocks.pagination');
