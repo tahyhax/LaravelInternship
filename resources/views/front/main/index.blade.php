@@ -10,8 +10,8 @@
 @section('content')
     <div class="col-lg-9">
         <div class="mb-4">
-            {{--//TODO сделать как каомонет или уточнить как правально будет реализовать--}}
-            @include('front.main.partials._slider')
+            {{--//TODO передать $items после добавления  можели  ImageLoader--}}
+            <x-the-carousel ></x-the-carousel>
         </div>
 
         <div class="row">
