@@ -10,7 +10,8 @@
 @section('content')
     <div class="col-lg-9">
         <div class="mb-4">
-            @include('front.main.partials._slider')
+            {{--//TODO передать $items после добавления  можели  ImageLoader--}}
+            <x-the-carousel ></x-the-carousel>
         </div>
 
         <div class="row">
