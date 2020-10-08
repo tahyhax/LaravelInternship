@@ -10,7 +10,7 @@
                 'product' => $product->slug,
             ])}}">{{$product->name}}</a>
         </h4>
-        <h5>{{$product->price}}</h5>
+        <h5>@money($product->price)</h5>
         <p class="card-text">
             {{$product->description}}
         </p>
@@ -18,7 +18,7 @@
     <div class="card-footer">
         <div class="d-flex justify-content-end">
             <a href="javascript:void(0);"
-               class="btn btn-success btn-lg">{{__('Add to cart (:price)', ['price'=> $product->price])}}</a>
+               class="btn btn-success btn-lg">{{__('Add to cart ($:price)', ['price'=> $product->price])}}</a>
         </div>
     </div>
 </div>
