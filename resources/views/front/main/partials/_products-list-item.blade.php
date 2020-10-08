@@ -17,6 +17,7 @@
     </div>
     <div class="card-footer">
         <div class="d-flex justify-content-end">
+            {{--TODO как вывести в переводах знак валюты--}}
             <a href="javascript:void(0);"
                class="btn btn-success btn-lg">{{__('Add to cart ($:price)', ['price'=> $product->price])}}</a>
         </div>

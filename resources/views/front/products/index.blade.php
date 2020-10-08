@@ -60,7 +60,7 @@
                     </div>
                     <hr/>
                     <h3 class="price-container">
-                        <span class="text-danger">{{$product->price}}</span>
+                        <span class="text-danger">@money($product->price)</span>
                         <small>*includes tax</small>
                     </h3>
 
