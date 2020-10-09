@@ -33,6 +33,7 @@ class SidebarCategoriesComposer
      */
     public function compose(View $view)
     {
-        $view->with('categories', $this->category->all());
+        $categories = $this->category->with('products')->withCount('products')->get();
+        $view->with('categories', $categories);
     }
 }
