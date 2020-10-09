@@ -2,20 +2,19 @@
 
 namespace App\View\Components;
 
+use App\Models\Product;
 use Illuminate\View\Component;
 
-class TheCarousel extends Component
+class ProductCardComponent extends Component
 {
-    protected $items;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Product $product)
     {
-        $items = [1,2,3,4];// hardcode пока не добавится модель для  загрузки  Image
-        $this->items = $items;
+        $this->product = $product;
     }
 
     /**
@@ -25,7 +24,7 @@ class TheCarousel extends Component
      */
     public function render()
     {
-        return view('components.the-carousel')
-            ->with(['items' => $this->items]);
+        return view('components.products.product-card')
+            ->with(['product' => $this->product]);
     }
 }
