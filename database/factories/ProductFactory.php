@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 class ProductFactory extends Factory
 {
@@ -44,6 +45,6 @@ class ProductFactory extends Factory
     private function getBrandId()
     {
         $brandIds = Brand::pluck('id')->toArray();
-        return array_rand($brandIds);
+        return Arr::random($brandIds);
     }
 }
