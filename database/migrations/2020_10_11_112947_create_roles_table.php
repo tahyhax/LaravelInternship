@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSlugToPostsTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class AddSlugToPostsTable extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->string('slug',103)->after('title');
-            $table->index(['slug']);
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 50)->unique();
+            $table->string('slug', 50)->unique();
+            $table->text('description')->nullable()->default('');
+            $table->timestamps();
+
         });
     }
 
@@ -26,9 +30,6 @@ class AddSlugToPostsTable extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->dropIndex(['slug']);
-            $table->dropColumn('slug');
-        });
+        Schema::dropIfExists('roles');
     }
 }
