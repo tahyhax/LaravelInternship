@@ -22,18 +22,6 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
-//        $name = $this->faker->unique()->name([
-//            'Gear',
-//            'Clothing',
-//            'Shoes',
-//            'Diapering',
-//            'Feeding',
-//            'Bath',
-//            'Toys',
-//            'Nursery',
-//            'Household',
-//            'Grocery'
-//         ]);
         $name = $this->faker->unique()->name;
         $slug = Str::slug($name, '-');
 //        $file = UploadedFile::fake()->image('category.png', 600, 600);

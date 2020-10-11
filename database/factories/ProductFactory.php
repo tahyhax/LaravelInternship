@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -22,7 +23,7 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->unique()->sentence;
+        $name = $this->faker->unique()->sentence(3);
         $slug = Str::slug($name, '-');
         // $file = UploadedFile::fake()->image('product.png', 600, 600);
 
@@ -34,7 +35,15 @@ class ProductFactory extends Factory
             //'cover' => $file->store('products', ['disk' => 'public'])
             'description' => $this->faker->paragraph,
             'price' => rand(1000, 450000) / 100,
+            'brand_id' => $this->getBrandId()
 
         ];
+    }
+
+
+    private function getBrandId()
+    {
+        $brandIds = Brand::pluck('id')->toArray();
+        return array_rand($brandIds);
     }
 }
