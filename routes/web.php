@@ -24,18 +24,38 @@ Route::get('/product/{product:slug}', [\App\Http\Controllers\Front\ProductContro
 
 //Route::resource('posts', \App\Http\Controllers\PostController::class);
 
-Route::get('posts', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
-Route::get('posts/{post}/show', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
+//Route::get('posts', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
+//Route::get('posts/{post}/show', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 
-Route::middleware('auth')->group(function() {
-    Route::get('posts/create', [\App\Http\Controllers\PostController::class, 'create'])->name('posts.create');
-    Route::get('posts/{post}/edit', [\App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
-    Route::delete('posts/{post}', [\App\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');
-    Route::post('posts', [\App\Http\Controllers\PostController::class, 'store'])->name('posts.store');
-    Route::put('posts/{post}', [\App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
-});
+//Route::middleware('auth')->group(function() {
+//    Route::get('posts/create', [\App\Http\Controllers\PostController::class, 'create'])->name('posts.create');
+//    Route::get('posts/{post}/edit', [\App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
+//    Route::delete('posts/{post}', [\App\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');
+//    Route::post('posts', [\App\Http\Controllers\PostController::class, 'store'])->name('posts.store');
+//    Route::put('posts/{post}', [\App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
+//});
+Route::name('cabinet.')
+//    ->namespace('\App\Http\Controllers\Dashboard')
+    ->prefix('cabinet')
+    ->group(function() {
+        Route::get('/', \App\Http\Controllers\Cabinet\MainController::class)
+            ->name('main.index');
+        Route::get('/customer-info', [\App\Http\Controllers\Cabinet\CustomerInfoController::class, 'show'])
+            ->name('customer-info.show');
+        Route::get('/customer-info/{customer}', [\App\Http\Controllers\Cabinet\CustomerInfoController::class, 'edit'])
+            ->name('customer-info.edit');
+
+        Route::put('/customer-info/{customer}/update', [\App\Http\Controllers\Cabinet\CustomerInfoController::class, 'update'])
+            ->name('customer-info.update');
+    });
 
 
-Route::prefix('admin')->name('Dashboard')->name('admin.')->group(function() {
-
+Route::name('admin.')
+//    ->namespace('\App\Http\Controllers\Dashboard')
+    ->prefix('admin')
+    ->group(function() {
+        Route::get('/', \App\Http\Controllers\Dashboard\MainController::class)
+        ->name('main.index');
+        Route::get('/users', [\App\Http\Controllers\Dashboard\UserController::class, 'index'])
+            ->name('users.index');
 });
