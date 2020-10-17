@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 // TODO 'middleware' => ['auth:api'] говорит что нет auth token
-Route::group(['as' => 'api.','namespace' => '\App\Http\Controllers\Api'], function () {
+Route::group(['as' => 'api.','namespace' => '\App\Http\Controllers\Api' ], function () {
     Route::apiResource('categories',    CategoryController::class);
 });
