@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSlugToPostsTable extends Migration
+class CreateImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddSlugToPostsTable extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->string('slug',103)->after('title');
-            $table->index(['slug']);
+        Schema::create('images', function (Blueprint $table) {
+            $table->id();
+            $table->morphs('imageable');
+            $table->timestamps();
         });
     }
 
@@ -26,9 +27,6 @@ class AddSlugToPostsTable extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->dropIndex(['slug']);
-            $table->dropColumn('slug');
-        });
+        Schema::dropIfExists('images');
     }
 }
