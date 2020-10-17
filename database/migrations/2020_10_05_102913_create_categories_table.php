@@ -17,8 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string('name',50)->unique();
             $table->string('slug',50)->unique();
-            $table->text('description')->nullable();
-            $table->string('cover')->nullable();
+            $table->foreignId('parent_id')->constrained('categories')->onUpdate('cascade')->onDelete('cascade')->nullable(false);
             $table->timestamps();
             $table->index(['slug']);
         });
