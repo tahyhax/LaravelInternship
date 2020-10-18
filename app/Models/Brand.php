@@ -9,7 +9,30 @@ class Brand extends Model
 {
     use HasFactory;
 
-    public function products() {
+    protected $fillable = [
+        'name',
+        'slug',
+        'description',
+    ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products()
+    {
         return $this->hasMany(Product::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 }
