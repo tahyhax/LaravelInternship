@@ -27,8 +27,8 @@ class CategoryFactory extends Factory
 //        $file = UploadedFile::fake()->image('category.png', 600, 600);
         return [
             'name' => $name,
-            'description' => $this->faker->paragraphs(4, true),
             'slug'=> $slug,
+//            'parent_id' => 0
             //'cover' => $file->store('categories', ['disk' => 'public'])
 
         ];
