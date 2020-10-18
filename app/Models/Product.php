@@ -9,6 +9,21 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'slug',
+        'sku',
+        'price',
+        'description',
+        'price',
+        'slug',
+    ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function brand()
     {
         return $this->belongsTo(Brand::class);
@@ -18,4 +33,11 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
+
 }
