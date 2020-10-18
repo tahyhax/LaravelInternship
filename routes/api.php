@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['as' => 'api.','namespace' => '\App\Http\Controllers\Api'], function () {
     Route::apiResource('categories',    CategoryController::class);
     Route::apiResource('products',    ProductController::class);
+    Route::apiResource('brands',    BrandController::class);
 
 //        ->parameters(['category', 'category:slug']);
 });
