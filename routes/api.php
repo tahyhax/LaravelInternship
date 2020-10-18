@@ -19,11 +19,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // TODO , 'middleware'=> 'auth:sanctum'  разобратся
-Route::group(['as' => 'api.','namespace' => '\App\Http\Controllers\Api'], function () {
-    Route::apiResource('categories',    CategoryController::class);
-    Route::apiResource('products',    ProductController::class);
-    Route::apiResource('brands',    BrandController::class);
-    Route::apiResource('posts',    PostController::class);
+Route::group(['as' => 'api.', 'namespace' => '\App\Http\Controllers\Api'], function () {
+//    Route::apiResources('categories',    CategoryController::class);
+//    Route::apiResource('products',    ProductController::class);
+//    Route::apiResource('brands',    BrandController::class);
+//    Route::apiResource('posts',    PostController::class);
+//    Route::apiResource('payment-methods',PaymentMethodController::class);
+    //        ->parameters(['category', 'category:slug']);
 
-//        ->parameters(['category', 'category:slug']);
+    Route::apiResources([
+        'categories' => CategoryController::class,
+        'products' => ProductController::class,
+        'brands' => BrandController::class,
+        'posts' => PostController::class,
+        'payment-methods' => PaymentMethodController::class,
+    ]);
+
 });
