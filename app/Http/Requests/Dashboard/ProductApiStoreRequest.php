@@ -11,6 +11,32 @@ use Illuminate\Http\JsonResponse;
 
 class ProductApiStoreRequest extends FormRequest
 {
+
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'slug' => Str::slug($this->name),
+        ]);
+    }
+
+    /**
+     * Handle a failed validation attempt.
+     *
+     * @param  \Illuminate\Contracts\Validation\Validator $validator
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function failedValidation(Validator $validator)
+    {
+        $errors = (new ValidationException($validator))->errors();
+
+        throw new HttpResponseException(
+            response()->json(['errors' => $errors], JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
+        );
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -19,13 +45,6 @@ class ProductApiStoreRequest extends FormRequest
     public function authorize()
     {
         return true;
-    }
-
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'slug' => Str::slug($this->name),
-        ]);
     }
 
 
@@ -44,22 +63,5 @@ class ProductApiStoreRequest extends FormRequest
             'categories' => 'required|array',
             'brand' => 'required|integer|exists:brands,id',
         ];
-    }
-
-    /**
-     * Handle a failed validation attempt.
-     *
-     * @param  \Illuminate\Contracts\Validation\Validator $validator
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function failedValidation(Validator $validator)
-    {
-        $errors = (new ValidationException($validator))->errors();
-
-        throw new HttpResponseException(
-            response()->json(['errors' => $errors], JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-        );
     }
 }
