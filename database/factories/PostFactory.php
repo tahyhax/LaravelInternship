@@ -25,12 +25,13 @@ class PostFactory extends Factory
     {
         $title = $this->faker->text(30);
         $slug = Str::slug($title, '-');
+        $userId = User::all()->pluck('id')->random();
 
         return [
             'title' => $title,
+            'slug' => $slug,
             'body' => $this->faker->paragraphs(3, true),
-            'slug'=> $slug,
-            'user_id' =>  User::factory(),
+            'user_id' => $userId,
             'views' => $this->faker->biasedNumberBetween()
 
         ];
