@@ -20,57 +20,55 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $per_page = $request->get('per_page') ? : self::PAGINATE_PER_PAGE;
+        $per_page = $request->get('per_page') ?: self::PAGINATE_PER_PAGE;
         $categories = Category::query()->orderBy('id', 'DESC')->paginate($per_page);
         return new CategoryResource($categories);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  CategoryApiStoreRequest $request
-     * @return \Illuminate\Http\Response
+     * @param CategoryApiStoreRequest $request
+     * @return CategoryResource
      */
     public function store(CategoryApiStoreRequest $request)
     {
-        $category =  Category::create($request->all());
+        $category = Category::create($request->all());
 
-        return (new CategoryResource($category))
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
         return new CategoryResource($category);
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Category $category
+     * @return CategoryResource
      */
-    public function update(CategoryApiUpdateRequest $request, Category $categroy)
+    public function show(Category $category)
     {
-
+        $category->load('images');
+        return new CategoryResource($category);
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param CategoryApiUpdateRequest $request
+     * @param Category $category
+     * @return \Illuminate\Http\JsonResponse|object
      */
-    public function destroy($id)
+    public function update(CategoryApiUpdateRequest $request, Category $category)
     {
-        //
+        $category->update($request->all());
+
+        return (new CategoryResource($category))
+            ->response()
+            ->setStatusCode(Response::HTTP_ACCEPTED);
+    }
+
+    /**
+     * @param Category $category
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|Response
+     * @throws \Exception
+     */
+    public function destroy(Category $category)
+    {
+        $category->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }

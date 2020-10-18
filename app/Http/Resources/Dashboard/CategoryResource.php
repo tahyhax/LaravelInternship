@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources\Dashboard;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryResource extends ResourceCollection
+class CategoryResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -14,7 +14,6 @@ class CategoryResource extends ResourceCollection
      */
     public function toArray($request)
     {
-//        dd(234);
         return parent::toArray($request);
     }
 }

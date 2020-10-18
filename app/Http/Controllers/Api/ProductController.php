@@ -3,62 +3,89 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\ProductApiStoreRequest;
+use App\Http\Requests\Dashboard\ProductApiUpdateRequest;
+use App\Http\Resources\Dashboard\ProductResource;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 
 class ProductController extends Controller
 {
+
+    const PAGINATE_PER_PAGE = 15;
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return ProductResource
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $per_page = $request->get('per_page') ?: self::PAGINATE_PER_PAGE;
+        $products = Product::query()->orderBy('id', 'DESC')->paginate($per_page);
+
+        return new ProductResource($products);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param ProductApiStoreRequest $request
+     * @return ProductResource
      */
-    public function store(Request $request)
+    public function store(ProductApiStoreRequest $request)
     {
-        //
+        $product = new Product($request->all());
+        $product->brand()->associate($request->get('brand'));
+
+        //TODO как будет правильно push или sync| он скорее всего не сохраняет и провто записывается данные
+//        $product->push();
+
+        $product->save();
+        $product->categories()->sync($request->get('categories', []));
+
+
+        return new ProductResource($product->load(['brand', 'categories', 'images']));
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return ProductResource
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        //
+        $product->load(['categories', 'brand', 'images']);
+
+        return new ProductResource($product);
+
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param ProductApiUpdateRequest $request
+     * @param Product $product
+     * @return ProductResource
      */
-    public function update(Request $request, $id)
+    public function update(ProductApiUpdateRequest $request, Product $product)
     {
-        //
+        $product->brand()->associate($request->get('brand'));
+        $product->update($request->all());
+        $product->categories()->sync($request->get('categories', []));
+
+        //NOTE Transform the resource into an HTTP response. ->response()
+        //TODO  https://laravel.com/docs/8.x/eloquent-resources
+        //TODO'posts' => PostResource::collection($this->posts), разобратся как работает
+        return new ProductResource($product->load(['categories', 'brand', 'images']));
+
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }
