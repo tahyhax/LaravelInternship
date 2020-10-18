@@ -11,15 +11,6 @@ use Illuminate\Http\JsonResponse;
 
 class CategoryApiStoreRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
 
     protected function prepareForValidation()
     {
@@ -27,19 +18,6 @@ class CategoryApiStoreRequest extends FormRequest
             'slug' => Str::slug($this->name),
         ]);
     }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            'name' => 'required|min:3|max:50|unique:categories',
-        ];
-    }
-
 
     /**
      * Handle a failed validation attempt.
@@ -57,5 +35,29 @@ class CategoryApiStoreRequest extends FormRequest
             response()->json(['errors' => $errors], JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
         );
     }
+
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'name' => 'required|min:3|max:50|unique:categories',
+        ];
+    }
+
 
 }

@@ -11,15 +11,7 @@ use Illuminate\Http\JsonResponse;
 
 class CategoryApiUpdateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
+
 
     protected function prepareForValidation()
     {
@@ -27,19 +19,6 @@ class CategoryApiUpdateRequest extends FormRequest
             'slug' => Str::slug($this->name),
         ]);
     }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            'name' => 'min:3|max:50|unique:categories,name,' . $this->category->id,
-        ];
-    }
-
 
     /**
      * Handle a failed validation attempt.
@@ -57,4 +36,29 @@ class CategoryApiUpdateRequest extends FormRequest
             response()->json(['errors' => $errors], JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
         );
     }
+
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'name' => 'min:3|max:50|unique:categories,name,' . $this->category->id,
+        ];
+    }
+
+
 }

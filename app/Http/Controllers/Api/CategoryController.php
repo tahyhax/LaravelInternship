@@ -22,6 +22,7 @@ class CategoryController extends Controller
     {
         $per_page = $request->get('per_page') ?: self::PAGINATE_PER_PAGE;
         $categories = Category::query()->orderBy('id', 'DESC')->paginate($per_page);
+
         return new CategoryResource($categories);
     }
 
@@ -55,9 +56,7 @@ class CategoryController extends Controller
     {
         $category->update($request->all());
 
-        return (new CategoryResource($category))
-            ->response()
-            ->setStatusCode(Response::HTTP_ACCEPTED);
+        return new CategoryResource($category);
     }
 
     /**
