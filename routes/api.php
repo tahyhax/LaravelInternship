@@ -18,7 +18,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// TODO 'middleware' => ['auth:api'] говорит что нет auth token
-Route::group(['as' => 'api.','namespace' => '\App\Http\Controllers\Api' ], function () {
+// TODO , 'middleware'=> 'auth:sanctum'  разобратся
+Route::group(['as' => 'api.','namespace' => '\App\Http\Controllers\Api'], function () {
     Route::apiResource('categories',    CategoryController::class);
+    Route::apiResource('products',    ProductController::class);
+
+//        ->parameters(['category', 'category:slug']);
 });
