@@ -23,6 +23,7 @@ Route::group(['as' => 'api.','namespace' => '\App\Http\Controllers\Api'], functi
     Route::apiResource('categories',    CategoryController::class);
     Route::apiResource('products',    ProductController::class);
     Route::apiResource('brands',    BrandController::class);
+    Route::apiResource('posts',    PostController::class);
 
 //        ->parameters(['category', 'category:slug']);
 });
