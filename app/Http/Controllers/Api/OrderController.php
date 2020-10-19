@@ -24,7 +24,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->get('per_page') ?: $this->perPage;
-        $requests = Order::query()->with(['user','orderItems.product.brand'])
+        $requests = Order::query()->with(['user', 'orderItems.product.brand'])
             ->orderBy('id', 'DESC')
             ->paginate($perPage);
 
@@ -42,16 +42,12 @@ class OrderController extends Controller
             $order->user()->associate($request->get('user'));
             $order->paymentMethod()->associate($request->get('paymentMethods'));
             $order->save();
-//
-//            $orderItems = [];
-//            foreach ($request->get('orderItems') as $item) {
-//                $orderItems[] = new OrderItem($item);
-//            }
-            //NOTE save принимает экземплярмодели а  create массив
-            $order->orderItems()->createMany($request->get('orderItems'));
-            return  new OrderResource($order->load(['user','orderItems.product.brand']));
 
-        } catch(\Exception $exception) {
+            $order->products()->sync($request->get('orderItems', []));
+
+            return new OrderResource($order->load(['user', 'products.brand']));
+
+        } catch (\Exception $exception) {
             //TODO сделать нормльный $exception
             throw new HttpException(400, "Invalid data - {$exception->getMessage()}");
         }
@@ -65,15 +61,13 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        return new OrderResource($order->load(['user','orderItems.product.brand']));
+        return new OrderResource($order->load(['user', 'products.brand']));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param OrderApiUpdateRequest $request
+     * @param Order $order
+     * @return OrderResource
      */
     public function update(OrderApiUpdateRequest $request, Order $order)
     {
@@ -81,15 +75,10 @@ class OrderController extends Controller
         $order->user()->associate($request->get('user'));
         $order->paymentMethod()->associate($request->get('paymentMethods'));
         $order->save();
-//        $orderItems = [];
-//        foreach ($request->get('orderItems') as $item) {
-//            $orderItems[] = new OrderItem($item);
-//        }
-//        $order->orderItems()->createMany($orderItems);
-        //TODO так не правильно дублирутся записи
-        $order->orderItems()->createMany($request->get('orderItems'));
 
-        return new OrderResource($order->load(['user','orderItems.product.brand']));
+        $order->products()->sync($request->get('orderItems', []));
+
+        return new OrderResource($order->load(['user', 'products.brand']));
     }
 
     /**
