@@ -54,17 +54,11 @@ class OrderApiUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-//            'address' => 'required|min:10|max:255',
-//            'user' => 'required|integer|exists:users,id',
-//            'paymentMethod'=> 'integer|exists:payment_methods,id',
-//            'orderItems.*'=> 'integer|exists:products,id',
-//            'orderItems'=> 'required|array',
-
             'address' => 'required|min:10|max:255',
             'user' => 'required|integer|exists:users,id',
-            'paymentMethods'=> 'integer|exists:payment_methods,id',
-            'orderItems.*.*'=> 'integer|exists:products,id',
-            'orderItems'=> 'required|array',
+            'paymentMethods' => 'integer|exists:payment_methods,id',
+            'orderItems.*.id' => 'integer|exists:products,id',
+            'orderItems' => 'required|array',
         ];
     }
 }
