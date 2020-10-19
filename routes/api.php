@@ -33,6 +33,7 @@ Route::group(['as' => 'api.', 'namespace' => '\App\Http\Controllers\Api'], funct
         'brands' => BrandController::class,
         'posts' => PostController::class,
         'payment-methods' => PaymentMethodController::class,
+        'orders' => OrderController::class,
     ]);
 
 });
