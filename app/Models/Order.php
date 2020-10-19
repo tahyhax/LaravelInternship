@@ -13,11 +13,6 @@ class Order extends Model
         'address', 'status', 'payment_methods_id', 'user_id',
     ];
 
-    public function orderItems()
-    {
-        return $this->hasMany(OrderItem::class);
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -26,5 +21,11 @@ class Order extends Model
     public function paymentMethod()
     {
         return $this->belongsTo(PaymentMethod::class,'payment_methods_id');
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'order_items')
+            ->withPivot('quantity')->as('orderItem');
     }
 }

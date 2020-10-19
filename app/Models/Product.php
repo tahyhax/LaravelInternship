@@ -38,9 +38,9 @@ class Product extends Model
         return $this->morphMany(Image::class, 'imageable');
     }
 
-    public function orderItems()
+    public function orders()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->belongsToMany(Order::class,'order_items');
     }
 
 }
