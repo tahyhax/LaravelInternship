@@ -18,4 +18,9 @@ class PaymentMethod extends Model
         return 'slug';
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
 }
