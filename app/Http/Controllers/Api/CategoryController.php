@@ -12,7 +12,7 @@ use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
-    const PAGINATE_PER_PAGE = 15;
+    protected $perPage = 10;
 
     /**
      * @param Request $request
@@ -20,8 +20,8 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $per_page = $request->get('per_page') ?: self::PAGINATE_PER_PAGE;
-        $categories = Category::query()->orderBy('id', 'DESC')->paginate($per_page);
+        $perPage = $request->get('per_page') ?: $this->perPage;
+        $categories = Category::query()->orderBy('id', 'DESC')->paginate($perPage);
 
         return new CategoryResource($categories);
     }

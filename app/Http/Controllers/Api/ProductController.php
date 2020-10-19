@@ -14,7 +14,7 @@ use Illuminate\Http\Response;
 class ProductController extends Controller
 {
 
-    const PAGINATE_PER_PAGE = 15;
+    protected $perPage = 10;
 
     /**
      * @param Request $request
@@ -22,8 +22,8 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $per_page = $request->get('per_page') ?: self::PAGINATE_PER_PAGE;
-        $products = Product::query()->orderBy('id', 'DESC')->paginate($per_page);
+        $perPage = $request->get('per_page') ?: $this->perPage;
+        $products = Product::query()->orderBy('id', 'DESC')->paginate($perPage);
 
         return new ProductResource($products);
     }
@@ -42,7 +42,6 @@ class ProductController extends Controller
 
         $product->save();
         $product->categories()->sync($request->get('categories', []));
-
 
         return new ProductResource($product->load(['brand', 'categories', 'images']));
     }
@@ -88,4 +87,6 @@ class ProductController extends Controller
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
+
+
 }

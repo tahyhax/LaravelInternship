@@ -15,7 +15,7 @@ use Illuminate\Http\Response;
 class OrderController extends Controller
 {
 
-    const PAGINATE_PER_PAGE = 15;
+    protected $perPage = 10;
 
     /**
      * @param Request $request
@@ -23,9 +23,10 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-
-        $per_page = $request->get('per_page') ?: self::PAGINATE_PER_PAGE;
-        $requests = Order::query()->with(['user','orderItems.product.brand'])->orderBy('id', 'DESC')->paginate($per_page);
+        $perPage = $request->get('per_page') ?: $this->perPage;
+        $requests = Order::query()->with(['user','orderItems.product.brand'])
+            ->orderBy('id', 'DESC')
+            ->paginate($perPage);
 
         return new OrderResource($requests);
     }

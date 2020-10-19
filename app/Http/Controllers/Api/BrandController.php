@@ -12,7 +12,7 @@ use Illuminate\Http\Response;
 
 class BrandController extends Controller
 {
-    const PAGINATE_PER_PAGE = 15;
+    protected $perPage = 10;
 
     /**
      * @param $request
@@ -20,8 +20,8 @@ class BrandController extends Controller
      */
     public function index(Request $request)
     {
-        $per_page = $request->get('per_page') ?: self::PAGINATE_PER_PAGE;
-        $brands = Brand::query()->orderBy('id', 'DESC')->paginate($per_page);
+        $perPage = $request->get('per_page') ?: $this->perPage;
+        $brands = Brand::query()->orderBy('id', 'DESC')->paginate($perPage);
 
         return new BrandResource($brands);
     }

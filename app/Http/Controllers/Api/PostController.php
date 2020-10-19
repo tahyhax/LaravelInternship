@@ -13,7 +13,7 @@ use Illuminate\Http\Response;
 class PostController extends Controller
 {
 
-    const PAGINATE_PER_PAGE = 15;
+    protected $perPage = 10;
 
     /**
      * @param Request $request
@@ -21,8 +21,9 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $per_page = $request->get('per_page') ?: self::PAGINATE_PER_PAGE;
-        $posts = Post::query()->orderBy('id', 'DESC')->paginate($per_page);
+        //TODO  refactor  All
+        $perPage = $request->get('per_page') ?: $this->perPage;
+        $posts = Post::query()->orderBy('id', 'DESC')->paginate($perPage);
         return new PostResource($posts);
     }
 
