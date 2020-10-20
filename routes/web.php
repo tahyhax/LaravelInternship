@@ -34,19 +34,21 @@ Route::get('/product/{product:slug}', [\App\Http\Controllers\Front\ProductContro
 //    Route::post('posts', [\App\Http\Controllers\PostController::class, 'store'])->name('posts.store');
 //    Route::put('posts/{post}', [\App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
 //});
-Route::name('cabinet.')
-//    ->namespace('\App\Http\Controllers\Dashboard')
-    ->prefix('cabinet')
-    ->group(function() {
-        Route::get('/', \App\Http\Controllers\Cabinet\MainController::class)
-            ->name('main.index');
-        Route::get('/customer-info', [\App\Http\Controllers\Cabinet\CustomerInfoController::class, 'show'])
-            ->name('customer-info.show');
-        Route::get('/customer-info/{customer}', [\App\Http\Controllers\Cabinet\CustomerInfoController::class, 'edit'])
-            ->name('customer-info.edit');
+Route::group(['as' => 'cabinet.', 'prefix' => 'cabinet', 'middleware' => 'auth'],
+//    'namespace' => '\App\Http\Controllers\Cabinet'
+//    'namespace' => '\App\Http\Controllers\Cabinet'
+// ],
+        function() {
+            Route::get('/', \App\Http\Controllers\Cabinet\MainController::class)
+                ->name('main.index');
 
-        Route::put('/customer-info/{customer}/update', [\App\Http\Controllers\Cabinet\CustomerInfoController::class, 'update'])
-            ->name('customer-info.update');
+            Route::get('/customer-info', [\App\Http\Controllers\Cabinet\CustomerInfoController::class, 'show'])
+                ->name('customer-info.show');
+            Route::get('/customer-info/{customer}', [\App\Http\Controllers\Cabinet\CustomerInfoController::class, 'edit'])
+                ->name('customer-info.edit');
+
+            Route::put('/customer-info/{customer}/update', [\App\Http\Controllers\Cabinet\CustomerInfoController::class, 'update'])
+                ->name('customer-info.update');
     });
 
 
