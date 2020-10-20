@@ -1,6 +1,6 @@
 @include('cabinet.customer-info.partials.form._errors')
 
-<form method="POST" action="{{route('cabinet.customer-info.update',['customer' => $customer])}}">
+<form method="POST" action="{{route('cabinet.customer-info.update',['customer' => $customer])}}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     @include('cabinet.customer-info.partials.form._fields', ['customer' => $customer])
