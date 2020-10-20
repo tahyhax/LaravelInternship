@@ -18,8 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// TODO , 'middleware'=> 'auth:sanctum'  разобратся
-Route::group(['as' => 'api.', 'namespace' => '\App\Http\Controllers\Api'], function () {
+Route::group(['as' => 'api.', 'namespace' => '\App\Http\Controllers\Api', 'middleware'=> 'auth:sanctum' ], function () {
 //    Route::apiResources('categories',    CategoryController::class);
 //    Route::apiResource('products',    ProductController::class);
 //    Route::apiResource('brands',    BrandController::class);
