@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id',
+        'name', 'email', 'password', 'role_id', 'avatar',
     ];
 
     /**
@@ -42,11 +42,13 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function posts() {
+    public function posts()
+    {
         return $this->hasMany(Post::class);
     }
 
-    public function role() {
+    public function role()
+    {
 
         $this->hasOne(Role::class);
     }
@@ -54,6 +56,15 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function getAvatarAttribute($image)
+    {
+        $image = $image
+            ? asset('avatars/' . $image)
+            : " https://via.placeholder.com/100x100?text=$this->name";
+
+        return $image;
     }
 
 }
