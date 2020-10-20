@@ -25,7 +25,7 @@ class CustomerInfoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  User  $customer
+     * @param  User $customer
      * @return \Illuminate\Http\Response
      */
     public function edit(User $customer)
@@ -41,9 +41,27 @@ class CustomerInfoController extends Controller
      */
     public function update(UserUpdateRequest $request, User $customer)
     {
-        $customer->update($request->all());
 
-       return redirect()->route('cabinet.customer-info.show')
+        $avatarHash = $this->storeImage($request);
+
+        //TODO  как правибудельно добвавить имя фаила если там уже существует  avatar как объект картинки и он
+        // TODO берет при сохранении tmpname
+        $customer->update(array_merge($request->all(), ['avatar' => $avatarHash]));
+
+        return redirect()->route('cabinet.customer-info.show')
             ->with('success', 'Post updated successfully.');
+    }
+
+
+    protected function storeImage(Request $request)
+    {
+        $path = '';
+
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $path = $avatar->store('avatars');
+        }
+
+        return substr($path, strlen('avatars/'));
     }
 }
