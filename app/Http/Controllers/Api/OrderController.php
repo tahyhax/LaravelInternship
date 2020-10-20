@@ -24,7 +24,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->get('per_page') ?: $this->perPage;
-        $requests = Order::query()->with(['user', 'orderItems.product.brand'])
+        $requests = Order::query()->with(['user', 'products.brand'])
             ->orderBy('id', 'DESC')
             ->paginate($perPage);
 
@@ -37,6 +37,7 @@ class OrderController extends Controller
      */
     public function store(OrderApiStoreRequest $request)
     {
+//        $this->authorize()
         try {
             $order = new Order($request->all());
             $order->user()->associate($request->get('user'));
