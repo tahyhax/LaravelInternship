@@ -21,7 +21,10 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->get('per_page') ?: $this->perPage;
-        $categories = Category::query()->orderBy('id', 'DESC')->paginate($perPage);
+        $categories = Category::query()->with('children')
+            ->whereNull('parent_id')
+            ->orderBy('id', 'DESC')
+            ->paginate($perPage);
 
         return new CategoryResource($categories);
     }
