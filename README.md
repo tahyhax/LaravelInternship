@@ -61,4 +61,6 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## Postman
- <p align="center"><a href="https://laravel.com" target="_blank"><img src="hhttps://github.com/tahyhax/OnixLaravelInternshipDmytroBekeshenko/blob/Lesson-3/tests/Postman/photo_2020-10-21_12-19-41.jpg" width="800"></a></p>
+ **[config](https://github.com/tahyhax/OnixLaravelInternshipDmytroBekeshenko/blob/Lesson-3/tests/Postman/intern.postman_collection.json)**
+ 
+ <p align="center"><img src="https://github.com/tahyhax/OnixLaravelInternshipDmytroBekeshenko/blob/Lesson-3/tests/Postman/photo_2020-10-21_12-19-41.jpg" width="800"></p>
