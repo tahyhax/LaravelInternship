@@ -54,7 +54,8 @@ class PostApiStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:3|max:100|unique:posts,name.' . $this->post->id
+            'title' => 'required|min:3|max:100|unique:posts,name.' . $this->post->id,
+            'publish_at' => 'nullable|date',
         ];
     }
 }

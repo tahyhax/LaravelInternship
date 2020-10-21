@@ -54,7 +54,8 @@ class PostApiUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:3|max:100|unique:posts'
+            'title' => 'required|min:3|max:100|unique:posts',
+            'publish_at' => 'nullable|date',
         ];
     }
 }
