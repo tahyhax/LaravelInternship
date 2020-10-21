@@ -46,7 +46,7 @@ class UserFactory extends Factory
     private function getRoleId($name)
     {
         $role = Role::query()->select('id')->where('slug', Str::slug($name))->first();
-        return $role || 1;
+        return $role ?? 1;
     }
 
 
