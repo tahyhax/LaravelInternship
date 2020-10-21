@@ -26,7 +26,7 @@ class UserUpdateRequest extends FormRequest
         return [
             'name' => 'required|min:3|unique:users,name,'.$this->customer->id,
             'email' => 'required|email|unique:users,email,'.$this->customer->id,
-            'avatar' => 'image'
+            'avatar' => 'image|size:2048'
         ];
     }
 }
