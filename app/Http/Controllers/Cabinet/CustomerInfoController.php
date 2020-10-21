@@ -42,7 +42,10 @@ class CustomerInfoController extends Controller
     public function update(UserUpdateRequest $request, User $customer)
     {
 
-        $avatarHash = $this->storeImage($request);
+        if ($request->hasFile('avatar')) {
+            $avatarHash = $this->storeImage($request);
+        }
+
 
         //TODO  как правибудельно добвавить имя фаила если там уже существует  avatar как объект картинки и он
         // TODO берет при сохранении tmpname
@@ -53,14 +56,16 @@ class CustomerInfoController extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     * @param $oldAvatar
+     * @return bool|string
+     */
     protected function storeImage(Request $request)
     {
-        $path = '';
 
-        if ($request->hasFile('avatar')) {
-            $avatar = $request->file('avatar');
-            $path = $avatar->store('avatars');
-        }
+        $avatar = $request->file('avatar');
+        $path = $avatar->store('avatars');
 
         return substr($path, strlen('avatars/'));
     }
