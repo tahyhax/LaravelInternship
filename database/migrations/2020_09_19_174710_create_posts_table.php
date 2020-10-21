@@ -20,7 +20,6 @@ class CreatePostsTable extends Migration
             $table->text('body')->nullable();
             $table->integer('views')->default(0);
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->nullable(false);
-            $table->timestamp("publish_at")->nullable();
             $table->timestamps();
             $table->index(['slug']);
 
