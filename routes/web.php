@@ -34,7 +34,7 @@ Route::get('/product/{product:slug}', [\App\Http\Controllers\Front\ProductContro
 //    Route::post('posts', [\App\Http\Controllers\PostController::class, 'store'])->name('posts.store');
 //    Route::put('posts/{post}', [\App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
 //});
-Route::group(['as' => 'cabinet.', 'prefix' => 'cabinet', 'middleware' => 'auth'],
+Route::group(['as' => 'cabinet.', 'prefix' => 'cabinet', 'middleware' => ['auth', 'role:user']],
 //    'namespace' => '\App\Http\Controllers\Cabinet'
 //    'namespace' => '\App\Http\Controllers\Cabinet'
 // ],
@@ -52,12 +52,12 @@ Route::group(['as' => 'cabinet.', 'prefix' => 'cabinet', 'middleware' => 'auth']
     });
 
 
-Route::name('admin.')
-//    ->namespace('\App\Http\Controllers\Dashboard')
-    ->prefix('admin')
-    ->group(function() {
-        Route::get('/', \App\Http\Controllers\Dashboard\MainController::class)
-        ->name('main.index');
-        Route::get('/users', [\App\Http\Controllers\Dashboard\UserController::class, 'index'])
-            ->name('users.index');
-});
+//Route::name('admin.')
+////    ->namespace('\App\Http\Controllers\Dashboard')
+//    ->prefix('admin')
+//    ->group(function() {
+//        Route::get('/', \App\Http\Controllers\Dashboard\MainController::class)
+//        ->name('main.index');
+//        Route::get('/users', [\App\Http\Controllers\Dashboard\UserController::class, 'index'])
+//            ->name('users.index');
+//});
