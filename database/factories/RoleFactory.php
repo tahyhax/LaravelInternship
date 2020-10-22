@@ -24,10 +24,8 @@ class RoleFactory extends Factory
     {
         $name = $this->faker->unique()->randomElement([
             'Admin',
-            'SuperAdmin',
             'Manager',
-            'User',
-            'Customer',
+            'OrderManager',
          ]);
         $slug = Str::slug($name);
 
