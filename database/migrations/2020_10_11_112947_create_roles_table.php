@@ -21,6 +21,10 @@ class CreateRolesTable extends Migration
             $table->timestamps();
 
         });
+
+        \Illuminate\Support\Facades\Artisan::call('db:seed', [
+            '--class' => \Database\Seeders\RoleSeeder::class
+        ]);
     }
 
     /**
