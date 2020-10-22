@@ -26,10 +26,8 @@ class UserFactory extends Factory
     {
         $name = $this->faker->randomElement([
             'Admin',
-            'SuperAdmin',
             'Manager',
-            'User',
-            'Customer',
+            'ManagerOrder',
         ]);
 
 
