@@ -16,7 +16,7 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
-        return Auth::user()->hasRole([...$roles]) ? $next($request) : abort(403);
+        return Auth::user()->hasRole($roles) ? $next($request) : abort(403);
 
     }
 }
