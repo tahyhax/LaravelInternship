@@ -40,6 +40,7 @@ class FortifyServiceProvider extends ServiceProvider
 
         Fortify::authenticateUsing(function (LoginRequest $request) {
             $user = User::query()->where('email', $request->email)->first();
+            echo(json_encode($user));
             if ($user && Hash::check($request->password, $user->password)) {
                 return $user;
             }
