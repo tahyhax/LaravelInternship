@@ -11,13 +11,13 @@
     <div class="col-lg-9">
         <div class="mb-4">
             {{--//TODO передать $items после добавления  можели  ImageLoader--}}
-            <x-the-carousel ></x-the-carousel>
+            <x-carousel :items="[1,2,4,5]"></x-carousel>
         </div>
 
         <div class="row">
             @foreach($products as $product)
                 <div class="col-lg-4 col-md-6 mb-4">
-                    <x-the-product-card :product="$product"></x-the-product-card>
+                    <x-products.product-card :product="$product"></x-products.product-card>
                 </div>
             @endforeach
         </div>

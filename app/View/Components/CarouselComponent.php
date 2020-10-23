@@ -12,9 +12,9 @@ class CarouselComponent extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($items)
     {
-        $items = [1,2,3,4];// hardcode пока не добавится модель для  загрузки  Image
+//        $items = [1,2,3,4];// hardcode пока не добавится модель для  загрузки  Image
         $this->items = $items;
     }
 
