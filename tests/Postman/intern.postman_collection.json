@@ -1310,6 +1310,23 @@
 		},
 		{
 			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8ba1c533-142e-4d31-948c-b40fee3fac75",
+						"exec": [
+							"const authToken = pm.response.json().access_token;",
+							"",
+							"if(authToken) {",
+							"     pm.environment.set('authToken', authToken)",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -1330,12 +1347,6 @@
 						"disabled": true
 					},
 					{
-						"key": "Referer",
-						"value": "{{host}}",
-						"type": "text",
-						"disabled": true
-					},
-					{
 						"key": "X-SRF-TOKEN",
 						"value": "{{xsrf-token}}",
 						"type": "text",
@@ -1346,7 +1357,7 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "emal",
+							"key": "email",
 							"value": "tahyhax456@gmail.com",
 							"type": "text"
 						},
@@ -1363,17 +1374,18 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_web_url}}/login",
+					"raw": "{{base_web_url}}/api/login",
 					"host": [
 						"{{base_web_url}}"
 					],
 					"path": [
+						"api",
 						"login"
 					],
 					"query": [
 						{
 							"key": "email",
-							"value": "sofia28@example.com",
+							"value": "tahyhax456@gmail.com",
 							"disabled": true
 						},
 						{
@@ -1501,7 +1513,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "2|KoW5T4O1qCnFcpq3NJMbQijDUbu3TztOqRHULGKB",
+				"value": "{{authToken}}",
 				"type": "string"
 			}
 		]
