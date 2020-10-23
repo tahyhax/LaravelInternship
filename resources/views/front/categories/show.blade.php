@@ -15,11 +15,12 @@
         </div>
 
         <div class="row">
-            @foreach($category->products as $product)
+            @foreach($products as $product)
                 <div class="col-lg-4 col-md-6 mb-4">
                     <x-product-card-component :product="$product"></x-product-card-component>
                 </div>
             @endforeach
         </div>
+        {{$products->links()}}
     </div>
 @endsection

@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Models\Category;
-use App\Models\Product;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 
 
 class CategoryController extends Controller
 {
+
+    /**
+     * @var int $perPage
+     */
+    protected $perPage = 10;
+
     /**
      * Display a listing of the resource.
      *
@@ -23,14 +27,13 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category  $category)
+    public function show(Category $category)
     {
-        //TODO как выбрать категорию со связью продуктов у которых  будет пагинация
-        $category->load('products')->get();
-        return view('front.categories.show')->with(compact(['category']));
+        $products = $category->products()->paginate($this->perPage);
+        return view('front.categories.show')->with(compact(['category', 'products']));
     }
 
 }
