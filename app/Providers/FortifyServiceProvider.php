@@ -38,12 +38,12 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
-        Fortify::authenticateUsing(function (LoginRequest $request) {
-            $user = User::query()->where('email', $request->email)->first();
-            if ($user && Hash::check($request->password, $user->password)) {
-                return $user;
-            }
-        });
+//        Fortify::authenticateUsing(function (LoginRequest $request) {
+//            $user = User::query()->where('email', $request->email)->first();
+//            if ($user && Hash::check($request->password, $user->password)) {
+//                return $user;
+//            }
+//        });
 
         Fortify::loginView(function () {
             return view('auth.login');
