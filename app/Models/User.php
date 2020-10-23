@@ -48,16 +48,18 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-//    public function role()
-//    {
-//        $this->hasOne(Role::class);
-//    }
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
 
+    /**
+     * @param $image
+     * @return string
+     */
     public function getAvatarAttribute($image)
     {
         $image = $image
