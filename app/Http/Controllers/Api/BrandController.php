@@ -12,6 +12,9 @@ use Illuminate\Http\Response;
 
 class BrandController extends Controller
 {
+    /**
+     * @var int $perPage
+     */
     protected $perPage = 10;
 
     /**

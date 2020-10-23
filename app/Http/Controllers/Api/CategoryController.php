@@ -12,6 +12,9 @@ use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
+    /**
+     * @var int $perPage
+     */
     protected $perPage = 10;
 
     /**

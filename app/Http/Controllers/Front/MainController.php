@@ -7,6 +7,9 @@ use App\Models\Product;
 
 class MainController extends Controller
 {
+    /**
+     * @var int $perPage
+     */
     protected $perPage = 12;
 
     /**
