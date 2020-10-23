@@ -9,20 +9,23 @@ trait HasRolesAndPermissions
 {
 
     /**
+     * @return mixed
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /**
      * Undocumented function
      *
      * @return boolean
      */
     public function isAdmin()
     {
-        return $this->roles->contains('slug', 'admin');
+        return $this->roles()->where('slug', 'admin')->exists();
     }
 
-
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
 
 //    /**
 //     * @return mixed
@@ -40,6 +43,6 @@ trait HasRolesAndPermissions
      */
     public function hasRole(array $roles)
     {
-        return !!$this->roles->whereIn('slug', $roles)->count();
+        return $this->roles()->whereIn('slug', $roles)->exists();
     }
 }
