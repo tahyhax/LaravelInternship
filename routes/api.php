@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 Route::group(['as' => 'api.'], function () {
 //    Route::resource('auth', AuthController::class)->only(['login','logout']);
     Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
