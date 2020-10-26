@@ -34,4 +34,20 @@ class Category extends Model
     }
 
 
+    /**
+     * @param array $images files  from category request
+     * @return array
+     */
+    public function loadImagesToStore($images)
+    {
+        foreach ($images as $image) {
+            $path = $image->store('categories');
+            $name = substr($path, strlen('categories/'));
+            $imagesList[] = new Image(['name' => $name]);
+        }
+
+        return isset($imagesList) ? $imagesList : [];
+
+    }
+
 }

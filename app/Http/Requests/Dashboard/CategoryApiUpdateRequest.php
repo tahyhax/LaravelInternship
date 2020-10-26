@@ -56,7 +56,9 @@ class CategoryApiUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'min:3|max:50|unique:categories,name,' . $this->category->id,
+            'name' => 'required|min:3|max:50|unique:categories,name,' . $this->category->id,
+            'images' => 'array|nullable',
+            'images.*' => 'image',
         ];
     }
 

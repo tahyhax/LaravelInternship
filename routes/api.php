@@ -34,8 +34,12 @@ Route::group(['as' => 'api.', 'namespace' => '\App\Http\Controllers\Api', 'middl
     Route::post('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
     Route::put('orders/update-status/{order}', [\App\Http\Controllers\Api\OrderController::class, 'updateStatus']);
 
+    Route::post('categories/{category}', [\App\Http\Controllers\Api\CategoryController::class, 'update']);
+    Route::apiResource('categories', CategoryController::class)->except('update');
+
+
     Route::apiResources([
-        'categories' => CategoryController::class,
+//        'categories' => CategoryController::class,
         'products' => ProductController::class,
         'brands' => BrandController::class,
         'posts' => PostController::class,

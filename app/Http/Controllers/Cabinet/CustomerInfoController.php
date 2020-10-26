@@ -42,14 +42,16 @@ class CustomerInfoController extends Controller
     public function update(UserUpdateRequest $request, User $customer)
     {
 
-        if ($request->hasFile('avatar')) {
-            $avatarHash = $this->storeImage($request);
-        }
+        $params = $request->all();
+        unset($params['avatar']);
 
+        if ($request->hasFile('avatar')) {
+            $params = array_merge($params, ['avatar' => $this->storeImage($request)]);
+        }
 
         //TODO  как правибудельно добвавить имя фаила если там уже существует  avatar как объект картинки и он
         // TODO берет при сохранении tmpname
-        $customer->update(array_merge($request->all(), ['avatar' => $avatarHash]));
+        $customer->update($params);
 
         return redirect()->route('cabinet.customer-info.show')
             ->with('success', 'Post updated successfully.');

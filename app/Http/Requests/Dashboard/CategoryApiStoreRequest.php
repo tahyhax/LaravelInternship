@@ -56,6 +56,8 @@ class CategoryApiStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:50|unique:categories',
+            'images' => 'array|nullable',
+            'images.*' => 'image',
         ];
     }
 

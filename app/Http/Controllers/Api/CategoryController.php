@@ -9,9 +9,12 @@ use App\Http\Resources\Dashboard\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
+
 
 class CategoryController extends Controller
 {
+
     /**
      * @var int $perPage
      */
@@ -38,9 +41,17 @@ class CategoryController extends Controller
      */
     public function store(CategoryApiStoreRequest $request)
     {
+        /**
+         * @var  Category $category
+         */
         $category = Category::create($request->all());
 
-        return new CategoryResource($category);
+        if ($request->hasFile('images')) {
+            $imagesList = $category->loadImagesToStore($request->file('images'));
+            $category->images()->saveMany($imagesList);
+        }
+
+        return new CategoryResource($category->load('images'));
     }
 
     /**
@@ -56,13 +67,31 @@ class CategoryController extends Controller
     /**
      * @param CategoryApiUpdateRequest $request
      * @param Category $category
-     * @return \Illuminate\Http\JsonResponse|object
+     * @return CategoryResource|\Illuminate\Contracts\Routing\ResponseFactory|Response
      */
     public function update(CategoryApiUpdateRequest $request, Category $category)
     {
-        $category->update($request->all());
+        DB::beginTransaction();
+        try {
+            $category->update($request->all());
 
-        return new CategoryResource($category);
+            if ($request->hasFile('images')) {
+                $imagesList = $category->loadImagesToStore($request->file('images'));
+                $category->images()->delete();
+                $category->images()->saveMany($imagesList);
+            }
+
+            DB::commit();
+
+        } catch (\Exception $error) {
+
+            DB::rollback();
+
+            return response($error->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+
+        return new CategoryResource($category->load('images'));
     }
 
     /**
