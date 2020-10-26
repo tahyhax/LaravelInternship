@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -18,24 +19,25 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-            $request->validate([
-                'email' => 'email|required',
-                'password' => 'required'
+        $request->validate([
+            'email' => 'email|required',
+            'password' => 'required'
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !$this->checkHash($request, $user, 'password')) {
+            throw ValidationException::withMessages([
+                'email' => ['The provided credentials are incorrect.']
             ]);
+        }
+        Auth::guard('api')->setUser($user);
 
-            $user = User::where('email', $request->email)->first();
-
-            if(! $user  || !$this->checkHash($request, $user, 'password')) {
-                throw ValidationException::withMessages([
-                    'email' =>  ['The provided credentials are incorrect.']
-                ]);
-            }
-
-            return response()->json([
-                'status_code' => Response::HTTP_OK,
-                'access_token' => $user->createToken('authToken')->plainTextToken,
-                'token_type' => 'Bearer',
-            ]);
+        return response()->json([
+            'status_code' => Response::HTTP_OK,
+            'access_token' => $user->createToken('authToken')->plainTextToken,
+            'token_type' => 'Bearer',
+        ]);
 
     }
 
@@ -47,7 +49,12 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        //
+//        https://stackoverflow.com/questions/62496954/laravel-7-sanctum-logout
+
+        return response()->json([
+            'status_code' => Response::HTTP_OK,
+            'auth' => !$request->user()->currentAccessToken()->delete()
+        ]);
     }
 
 
