@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\OrderApiChangeStatusRequest;
 use App\Http\Requests\Dashboard\OrderApiStoreRequest;
 use App\Http\Requests\Dashboard\OrderApiUpdateRequest;
 use App\Http\Resources\Dashboard\OrderResource;
@@ -96,8 +97,9 @@ class OrderController extends Controller
 
     public function updateStatus(OrderApiChangeStatusRequest $request, Order $order)
     {
-        $order->update('sta');
+        $order->update($request->all());
 
-        return response(null, Response::HTTP_NO_CONTENT);
+        return new OrderResource($order->load(['user', 'products.brand']));
+//        return response(null, Response::HTTP_NO_CONTENT);
     }
 }

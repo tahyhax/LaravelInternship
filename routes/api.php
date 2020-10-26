@@ -32,6 +32,7 @@ Route::group(['as' => 'api.', 'namespace' => '\App\Http\Controllers\Api', 'middl
     //        ->parameters(['category', 'category:slug']);
 
     Route::post('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
+    Route::put('orders/update-status/{order}', [\App\Http\Controllers\Api\OrderController::class, 'updateStatus']);
 
     Route::apiResources([
         'categories' => CategoryController::class,

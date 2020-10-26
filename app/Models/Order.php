@@ -9,6 +9,10 @@ class Order extends Model
 {
     use HasFactory;
 
+    public static $statusList = [
+        'approved', 'canceled', 'closed', 'new'
+    ];
+
     protected $fillable = [
         'address', 'status', 'payment_methods_id', 'user_id',
     ];
@@ -20,7 +24,7 @@ class Order extends Model
 
     public function paymentMethod()
     {
-        return $this->belongsTo(PaymentMethod::class,'payment_methods_id');
+        return $this->belongsTo(PaymentMethod::class, 'payment_methods_id');
     }
 
     public function products()
