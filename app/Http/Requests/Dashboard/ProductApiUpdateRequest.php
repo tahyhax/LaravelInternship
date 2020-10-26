@@ -61,6 +61,8 @@ class ProductApiUpdateRequest extends FormRequest
             'categories.*' => 'integer|exists:categories,id',
             'categories' => 'required|array',
             'brand' => 'required|integer|exists:brands,id',
+            'images' => 'array|nullable',
+            'images.*' => 'image',
         ];
     }
 

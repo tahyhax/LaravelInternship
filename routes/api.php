@@ -37,10 +37,13 @@ Route::group(['as' => 'api.', 'namespace' => '\App\Http\Controllers\Api', 'middl
     Route::post('categories/{category}', [\App\Http\Controllers\Api\CategoryController::class, 'update']);
     Route::apiResource('categories', CategoryController::class)->except('update');
 
+    Route::post('products/{product}', [\App\Http\Controllers\Api\ProductController::class, 'update']);
+    Route::apiResource('products', ProductController::class)->except('update');
+
 
     Route::apiResources([
 //        'categories' => CategoryController::class,
-        'products' => ProductController::class,
+//        'products' => ProductController::class,
         'brands' => BrandController::class,
         'posts' => PostController::class,
         'payment-methods' => PaymentMethodController::class,

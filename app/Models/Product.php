@@ -43,4 +43,20 @@ class Product extends Model
         return $this->belongsToMany(Order::class, 'order_items');
     }
 
+    /**
+     * @param array $images files  from product request
+     * @return array
+     */
+    public function loadImagesToStore($images)
+    {
+        foreach ($images as $image) {
+            $path = $image->store('products');
+            $name = substr($path, strlen('products/'));
+            $imagesList[] = new Image(['name' => $name]);
+        }
+
+        return isset($imagesList) ? $imagesList : [];
+
+    }
+
 }

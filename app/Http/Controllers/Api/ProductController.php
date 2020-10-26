@@ -9,6 +9,7 @@ use App\Http\Resources\Dashboard\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 
 class ProductController extends Controller
@@ -43,6 +44,11 @@ class ProductController extends Controller
         $product->save();
         $product->categories()->sync($request->get('categories', []));
 
+        if ($request->hasFile('images')) {
+            $imagesList = $product->loadImagesToStore($request->file('images'));
+            $product->images()->saveMany($imagesList);
+        }
+
         return new ProductResource($product->load(['brand', 'categories', 'images']));
     }
 
@@ -65,9 +71,29 @@ class ProductController extends Controller
      */
     public function update(ProductApiUpdateRequest $request, Product $product)
     {
-        $product->brand()->associate($request->get('brand'));
-        $product->update($request->all());
-        $product->categories()->sync($request->get('categories', []));
+        DB::beginTransaction();
+        try {
+
+            $product->brand()->associate($request->get('brand'));
+            $product->update($request->all());
+            $product->categories()->sync($request->get('categories', []));
+
+
+            if ($request->hasFile('images')) {
+                $imagesList = $product->loadImagesToStore($request->file('images'));
+                $product->images()->delete();
+                $product->images()->saveMany($imagesList);
+            }
+
+            DB::commit();
+
+        } catch (\Exception $error) {
+
+            DB::rollBack();
+
+            return response($error->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
 
         //NOTE Transform the resource into an HTTP response. ->response()
         //TODO  https://laravel.com/docs/8.x/eloquent-resources
