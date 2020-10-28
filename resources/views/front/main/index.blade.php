@@ -10,8 +10,7 @@
 @section('content')
     <div class="col-lg-9">
         <div class="mb-4">
-            {{--//TODO передать $items после добавления  можели  ImageLoader--}}
-            <x-carousel :items="[1,2,4,5]"></x-carousel>
+            <x-carousel-component :items="$slideImages"></x-carousel-component>
         </div>
 
         <div class="row">
