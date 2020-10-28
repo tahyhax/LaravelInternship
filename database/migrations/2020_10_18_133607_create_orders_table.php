@@ -15,12 +15,13 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->slug('slug', 20)->unique();
             $table->string('address', 255);
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('payment_methods_id')->constrained('payment_methods');
             $table->enum('status', ['approved','canceled','closed','new'])->default('new');
             $table->timestamps();
-            $table->index(['status']);
+            $table->index(['status', 'order', 'address']);
         });
     }
 
