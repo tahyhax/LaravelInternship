@@ -12,12 +12,12 @@ use Illuminate\Http\JsonResponse;
 class OrderApiUpdateRequest extends FormRequest
 {
 
-//    protected function prepareForValidation()
-//    {
-//        $this->merge([
-//            'slug' => Str::slug($this->name),
-//        ]);
-//    }
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'slug' => 'NTR-' . Carbon::now()->format('mdYHi-s'),
+        ]);
+    }
 
     /**
      * Handle a failed validation attempt.

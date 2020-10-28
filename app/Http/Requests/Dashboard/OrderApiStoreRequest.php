@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Dashboard;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -12,12 +12,12 @@ use Illuminate\Http\JsonResponse;
 class OrderApiStoreRequest extends FormRequest
 {
 
-//    protected function prepareForValidation()
-//    {
-//        $this->merge([
-//            'slug' => Str::slug($this->name),
-//        ]);
-//    }
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'slug' => 'NTR-' . Carbon::now()->format('mdYHi-s'),
+        ]);
+    }
 
     /**
      * Handle a failed validation attempt.
