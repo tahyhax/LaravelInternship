@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Filters\ProductFilter;
 use App\Http\Requests\Dashboard\ProductApiStoreRequest;
 use App\Http\Requests\Dashboard\ProductApiUpdateRequest;
 use App\Http\Resources\Dashboard\ProductResource;
@@ -19,12 +20,13 @@ class ProductController extends Controller
 
     /**
      * @param Request $request
+     * @param ProductFilter $filters
      * @return ProductResource
      */
-    public function index(Request $request)
+    public function index(Request $request, ProductFilter $filters)
     {
         $perPage = $request->get('per_page') ?: $this->perPage;
-        $products = Product::query()->orderBy('id', 'DESC')->paginate($perPage);
+        $products = Product::query()->with(['categories', 'brand'])->filter($filters)->paginate($perPage);
 
         return new ProductResource($products);
     }
