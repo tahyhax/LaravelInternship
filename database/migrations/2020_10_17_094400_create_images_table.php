@@ -17,6 +17,7 @@ class CreateImagesTable extends Migration
             $table->id();
             $table->morphs('imageable');
             $table->string('name', 75);
+            $table->string('storage_link',50);
             $table->timestamps();
         });
     }
