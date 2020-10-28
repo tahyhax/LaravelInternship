@@ -26,6 +26,8 @@ abstract class  QueryFilter
      */
     protected $delimiter = ',';
 
+    protected $betweenDelimiter = '-';
+
 
     /**
      * QueryFilter constructor.
@@ -36,13 +38,6 @@ abstract class  QueryFilter
         $this->request = $request;
     }
 
-    /**
-     * @param $delimiter
-     */
-    private function setDelimiter($delimiter)
-    {
-        $this->delimiter = $delimiter;
-    }
 
     /**
      * @param string $param
@@ -59,8 +54,7 @@ abstract class  QueryFilter
      */
     protected function paramBetweenToArray(string $param): array
     {
-        $this->setDelimiter('-');
-        return explode($this->delimiter, $param);
+        return explode($this->betweenDelimiter, $param);
     }
 
     /**
@@ -93,5 +87,4 @@ abstract class  QueryFilter
         }
         return $this->builder;
     }
-
 }
