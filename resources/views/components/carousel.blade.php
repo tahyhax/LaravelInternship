@@ -1,4 +1,4 @@
-@if($items)
+@if($items->count())
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             @foreach($items as $key => $item)
@@ -23,4 +23,8 @@
         </a>
     </div>
 
+@else
+    <img class="d-block img-fluid" src="https://via.placeholder.com/500x500?text=No+slides" alt="no slides">
 @endif
+
+
