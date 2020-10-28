@@ -9,25 +9,40 @@ class Category extends Model
 {
     use HasFactory;
 
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'slug', 'parent_id',
+    ];
+
+    /**
+     * @return string
+     */
     public function getRouteKeyName()
     {
         return 'slug';
     }
 
-    protected $fillable = [
-        'name', 'slug', 'parent_id',
-    ];
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function products()
     {
         return $this->belongsToMany(Product::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable');
@@ -43,11 +58,13 @@ class Category extends Model
         foreach ($images as $image) {
             $path = $image->store('categories');
             $name = substr($path, strlen('categories/'));
-            $imagesList[] = new Image(['name' => $name]);
+            $imagesList[] = new Image(['name' => $name, 'storage_link' => 'categories']);
         }
 
         return isset($imagesList) ? $imagesList : [];
 
     }
+
+
 
 }
