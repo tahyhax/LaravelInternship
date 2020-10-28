@@ -11,7 +11,7 @@
     <div class="col-lg-9">
         <div class="mb-4">
             {{--//TODO передать $items после добавления  можели  ImageLoader--}}
-            <x-carousel-component :items="[1,2,3]"></x-carousel-component>
+            <x-carousel-component :items="$category->images"></x-carousel-component>
         </div>
 
         <div class="row">
