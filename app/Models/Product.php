@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
+use App\Traits\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Product
+ * @package App\Models
+ */
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, Filterable;
 
     protected $fillable = [
         'name',
@@ -16,6 +21,11 @@ class Product extends Model
         'price',
         'description',
         'price',
+    ];
+
+    protected $casts = [
+
+        'price'=> 'float'
     ];
 
     public function getRouteKeyName()
