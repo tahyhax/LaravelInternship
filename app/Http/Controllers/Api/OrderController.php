@@ -8,10 +8,9 @@ use App\Http\Requests\Dashboard\OrderApiStoreRequest;
 use App\Http\Requests\Dashboard\OrderApiUpdateRequest;
 use App\Http\Resources\Dashboard\OrderResource;
 use App\Models\Order;
-use App\Models\OrderItem;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Http\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class OrderController extends Controller
 {
