@@ -25,7 +25,7 @@ class Product extends Model
 
     protected $casts = [
 
-        'price'=> 'float'
+        'price' => 'float'
     ];
 
     public function getRouteKeyName()
@@ -62,7 +62,7 @@ class Product extends Model
         foreach ($images as $image) {
             $path = $image->store('products');
             $name = substr($path, strlen('products/'));
-            $imagesList[] = new Image(['name' => $name]);
+            $imagesList[] = new Image(['name' => $name, 'storage_link' => 'products']);
         }
 
         return isset($imagesList) ? $imagesList : [];
