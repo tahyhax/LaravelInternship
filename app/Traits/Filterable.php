@@ -2,16 +2,16 @@
 
 namespace App\Traits;
 
-use App\Http\Filters\QueryFilter;
+use App\Http\Filters\QueryFilters;
 use Illuminate\Database\Eloquent\Builder;
 
 trait Filterable
 {
     /**
      * @param Builder $builder
-     * @param QueryFilter $filter
+     * @param QueryFilters $filter
      */
-    public function scopeFilter(Builder $builder, QueryFilter $filter)
+    public function scopeFilter(Builder $builder, QueryFilters $filter)
     {
         $filter->apply($builder);
     }
