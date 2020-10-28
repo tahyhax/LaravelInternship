@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 
-abstract class  QueryFilter
+abstract class  QueryFilters
 {
     /**
      * @var Request

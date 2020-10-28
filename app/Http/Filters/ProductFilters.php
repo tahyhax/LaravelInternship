@@ -4,7 +4,7 @@ namespace App\Http\Filters;
 
 use Illuminate\Database\Query\Builder;
 
-class ProductFilter extends QueryFilter
+class ProductFilters extends QueryFilters
 {
 
     /**
