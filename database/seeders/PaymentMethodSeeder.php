@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PaymentMethod;
 use Illuminate\Database\Seeder;
 
 class PaymentMethodSeeder extends Seeder
@@ -13,6 +14,13 @@ class PaymentMethodSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $paymentMethods = [
+            [
+                'name' => 'CC',
+                'slug' => 'cc',
+            ],
+        ];
+
+        PaymentMethod::insert($paymentMethods);
     }
 }
