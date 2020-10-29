@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('payment_methods_id')->constrained('payment_methods');
             $table->enum('status', ['approved','canceled','closed','new'])->default('new');
             $table->timestamps();
-            $table->index(['status', 'order', 'address']);
+            $table->index(['status', 'slug', 'address']);
         });
     }
 
