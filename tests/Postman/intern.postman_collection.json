@@ -413,44 +413,59 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"123\",\n    \"sku\": 1233,\n    \"price\":25,\n    \"description\": \"l1123123oram ipsum  loram ipsum loram ipsum loram ipsum loram ipsum loram ipsum \",\n    \"categories\":[8,6,10],\n    \"brand\":3\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "images[]",
+									"type": "file",
+									"src": [
+										"/home/soromir/Рабочий стол/qOOpHF8vzrE.jpg",
+										"/home/soromir/Рабочий стол/fdeVslA0Woc.jpg",
+										"/home/soromir/Рабочий стол/WpEO2zP8tN0.jpg"
+									]
+								},
+								{
+									"key": "price",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "categories[]",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "brand",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "testfile123123",
+									"type": "text"
+								},
+								{
+									"key": "sku",
+									"value": "555665465",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
-							"raw": "{{base_web_url}}/api/products/dolor-iste-eum?sku=12333&description=155555asdf5asdf5asdf5asd5f5asdf5asdf5asd sd5fs5df5s df5 asd5&categories[]=2&brand=2&images[]",
+							"raw": "{{base_web_url}}/api/products/testfile123123",
 							"host": [
 								"{{base_web_url}}"
 							],
 							"path": [
 								"api",
 								"products",
-								"dolor-iste-eum"
+								"testfile123123"
 							],
 							"query": [
 								{
 									"key": "name",
 									"value": "dolor-iste-eum",
 									"disabled": true
-								},
-								{
-									"key": "sku",
-									"value": "12333"
-								},
-								{
-									"key": "description",
-									"value": "155555asdf5asdf5asdf5asd5f5asdf5asdf5asd sd5fs5df5s df5 asd5"
-								},
-								{
-									"key": "categories[]",
-									"value": "2"
-								},
-								{
-									"key": "brand",
-									"value": "2"
-								},
-								{
-									"key": "images[]",
-									"value": null
 								}
 							]
 						},
