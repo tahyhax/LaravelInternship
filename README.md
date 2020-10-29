@@ -62,9 +62,9 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Postman
  **[config](https://github.com/tahyhax/OnixLaravelInternshipDmytroBekeshenko/blob/Lesson-3/tests/Postman/intern.postman_collection.json)**
- 
- <p align="center"><img src="https://github.com/tahyhax/OnixLaravelInternshipDmytroBekeshenko/blob/Lesson-3/tests/Postman/photo_2020-10-21_12-19-41.jpg" width="800"></p>
+
+![database  schema](/home/soromir/Documents/work/intern/tests/Postman/photo_2020-10-21_12-19-41.jpg?raw=true "Title")
 
 ## Database
- 
- <p align="center"><img src="https://github.com/tahyhax/OnixLaravelInternshipDmytroBekeshenko/blob/Lesson-3/database/inter-db-schema.png" width="800"></p>
+
+![database  schema](./database/inter-db-schema.png?raw=true "project database  schema")
