@@ -23,7 +23,6 @@ class PaymentMethodFactory extends Factory
     public function definition()
     {
        $name =  $this->faker->randomElement([
-           'CC',
            'WU',
            'WT',
            'PayPal'
