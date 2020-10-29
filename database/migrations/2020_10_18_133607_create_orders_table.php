@@ -23,6 +23,10 @@ class CreateOrdersTable extends Migration
             $table->timestamps();
             $table->index(['status', 'slug', 'address']);
         });
+        
+        \Illuminate\Support\Facades\Artisan::call('db:seed', [
+            '--class' => \Database\Seeders\PaymentMethodSeeder::class
+        ]);
     }
 
     /**
