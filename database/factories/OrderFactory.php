@@ -4,9 +4,9 @@ namespace Database\Factories;
 
 use App\Models\Order;
 use App\Models\PaymentMethod;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 class OrderFactory extends Factory
 {
@@ -29,6 +29,7 @@ class OrderFactory extends Factory
 
         return [
             'address' => $this->faker->address,
+            'slug' => 'NTR-' . Carbon::now()->format('mdYHi-s'),
             'status' => 'new',
             'payment_methods_id' => $paymentMethodId,
             'user_id' => $userId
