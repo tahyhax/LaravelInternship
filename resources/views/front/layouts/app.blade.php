@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'Document')</title>
     <link rel="stylesheet" href="{{mix('css/front/app.css')}}">
+
+    @livewireStyles
+
     @stack('styles')
 </head>
 <body>
@@ -14,16 +17,15 @@
 @include('front.layouts.partials._header', ['companyName' => 'InternShipPhp'])
 
 <div class="container">
-
     <div class="row">
+
         @yield('sidebar-left')
         @yield('content')
 
     </div>
-    <!-- /.row -->
-
 </div>
 
+@livewireScripts
 <script src="{{mix('js/front/app.js')}}"></script>
 
 </body>
