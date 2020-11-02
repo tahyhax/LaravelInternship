@@ -22,6 +22,9 @@ Route::get('/product/{product:slug}', [\App\Http\Controllers\Front\ProductContro
     ->name('products.show');
 
 
+Route::get('/cart', \App\Http\Livewire\Cart::class)->name('cart');
+
+
 //Route::resource('posts', \App\Http\Controllers\PostController::class);
 
 //Route::get('posts', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
