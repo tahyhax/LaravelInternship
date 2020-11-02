@@ -44,11 +44,12 @@
                     <hr/>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 d-flex justify-content-end">
-                            <a href="javascript:void(0);"
-                               class="btn btn-success btn-lg">{{__('Add to cart (:price)', ['price'=> $product->price])}}</a>
+                            <livewire:cart-add-button
+                                    :product-id="$product->id"
+                            />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        @endsection
+@endsection

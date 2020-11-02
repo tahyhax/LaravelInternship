@@ -9,7 +9,7 @@
     <div class="d-flex  w-75">
         @include('front.layouts.partials._search')
     </div>
-
+    <livewire:cart-header/>
     <div class="px-3">
         @include('front.layouts.partials._navbar')
     </div>
