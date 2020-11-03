@@ -8,7 +8,8 @@ class CartHeader extends Component
 {
     public $qty;
 
-        protected $listeners = [
+    protected $listeners = [
+        
         'basketUpdated' => 'update',
     ];
 
