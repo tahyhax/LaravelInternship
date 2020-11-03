@@ -46,9 +46,8 @@ class Cart extends Component
     }
 
     /**
-     * Get products.
-     *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     private function products(): Collection
     {
@@ -56,17 +55,16 @@ class Cart extends Component
             return new Collection;
         }
 
-        return Product::whereIn('id', array_keys($this->cart))
-            ->get()
-            ->map(function (Product $product) {
-                return (object)[
-                    'id' => $product->id,
-                    'name' => $product->name,
-                    'price' => $product->price,
-                    'qty' => $qty = $this->cart[$product->id],
-                    'total' => $product->price * $qty,
-                ];
-            });
+        return $this->cartService()->productsList();
+//            ->map(function (Product $product) {
+//                return (object)[
+//                    'id' => $product->id,
+//                    'name' => $product->name,
+//                    'price' => $product->price,
+//                    'qty' => $qty = $this->cart[$product->id],
+//                    'total' => $product->price * $qty,
+//                ];
+//            });
     }
 
     /**
@@ -127,6 +125,14 @@ class Cart extends Component
         return app()->make(\App\Models\Cart::class);
     }
 
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function checkout()
+    {
+        return  redirect()->route('checkout.show');
+    }
     /**
      * @return mixed
      */
