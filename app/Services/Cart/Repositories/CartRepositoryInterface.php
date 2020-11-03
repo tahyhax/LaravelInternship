@@ -19,12 +19,6 @@ interface CartRepositoryInterface {
 
     /**
      * @param int $id
-     * @return string
-     */
-    public function identity(int $id): string;
-
-    /**
-     * @param int $id
      * @return mixed
      */
     public function getCurrentQty(int $id): int;

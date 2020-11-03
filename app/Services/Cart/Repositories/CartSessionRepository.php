@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\Cart\Repositories;
 
 use Illuminate\Contracts\Session\Session;
@@ -28,6 +29,15 @@ class CartSessionRepository implements CartRepositoryInterface
         $this->session = $session;
     }
 
+    /**
+     * @param int $id
+     * @return string
+     */
+    private function identity(int $id): string
+    {
+        return self::CART_KEY . '.' . $id;
+    }
+
 
     /**
      * Get all items in the cart.
@@ -48,14 +58,6 @@ class CartSessionRepository implements CartRepositoryInterface
         $this->session->put($this->identity($id), $qty);
     }
 
-    /**
-     * @param int $id
-     * @return string
-     */
-    public function identity(int $id): string
-    {
-        return self::CART_KEY . '.' . $id;
-    }
 
     /**
      * @param int $id
