@@ -23,6 +23,8 @@ Route::get('/product/{product:slug}', [\App\Http\Controllers\Front\ProductContro
 
 
 Route::get('/cart', \App\Http\Livewire\Cart::class)->name('cart');
+Route::get('/checkout', [\App\Http\Controllers\Front\CheckoutController::class, 'show'])->name('checkout.show');
+Route::post('/checkout/ordering', [\App\Http\Controllers\Front\CheckoutController::class, 'ordering'])->name('checkout.ordering');
 
 
 //Route::resource('posts', \App\Http\Controllers\PostController::class);
