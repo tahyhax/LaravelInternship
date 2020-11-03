@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Services\Cart\CartService;
 use Livewire\Component;
 use Illuminate\View\View;
-use App\Models\Cart as mCart;
+//use App\Models\Cart as mCart;
 
 
 class CartAddButton extends Component
@@ -30,6 +31,16 @@ class CartAddButton extends Component
      */
     public $currentQty = 0;
 
+
+    protected $cartService;
+
+    public function __construct()//CartService $cartService
+    {
+//        $this->cartService = $cartService;
+        $this->cartService = app(CartService::class);
+    }
+
+
     /**
      * @param int $productId
      * @param bool $onlyButton
@@ -49,7 +60,7 @@ class CartAddButton extends Component
     {
 //        $cart = new mCart; //сделать  пепозиторий
 
-        $this->currentQty = app(mCart::class)->getCurrentQty($this->productId);
+        $this->currentQty = $this->cartService->getCurrentQty($this->productId);
     }
 
     /**
@@ -59,15 +70,13 @@ class CartAddButton extends Component
      */
     public function add(): void
     {
-//        $cart = new mCart; //сделать  пепозиторий
-//        app(mCart::class)
-        $qty = $this->currentQty + (int) $this->qty;
+//        $qty = $this->currentQty + (int) $this->qty;
+//
+//        if (!$qty) {
+//            return;
+//        }
 
-        if (!$qty) {
-            return;
-        }
-
-        app(mCart::class)->add($this->productId, $qty);
+        $this->cartService->add($this->productId, $this->qty);
         $this->emit('basketUpdated');
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Services\Cart\CartService;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
@@ -24,6 +25,16 @@ class Cart extends Component
      */
     public $total = 0.00;
 
+    /**
+     * @var CartService $cartService
+     */
+    protected $cartService;
+
+    public function __construct()
+    {
+        $this->cartService = app(CartService::class);
+    }
+
 
     public function mount()
     {
@@ -35,7 +46,7 @@ class Cart extends Component
      */
     public function hydrate(): void
     {
-        $this->cart = $this->cartService()->cart();
+//        $this->cart = $this->cartService->cart();
         $this->products = $this->products();
         $this->total = $this->products->sum('total');
     }
@@ -46,7 +57,7 @@ class Cart extends Component
      */
     private function products(): Collection
     {
-        return $this->cartService()->productsList();
+        return $this->cartService->productsList();
     }
 
     /**
@@ -55,7 +66,7 @@ class Cart extends Component
      */
     public function remove(int $id): void
     {
-        $this->cartService()->remove($id);
+        $this->cartService->remove($id);
         $this->update();
     }
 
@@ -66,7 +77,7 @@ class Cart extends Component
      */
     public function add(int $id, int $qty): void
     {
-        $this->cartService()->add($id, $qty);
+        $this->cartService->add($id, $qty);
         $this->update();
     }
 
@@ -88,7 +99,8 @@ class Cart extends Component
      */
     public function increase(int $id): void
     {
-        $this->add($id, $this->cart[$id] + 1);
+        $this->cartService->increase($id);
+//        $this->add($id, $this->cart[$id] + 1);
     }
 
 
@@ -98,8 +110,10 @@ class Cart extends Component
      */
     public function decrease(int $id): void
     {
-        $qty = $this->cart[$id] - 1;
-        $qty < 1 ?  $this->remove($id) :  $this->add($id, $qty);
+//        $qty = $this->cart[$id] - 1;
+//        $qty < 1 ?  $this->remove($id) :  $this->add($id, $qty);
+
+        $this->cartService->decrease($id);
     }
 
 
@@ -109,7 +123,9 @@ class Cart extends Component
      */
     protected function cartService()
     {
-        return app()->make(\App\Models\Cart::class);
+        return new CartService();
+
+        return app()->make(CartService::class);
     }
 
 

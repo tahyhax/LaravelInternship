@@ -2,11 +2,24 @@
 
 namespace App\Http\Livewire;
 
+use App\Services\Cart\CartService;
 use Livewire\Component;
 
 class CartHeader extends Component
 {
     public $qty;
+
+    /**
+     * @var CartService $cartService
+     */
+    protected $cartService;
+
+    public function __construct()//CartService $cartService
+    {
+//        $this->cartService = $cartService;
+        $this->cartService = app(CartService::class);
+    }
+
 
     protected $listeners = [
 
@@ -21,7 +34,8 @@ class CartHeader extends Component
 
     public function update()
     {
-        $this->qty = array_sum(app(\App\Models\Cart::class)->cart());
+        $this->qty = $this->cartService->getQty();
+//        $this->qty = array_sum(app(\App\Models\Cart::class)->cart());
     }
 
 
