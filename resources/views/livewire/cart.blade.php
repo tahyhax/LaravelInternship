@@ -15,7 +15,15 @@
             <tr class="hover:bg-grey-lighter">
                 <th scope="row">{{ $loop->index +1 }}</th>
                 <td>{{ $product->name }}</td>
-                <td>{{ $product->qty }}</td>
+                <td>
+                    <div wire:model.debounce.250ms="amountToAdd">
+                        <button class="btn btn-secondary" wire:click="decrease({{$product->id }})">-</button>
+                        <button class="btn btn-secondary">
+                            {{ $product->qty }}
+                        </button>
+                        <button class="btn btn-secondary" wire:click="increase({{$product->id }})">+</button>
+                    </div>
+                </td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->total }}</td>
                 <td>
@@ -35,7 +43,7 @@
         @if($products)
             <tr>
                 <th scope="row" colspan="6" class="text-right">
-                    <strong class="">Total:</strong> &pound;{{ $this->total }}
+                    <strong class="">Total:</strong> {{ $this->total }}
                 </th>
             </tr>
         @endif
