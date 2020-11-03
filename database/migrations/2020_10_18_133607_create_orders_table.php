@@ -17,6 +17,10 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->string('slug', 20)->unique();
             $table->string('address', 255);
+            $table->string('email', 255);
+            $table->string('phone', 50);
+            $table->string('first_name', 50);
+            $table->string('last_name', 50);
             $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('payment_methods_id')->constrained('payment_methods');
             $table->enum('status', ['approved','canceled','closed','new'])->default('new');
@@ -24,9 +28,7 @@ class CreateOrdersTable extends Migration
             $table->index(['status', 'slug', 'address']);
         });
         
-        \Illuminate\Support\Facades\Artisan::call('db:seed', [
-            '--class' => \Database\Seeders\PaymentMethodSeeder::class
-        ]);
+
     }
 
     /**
