@@ -11,6 +11,6 @@ class OrderItem extends Pivot
 
 
     protected $fillable = [
-        'quantity', 'product_id', 'order_id',
+        'qty', 'product_id', 'order_id',
     ];
 }
