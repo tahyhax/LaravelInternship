@@ -14,7 +14,8 @@ class Order extends Model
     ];
 
     protected $fillable = [
-        'address', 'status', 'payment_methods_id', 'user_id','slug'
+        'address', 'status', 'payment_methods_id', 'user_id',
+        'slug', 'email', 'phone', 'first_name', 'last_name'
     ];
 
     /**
