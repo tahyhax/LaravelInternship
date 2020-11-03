@@ -48,6 +48,7 @@ class Product extends Model
         return $this->morphMany(Image::class, 'imageable');
     }
 
+
     public function orders()
     {
         return $this->belongsToMany(Order::class, 'order_items');
