@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->string('slug', 20)->unique();
             $table->string('address', 255);
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('payment_methods_id')->constrained('payment_methods');
             $table->enum('status', ['approved','canceled','closed','new'])->default('new');
             $table->timestamps();
