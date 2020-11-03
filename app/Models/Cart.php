@@ -22,6 +22,13 @@ class Cart extends Model
      */
 private Session $session;
 
+
+    /**
+     *  cart  key in session
+     * @var string
+     */
+   private const CART_KEY = 'cart';
+
     public function __construct(Session $session)
     {
         $this->session = $session;
@@ -32,7 +39,7 @@ private Session $session;
      */
     public function list()
     {
-        return $this->session->get('cart', []);
+        return $this->session->get(self::CART_KEY, []);
     }
 
     /**
@@ -51,7 +58,22 @@ private Session $session;
      */
     public function identity(int $id): string
     {
-        return 'cart.' . $id;
+        return self::CART_KEY . '.' . $id;
+    }
+
+    public function productsList()
+    {
+       $cart = $this->list();
+       return Product::whereIn('id', array_keys($cart))->get()
+           ->map(function (Product $product) use ($cart) {
+               return (object)[
+                   'id' => $product->id,
+                   'name' => $product->name,
+                   'price' => $product->price,
+                   'qty' => $qty = $cart[$product->id],
+                   'total' => $product->price * $qty,
+               ];
+           });
     }
 
     /**
@@ -70,6 +92,19 @@ private Session $session;
     {
         $this->session->forget($this->identity($id));
     }
+
+    /**
+     *
+     */
+    public function delete(): void
+    {
+        $this->session->forget(self::CART_KEY);
+    }
+
+
+
+
+
 
 
     /**
