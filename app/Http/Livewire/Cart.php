@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Product;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
@@ -37,34 +36,17 @@ class Cart extends Component
     public function hydrate(): void
     {
         $this->cart = $this->cartService()->cart();
-        $this->products = tap(
-            $this->products(),
-            function(Collection $products) {
-                return $this->total = $products->sum('total');
-            }
-        )->toArray();
+        $this->products = $this->products();
+        $this->total = $this->products->sum('total');
     }
 
-    /**
+     /**
      * @return Collection
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     private function products(): Collection
     {
-        if (empty($this->cart)) {
-            return new Collection;
-        }
-
         return $this->cartService()->productsList();
-//            ->map(function (Product $product) {
-//                return (object)[
-//                    'id' => $product->id,
-//                    'name' => $product->name,
-//                    'price' => $product->price,
-//                    'qty' => $qty = $this->cart[$product->id],
-//                    'total' => $product->price * $qty,
-//                ];
-//            });
     }
 
     /**
@@ -77,9 +59,20 @@ class Cart extends Component
         $this->update();
     }
 
+    /**
+     * @param int $id
+     * @param int $qty
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function add(int $id, int $qty): void
+    {
+        $this->cartService()->add($id, $qty);
+        $this->update();
+    }
+
 
     /**
-     * Update basket.
+     * ivent  for  update other carts.
      *
      * @return void
      */
@@ -95,9 +88,7 @@ class Cart extends Component
      */
     public function increase(int $id): void
     {
-
-        $this->cartService()->add($id, $this->cart[$id] + 1);
-        $this->update();
+        $this->add($id, $this->cart[$id] + 1);
     }
 
 
@@ -107,12 +98,8 @@ class Cart extends Component
      */
     public function decrease(int $id): void
     {
-        if (($qty = $this->cart[$id] - 1) < 1) {
-            $this->remove($id);
-        } else {
-            $this->cartService()->add($id, $qty);
-            $this->update();
-        }
+        $qty = $this->cart[$id] - 1;
+        $qty < 1 ?  $this->remove($id) :  $this->add($id, $qty);
     }
 
 
@@ -139,11 +126,6 @@ class Cart extends Component
     public function render()
     {
         return view('livewire.cart')
-//            ->extends('layouts.app');
-//            ->layout('front.layouts.app', ['title' => 'Cart'])
-//            ->layout('front.layouts.app')
-//            ->slot('main');
             ->extends('front.layouts.app');
-//            ->section('content');
     }
 }
