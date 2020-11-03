@@ -20,7 +20,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->timestamps();
             $table->index(['slug']);
         });
-        
+
         \Illuminate\Support\Facades\Artisan::call('db:seed', [
             '--class' => \Database\Seeders\PaymentMethodSeeder::class
         ]);
