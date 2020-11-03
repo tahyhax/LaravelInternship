@@ -7,15 +7,25 @@ use App\Http\Requests\CheckoutOrderingRequest;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\PaymentMethod;
+use App\Services\Cart\CartService;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CheckoutController extends Controller
 {
+    /**
+     * @var CartService $cartService
+     */
+    private $cartService;
+
+    public function __construct(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
 
     public function show()
     {
-        $products =  app(Cart::class)->productsList();
+        $products = $this->cartService->productsList();
         $total = $products->sum('total');
         $paymentMethods = PaymentMethod::all();
 
@@ -29,16 +39,16 @@ class CheckoutController extends Controller
         DB::beginTransaction();
 
         try {
-            //        TODO вынести в сервис
-            $cart = app(Cart::class)->list();
 
-            $products = collect($cart)->map(function ($item, $key) {
+            //NOTE сомнительная штука !!
+            $cartList = $this->cartService->productsList();
+
+            $products = collect($cartList)->map(function ($item) {
                 return [
-                    'product_id' => $key,
-                    'quantity' => $item
+                    'product_id' => $item->id,
+                    'qty' => $item->qty
                 ];
             });
-
 
             $order = new Order($request->all());
             $order->paymentMethod()->associate($request->get('paymentMethod'));
@@ -46,12 +56,9 @@ class CheckoutController extends Controller
             $order->save();
             $order->products()->sync($products);
 
-            //TODO  использовать сервис
-            app(Cart::class)->delete();
+            $this->cartService->delete();
 
             DB::commit();
-
-
 
         } catch(\Exception $exception) {
 
