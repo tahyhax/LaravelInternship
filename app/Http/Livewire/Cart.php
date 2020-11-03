@@ -100,6 +100,7 @@ class Cart extends Component
     public function increase(int $id): void
     {
         $this->cartService->increase($id);
+        $this->update();
 //        $this->add($id, $this->cart[$id] + 1);
     }
 
@@ -114,6 +115,7 @@ class Cart extends Component
 //        $qty < 1 ?  $this->remove($id) :  $this->add($id, $qty);
 
         $this->cartService->decrease($id);
+        $this->update();
     }
 
 
