@@ -20,7 +20,7 @@ class CartHeader extends Component
 
     public function update()
     {
-        $this->qty = array_sum(app(\App\Models\Cart::class)->list());
+        $this->qty = array_sum(app(\App\Models\Cart::class)->cart());
     }
 
 

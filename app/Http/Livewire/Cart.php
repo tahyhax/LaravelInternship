@@ -36,7 +36,7 @@ class Cart extends Component
      */
     public function hydrate(): void
     {
-        $this->cart = $this->cartService()->list();
+        $this->cart = $this->cartService()->cart();
         $this->products = tap(
             $this->products(),
             function(Collection $products) {

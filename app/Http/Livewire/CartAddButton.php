@@ -14,15 +14,15 @@ class CartAddButton extends Component
      * @var
      */
     public $onlyButton;
+
     /**
      * @var
      */
     public $productId;
+
     /**
      * @var
      */
-//    public $productPrice;
-
     public $qty = 1;
 
     /**
@@ -32,6 +32,7 @@ class CartAddButton extends Component
 
     /**
      * @param int $productId
+     * @param bool $onlyButton
      */
     public function mount(int $productId, bool $onlyButton = false): void
     {
@@ -62,12 +63,11 @@ class CartAddButton extends Component
 //        app(mCart::class)
         $qty = $this->currentQty + (int) $this->qty;
 
-        if ($qty < 1) {
+        if (!$qty) {
             return;
         }
 
         app(mCart::class)->add($this->productId, $qty);
-        $this->qty = 1;
         $this->emit('basketUpdated');
     }
 

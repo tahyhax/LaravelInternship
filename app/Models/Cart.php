@@ -37,7 +37,7 @@ private Session $session;
     /**
      * @return mixed
      */
-    public function list()
+    public function cart()
     {
         return $this->session->get(self::CART_KEY, []);
     }
@@ -63,7 +63,7 @@ private Session $session;
 
     public function productsList()
     {
-       $cart = $this->list();
+       $cart = $this->cart();
        return Product::whereIn('id', array_keys($cart))->get()
            ->map(function (Product $product) use ($cart) {
                return (object)[
