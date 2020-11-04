@@ -3,13 +3,12 @@
 namespace App\Services\Cart\Repositories;
 
 use Illuminate\Contracts\Session\Session;
-use Illuminate\Session\Store;
 
 /**
  * Class CartRepository
  * @package App\Services\Cart\Repositories
  *
- * @property Store session;
+ * @property Session session;
  */
 class CartSessionRepository implements CartRepositoryInterface
 {
@@ -73,7 +72,7 @@ class CartSessionRepository implements CartRepositoryInterface
      */
     public function remove(int $id): void
     {
-        $this->session->forget($this->identity($id));
+        $this->session->remove($this->identity($id));
     }
 
     /**

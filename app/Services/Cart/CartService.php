@@ -50,7 +50,8 @@ class CartService
     {
         $currentQty = $this->getCurrentQty($id);
         $qty = $currentQty + $qty;
-        return $this->cartRepository->add($id, $qty);
+
+        return $qty ? $this->cartRepository->add($id, $qty): $this->cartRepository->remove($id);
     }
 
     /**
@@ -76,9 +77,9 @@ class CartService
      */
     public function increase(int $id)
     {
-        $qty = $this->getCurrentQty($id) + 1;
+//        $qty = $this->getCurrentQty($id) + 1;
 
-        return $this->cartRepository->add($id, $qty);
+        return $this->add($id, 1);
     }
 
 
@@ -87,9 +88,9 @@ class CartService
      */
     public function decrease(int $id)
     {
-        $qty = $this->cartRepository->getCurrentQty($id) - 1;
+//        $qty = $this->cartRepository->getCurrentQty($id) - 1;
 
-        return $qty < 1 ? $this->cartRepository->remove($id): $this->cartRepository->add($id, $qty);
+        return $this->add($id, -1);
     }
 
     /**
