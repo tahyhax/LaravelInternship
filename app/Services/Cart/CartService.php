@@ -51,7 +51,7 @@ class CartService
         $currentQty = $this->getCurrentQty($id);
         $qty = $currentQty + $qty;
 
-        return $qty ? $this->cartRepository->add($id, $qty): $this->cartRepository->remove($id);
+        return $qty ? $this->cartRepository->add($id, $qty) : $this->cartRepository->remove($id);
     }
 
     /**
