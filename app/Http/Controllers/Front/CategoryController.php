@@ -14,15 +14,6 @@ class CategoryController extends Controller
      */
     protected $perPage = 10;
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
