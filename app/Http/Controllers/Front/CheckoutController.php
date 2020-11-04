@@ -22,6 +22,9 @@ class CheckoutController extends Controller
         $this->cartService = $cartService;
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show()
     {
         $products = $this->cartService->productsList();
@@ -32,6 +35,9 @@ class CheckoutController extends Controller
         return view('front.checkout.show')->with(compact(['products', 'total', 'paymentMethods']));
     }
 
+    /**
+     * @param CheckoutOrderingRequest $request
+     */
     public function ordering(CheckoutOrderingRequest $request)
     {
 
