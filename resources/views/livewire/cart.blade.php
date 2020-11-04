@@ -16,7 +16,7 @@
                 <th scope="row">{{ $loop->index +1 }}</th>
                 <td>{{ $product->name }}</td>
                 <td>
-                    <div wire:model.debounce.250ms="amountToAdd">
+                    <div >
                         <button class="btn btn-secondary" wire:click="decrease({{$product->id }})">-</button>
                         <button class="btn btn-secondary">
                             {{ $product->qty }}
