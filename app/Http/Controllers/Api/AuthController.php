@@ -31,7 +31,7 @@ class AuthController extends Controller
                 'email' => ['The provided credentials are incorrect.']
             ]);
         }
-        Auth::guard('api')->setUser($user);
+//        Auth::guard('api')->setUser($user);
 
         return response()->json([
             'status_code' => Response::HTTP_OK,
