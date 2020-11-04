@@ -4,10 +4,6 @@ namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Http\JsonResponse;
 
 class PostApiUpdateRequest extends FormRequest
 {
@@ -19,22 +15,6 @@ class PostApiUpdateRequest extends FormRequest
         ]);
     }
 
-    /**
-     * Handle a failed validation attempt.
-     *
-     * @param  \Illuminate\Contracts\Validation\Validator $validator
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function failedValidation(Validator $validator)
-    {
-        $errors = (new ValidationException($validator))->errors();
-
-        throw new HttpResponseException(
-            response()->json(['errors' => $errors], JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-        );
-    }
 
     /**
      * Determine if the user is authorized to make this request.
@@ -54,7 +34,7 @@ class PostApiUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:3|max:100|unique:posts',
+            'title' => 'required|min:3|max:100|unique:posts,title,' . $this->post->id,
             'publish_at' => 'nullable|date',
         ];
     }

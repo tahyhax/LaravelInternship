@@ -4,10 +4,6 @@ namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Http\JsonResponse;
 
 class PostApiStoreRequest extends FormRequest
 {
@@ -17,23 +13,6 @@ class PostApiStoreRequest extends FormRequest
         $this->merge([
             'slug' => Str::slug($this->title),
         ]);
-    }
-
-    /**
-     * Handle a failed validation attempt.
-     *
-     * @param  \Illuminate\Contracts\Validation\Validator $validator
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function failedValidation(Validator $validator)
-    {
-        $errors = (new ValidationException($validator))->errors();
-
-        throw new HttpResponseException(
-            response()->json(['errors' => $errors], JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-        );
     }
 
     /**
@@ -54,7 +33,7 @@ class PostApiStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:3|max:100|unique:posts,name.' . $this->post->id,
+            'title' => 'required|min:3|max:100|unique:posts,title',
             'publish_at' => 'nullable|date',
         ];
     }
