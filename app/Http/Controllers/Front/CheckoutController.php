@@ -31,12 +31,12 @@ class CheckoutController extends Controller
         $total = $products->sum('total');
         $paymentMethods = PaymentMethod::all();
 
-
         return view('front.checkout.show')->with(compact(['products', 'total', 'paymentMethods']));
     }
 
     /**
      * @param CheckoutOrderingRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function ordering(CheckoutOrderingRequest $request)
     {
@@ -64,6 +64,8 @@ class CheckoutController extends Controller
             $this->cartService->delete();
 
             DB::commit();
+
+            return redirect()->route('main.index')->with('success', 'Your order is success!');
 
         } catch(\Exception $exception) {
 
