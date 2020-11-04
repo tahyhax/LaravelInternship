@@ -36,6 +36,7 @@ class CartService
                     'id' => $product->id,
                     'name' => $product->name,
                     'price' => $product->price,
+                    'slug' => $product->slug,
                     'qty' => $qty = $cart[$product->id],
                     'total' => $product->price * $qty,
                 ];

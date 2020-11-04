@@ -14,7 +14,9 @@
     @foreach($products as $product)
         <tr class="hover:bg-grey-lighter">
             <th scope="row">{{ $loop->index +1 }}</th>
-            <td>{{ $product->name }}</td>
+            <td><a href="{{route('products.show', [
+                'product' => $product->slug,
+            ])}}">{{ $product->name }}</a></td>
             <td>{{ $product->qty }}</td>
             <td>{{ $product->price }}</td>
             <td>{{ $product->total }}</td>
