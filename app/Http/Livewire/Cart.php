@@ -41,9 +41,7 @@ class Cart extends Component
        $this->hydrate();
     }
 
-    /**
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
+
     public function hydrate(): void
     {
 //        $this->cart = $this->cartService->cart();
@@ -51,9 +49,8 @@ class Cart extends Component
         $this->total = $this->products->sum('total');
     }
 
-     /**
+    /**
      * @return Collection
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     private function products(): Collection
     {
@@ -62,7 +59,6 @@ class Cart extends Component
 
     /**
      * @param int $id
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function remove(int $id): void
     {
@@ -73,7 +69,6 @@ class Cart extends Component
     /**
      * @param int $id
      * @param int $qty
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function add(int $id, int $qty): void
     {
@@ -83,7 +78,7 @@ class Cart extends Component
 
 
     /**
-     * ivent  for  update other carts.
+     * event  for  update other carts.
      *
      * @return void
      */
@@ -95,7 +90,6 @@ class Cart extends Component
 
     /**
      * @param int $id
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function increase(int $id): void
     {
@@ -107,7 +101,6 @@ class Cart extends Component
 
     /**
      * @param int $id
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function decrease(int $id): void
     {
@@ -120,24 +113,13 @@ class Cart extends Component
 
 
     /**
-     * @return mixed
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
-    protected function cartService()
-    {
-        return new CartService();
-
-        return app()->make(CartService::class);
-    }
-
-
-    /**
      * @return \Illuminate\Http\RedirectResponse
      */
     public function checkout()
     {
         return  redirect()->route('checkout.show');
     }
+
     /**
      * @return mixed
      */
