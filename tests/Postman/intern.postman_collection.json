@@ -152,15 +152,18 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "sadfasdfasdfsadfasdf",
+									"value": "123",
 									"type": "text"
 								},
 								{
 									"key": "images[]",
 									"type": "file",
 									"src": [
+										"/home/soromir/Рабочий стол/2dfi6QXrTaU.jpg",
 										"/home/soromir/Рабочий стол/qOOpHF8vzrE.jpg",
-										"/home/soromir/Рабочий стол/fdeVslA0Woc.jpg"
+										"/home/soromir/Рабочий стол/fdeVslA0Woc.jpg",
+										"/home/soromir/Рабочий стол/WpEO2zP8tN0.jpg",
+										"/home/soromir/Рабочий стол/U2CG69bbP5k.jpg"
 									]
 								}
 							],
@@ -171,14 +174,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_web_url}}/api/categories/asdf",
+							"raw": "{{base_web_url}}/api/categories/123",
 							"host": [
 								"{{base_web_url}}"
 							],
 							"path": [
 								"api",
 								"categories",
-								"asdf"
+								"123"
 							],
 							"query": [
 								{
@@ -669,17 +672,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"123\",\n    \"sku\": 1233,\n    \"price\":25,\n    \"description\": \"l1123123oram ipsum  loram ipsum loram ipsum loram ipsum loram ipsum loram ipsum \",\n    \"categories\":[8,6,10],\n    \"brand\":3\n}"
+							"raw": "{\n    \"name\": \"112333\",\n    \"description\": \"loram ipsum  loram ipsum loram ipsum loram ipsum loram ipsum loram ipsum \"\n}"
 						},
 						"url": {
-							"raw": "{{base_web_url}}/api/products/444444",
+							"raw": "{{base_web_url}}/api/brands/112333",
 							"host": [
 								"{{base_web_url}}"
 							],
 							"path": [
 								"api",
-								"products",
-								"444444"
+								"brands",
+								"112333"
 							],
 							"query": [
 								{
@@ -849,7 +852,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"112333\",\n    \"description\": \"loram ipsum  loram ipsum loram ipsum loram ipsum loram ipsum loram ipsum \"\n   \n}"
+							"raw": "{\n    \"title\": \"123\",\n    \"body\": \"l1123123oram ipsum  loram ipsum loram ipsum loram ipsum loram ipsum loram ipsum \",\n    \"user_id\":1,\n    \"views\":500\n   \n}"
 						},
 						"url": {
 							"raw": "{{base_web_url}}/api/posts",
@@ -1081,7 +1084,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"address\": \"25 est 23423423\",\n    \"user\": 2,\n    \"paymentMethods\": 2,\n    \"orderItems\": [\n        {\n            \"quantity\": 5,\n            \"product_id\": 10\n        },\n        {\n            \"quantity\": 50,\n            \"product_id\": 7\n        },\n        {\n            \"quantity\": 1,\n            \"product_id\": 4\n        }\n    ]\n}"
+							"raw": "{\n    \"address\": \"25 est 2342342322222333333123\",\n    \"user\": 2,\n    \"paymentMethods\": 2,\n    \"orderItems\": [\n        {\n            \"qty\": 5,\n            \"product_id\": 10\n        },\n        {\n            \"qty\": 50,\n            \"product_id\": 7\n        },\n        {\n            \"qty\": 1,\n            \"product_id\": 4\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "{{base_web_url}}/api/orders?",
@@ -1121,17 +1124,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"address\": \"25 est 86t4444\",\n    \"user\": 2,\n    \"paymentMethods\": 2,\n    \"orderItems\": [\n        {\n            \"quantity\": 4,\n            \"product_id\": 23\n        },\n        {\n            \"quantity\": 40,\n            \"product_id\": 4\n        },\n        {\n            \"quantity\": 36,\n            \"product_id\": 1\n        },\n        {\n            \"quantity\": 155,\n            \"product_id\": 3\n        }\n\n    ]\n}"
+							"raw": "{\n    \"address\": \"25 est 86t4444\",\n    \"user\": 2,\n    \"paymentMethods\": 1,\n    \"orderItems\": [\n        {\n            \"qty\": 4,\n            \"product_id\": 23\n        },\n        {\n            \"qty\": 40,\n            \"product_id\": 4\n        },\n        {\n            \"qty\": 36,\n            \"product_id\": 1\n        },\n        {\n            \"qty\": 155,\n            \"product_id\": 3\n        }\n\n    ]\n}"
 						},
 						"url": {
-							"raw": "{{base_web_url}}/api/orders/26",
+							"raw": "{{base_web_url}}/api/orders/NTR-110320201515-51",
 							"host": [
 								"{{base_web_url}}"
 							],
 							"path": [
 								"api",
 								"orders",
-								"26"
+								"NTR-110320201515-51"
 							],
 							"query": [
 								{
@@ -1166,7 +1169,7 @@
 							"raw": "{\n    \"status\": \"new\"\n}"
 						},
 						"url": {
-							"raw": "{{base_web_url}}/api/orders/update-status/1",
+							"raw": "{{base_web_url}}/api/orders/update-status/NTR-110320201515-51",
 							"host": [
 								"{{base_web_url}}"
 							],
@@ -1174,7 +1177,7 @@
 								"api",
 								"orders",
 								"update-status",
-								"1"
+								"NTR-110320201515-51"
 							],
 							"query": [
 								{
