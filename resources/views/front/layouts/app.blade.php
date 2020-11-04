@@ -17,6 +17,9 @@
 @include('front.layouts.partials._header', ['companyName' => 'InternShipPhp'])
 
 <div class="container">
+
+    @include('front.blocks.notice.message-session')
+
     <div class="row">
 
         @yield('sidebar-left')
