@@ -28,12 +28,6 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-
-//    public function getDateByHuman($field)
-//    {
-//       return $this->{$field}->diffForHumans();
-//    }
-
     public function getRouteKeyName()
     {
         return 'slug';
