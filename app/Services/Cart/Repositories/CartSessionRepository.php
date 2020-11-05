@@ -12,7 +12,9 @@ use Illuminate\Contracts\Session\Session;
  */
 class CartSessionRepository implements CartRepositoryInterface
 {
-    //Session
+    /**
+     * @var Session 
+     */
     private $session;
 
 

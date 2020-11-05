@@ -78,8 +78,6 @@ class CartService
      */
     public function increase(int $id)
     {
-//        $qty = $this->getCurrentQty($id) + 1;
-
         return $this->add($id, 1);
     }
 
@@ -89,8 +87,6 @@ class CartService
      */
     public function decrease(int $id)
     {
-//        $qty = $this->cartRepository->getCurrentQty($id) - 1;
-
         return $this->add($id, -1);
     }
 
