@@ -23,15 +23,6 @@ class Role extends Command
      */
     protected $description = 'Set user role by email';
 
-//    /**
-//     * Create a new command instance.
-//     *
-//     * @return void
-//     */
-//    public function __construct()
-//    {
-//        parent::__construct();
-//    }
 
     /**
      * Execute the console command.
