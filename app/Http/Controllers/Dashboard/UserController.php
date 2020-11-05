@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -17,6 +16,6 @@ class UserController extends Controller
     {
         $users = User::query()->orderByDesc('id')->paginate(15);
 
-        return  view('dashboard.users.index')->with(compact('users'));
+        return view('dashboard.users.index')->with(compact('users'));
     }
 }

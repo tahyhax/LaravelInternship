@@ -23,8 +23,10 @@ class MainController extends Controller
      */
     public function __invoke(ProductFilters $filtes)
     {
-        //TODO  сделать repository для  работы с базой. не писать сами запросы  в  контроллере / 'это over здесь
-        $products = Product::query()->with('images')->filter($filtes)->orderByDesc('id')->paginate($this->perPage);
+        $products = Product::query()->with('images')
+            ->filter($filtes)
+            ->orderByDesc('id')
+            ->paginate($this->perPage);
 
         //TODO   как правильно сделать !!
         $slideImages = Image::query()->with('product')->latest('id')->limit(5)->get();

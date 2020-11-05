@@ -49,8 +49,6 @@ class CustomerInfoController extends Controller
             $params = array_merge($params, ['avatar' => $this->storeImage($request)]);
         }
 
-        //TODO  как правибудельно добвавить имя фаила если там уже существует  avatar как объект картинки и он
-        // TODO берет при сохранении tmpname
         $customer->update($params);
 
         return redirect()->route('cabinet.customer-info.show')
@@ -60,12 +58,10 @@ class CustomerInfoController extends Controller
 
     /**
      * @param Request $request
-     * @param $oldAvatar
      * @return bool|string
      */
     protected function storeImage(Request $request)
     {
-
         $avatar = $request->file('avatar');
         $path = $avatar->store('avatars');
 

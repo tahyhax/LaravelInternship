@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -31,7 +30,6 @@ class AuthController extends Controller
                 'email' => ['The provided credentials are incorrect.']
             ]);
         }
-//        Auth::guard('api')->setUser($user);
 
         return response()->json([
             'status_code' => Response::HTTP_OK,
@@ -43,14 +41,12 @@ class AuthController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * @see https://stackoverflow.com/questions/62496954/laravel-7-sanctum-logout
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function logout(Request $request)
     {
-//        https://stackoverflow.com/questions/62496954/laravel-7-sanctum-logout
-
         return response()->json([
             'status_code' => Response::HTTP_OK,
             'auth' => !$request->user()->currentAccessToken()->delete()

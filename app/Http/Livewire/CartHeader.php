@@ -14,9 +14,8 @@ class CartHeader extends Component
      */
     protected $cartService;
 
-    public function __construct()//CartService $cartService
+    public function __construct()
     {
-//        $this->cartService = $cartService;
         $this->cartService = app(CartService::class);
     }
 
@@ -35,7 +34,6 @@ class CartHeader extends Component
     public function update()
     {
         $this->qty = $this->cartService->getQty();
-//        $this->qty = array_sum(app(\App\Models\Cart::class)->cart());
     }
 
 

@@ -37,7 +37,6 @@ class OrderController extends Controller
      */
     public function store(OrderApiStoreRequest $request)
     {
-//        $this->authorize()
         try {
             $order = new Order($request->all());
             $order->user()->associate($request->get('user'));
@@ -72,9 +71,9 @@ class OrderController extends Controller
      */
     public function update(OrderApiUpdateRequest $request, Order $order)
     {
-        //TODO как это сделать
         $order->user()->associate($request->get('user'));
         $order->paymentMethod()->associate($request->get('paymentMethods'));
+
         $order->save();
 
         $order->products()->sync($request->get('orderItems', []));
@@ -99,6 +98,5 @@ class OrderController extends Controller
         $order->update($request->all());
 
         return new OrderResource($order->load(['user', 'products.brand']));
-//        return response(null, Response::HTTP_NO_CONTENT);
     }
 }

@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 class CategoryApiUpdateRequest extends FormRequest
 {
 
-
     protected function prepareForValidation()
     {
         $this->merge([

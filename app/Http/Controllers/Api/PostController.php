@@ -21,7 +21,6 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        //TODO  refactor  All
         $perPage = $request->get('per_page') ?: $this->perPage;
         $posts = Post::query()->orderBy('id', 'DESC')->paginate($perPage);
         return new PostResource($posts);

@@ -44,7 +44,6 @@ class Cart extends Component
 
     public function hydrate(): void
     {
-//        $this->cart = $this->cartService->cart();
         $this->products = $this->products();
         $this->total = $this->products->sum('total');
     }
@@ -95,7 +94,6 @@ class Cart extends Component
     {
         $this->cartService->increase($id);
         $this->update();
-//        $this->add($id, $this->cart[$id] + 1);
     }
 
 
@@ -104,9 +102,6 @@ class Cart extends Component
      */
     public function decrease(int $id): void
     {
-//        $qty = $this->cart[$id] - 1;
-//        $qty < 1 ?  $this->remove($id) :  $this->add($id, $qty);
-
         $this->cartService->decrease($id);
         $this->update();
     }

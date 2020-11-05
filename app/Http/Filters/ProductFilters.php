@@ -19,7 +19,6 @@ class ProductFilters extends QueryFilters
             $query->whereIn('slug', $this->paramToArray($categories));
         });
 
-
     }
 
     /**

@@ -36,8 +36,6 @@ class BrandController extends Controller
     public function store(BrandApiStoreRequest $request)
     {
         $brand = Brand::create($request->all());
-//        $brand = new Brand($request->all());
-//        $brand->save();
 
         return new BrandResource($brand);
     }
