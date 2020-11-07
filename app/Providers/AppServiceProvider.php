@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
         $this->bootBladeStatements();
         $this->registerBindings();
         $this->registerPagination();
+        $this->registerObservers();
 
     }
 
@@ -44,5 +45,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::defaultView('front.blocks.pagination');
         Paginator::defaultSimpleView('front.blocks.pagination');
+    }
+
+    private function registerObservers()
+    {
+        \App\Models\Order::observe(\App\Observers\OrderObserver::class);
     }
 }
