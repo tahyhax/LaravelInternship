@@ -54,6 +54,15 @@ class Category extends Model
         return $this->morphMany(Image::class, 'imageable');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function imagesMain()
+    {
+        return $this->morphOne(Image::class, 'imageable')
+            ->orderBy('id', 'DESC')
+            ->latest();
+    }
 
     /**
      * @param array $images files  from category request
@@ -72,6 +81,15 @@ class Category extends Model
 
         return isset($imagesList) ? $imagesList : [];
 
+    }
+
+    /**
+     * get main image fro scope  images
+     * @return string
+     */
+    public function getImageMainAttribute(): string
+    {
+        return $this->imagesMain ? $this->imagesMain->image : 'http://placehold.it/700x400';
     }
 
 
