@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\ImagesEvent;
 use App\Traits\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,11 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory, Filterable;
+
+    /**
+     * @see config/filesystems
+     */
+    const FILE_STORAGE_LINK = 'products';
 
     protected $fillable = [
         'name',
@@ -73,10 +79,13 @@ class Product extends Model
     public function loadImagesToStore($images)
     {
         foreach ($images as $image) {
-            $path = $image->store('products');
-            $name = substr($path, strlen('products/'));
-            $imagesList[] = new Image(['name' => $name, 'storage_link' => 'products']);
+            $path = $image->store(self::FILE_STORAGE_LINK);
+            $name = substr($path, strlen(self::FILE_STORAGE_LINK . '/'));
+            $imagesList[] = new Image(['name' => $name, 'storage_link' => self::FILE_STORAGE_LINK ]);
         }
+
+        //TODO  как правильно ето сделать ?
+        event(new ImagesEvent($this->images));
 
         return isset($imagesList) ? $imagesList : [];
 

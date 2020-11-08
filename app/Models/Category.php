@@ -2,12 +2,18 @@
 
 namespace App\Models;
 
+use App\Events\ImagesEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
     use HasFactory;
+
+    /**
+     * @see config/filesystems
+     */
+    const FILE_STORAGE_LINK = 'categories';
 
     /**
      * @var array
@@ -56,10 +62,13 @@ class Category extends Model
     public function loadImagesToStore($images)
     {
         foreach ($images as $image) {
-            $path = $image->store('categories');
-            $name = substr($path, strlen('categories/'));
-            $imagesList[] = new Image(['name' => $name, 'storage_link' => 'categories']);
+            $path = $image->store(self::FILE_STORAGE_LINK);
+            $name = substr($path, strlen(self::FILE_STORAGE_LINK . '/'));
+            $imagesList[] = new Image(['name' => $name, 'storage_link' =>  self::FILE_STORAGE_LINK ]);
         }
+
+        //TODO  как правильно ето сделать ?
+        event(new ImagesEvent($this->images));
 
         return isset($imagesList) ? $imagesList : [];
 
