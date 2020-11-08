@@ -22,7 +22,7 @@ class CarouselComponent extends Component
      * @param Collection $items
      * @param string $attribute
      */
-    public function __construct(Collection $items, $attribute = 'name')
+    public function __construct(Collection $items, $attribute = 'image')
     {
         $this->items = $items;
         $this->attribute = $attribute;
