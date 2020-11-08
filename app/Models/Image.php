@@ -29,12 +29,11 @@ class Image extends Model
     }
 
     /**
-     * @param $image
      * @return string
      */
-    public function getNameAttribute($image)
+    public function getImageAttribute()
     {
-        // TODO как правильноо сделать   денамический path "categories" . либо просто хранить не только название а и path db
-        return asset($this->storage_link . '/' . $image);
+        return asset($this->storage_link . '/' . $this->name);
     }
+
 }
