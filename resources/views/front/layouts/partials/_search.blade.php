@@ -1,4 +1,4 @@
 <form method="GET" class="w-100">
-    @csrf
+    {{--@csrf--}}
     <input class="form-control  form-control" name="search" type="text" placeholder="Search" aria-label="Search">
 </form>
