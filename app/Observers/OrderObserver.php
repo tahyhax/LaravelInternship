@@ -17,7 +17,7 @@ class OrderObserver
      */
     public function created(Order $order)
     {
-        Notification::route('mail', $order->email)->notify(new OrderCreatedNotification($order));
+//        Notification::route('mail', $order->email)->notify(new OrderCreatedNotification( $order->load('products')));
     }
 
     /**

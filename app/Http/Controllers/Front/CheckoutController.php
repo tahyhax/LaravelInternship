@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Events\OrderCreatedEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CheckoutOrderingRequest;
 use App\Models\Order;
@@ -61,7 +62,11 @@ class CheckoutController extends Controller
             $order->save();
             $order->products()->sync($products);
 
-            $this->cartService->delete();
+//            $this->cartService->delete();
+
+
+
+            event(new OrderCreatedEvent($order));
 
             DB::commit();
 
