@@ -9,7 +9,10 @@
         <div class="carousel-inner" role="listbox">
             @foreach($items as $item)
                 <div class="carousel-item {{$loop->first ? 'active' : ''}}">
-                    <img class="d-block img-fluid" src="@php echo $item->{$attribute} @endphp " alt="First slide">
+                    {{--//TODO сделать динамический route--}}
+                    <a href="{{route('products.show', ['product' => $item])}}">
+                        <img class="d-block img-fluid" src="@php echo $item->{$attribute} @endphp " alt="{{$item->name}}">
+                    </a>
                 </div>
             @endforeach
         </div>
