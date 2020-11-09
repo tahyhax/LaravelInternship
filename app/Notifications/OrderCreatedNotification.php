@@ -20,7 +20,7 @@ class OrderCreatedNotification extends Notification
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param Order $order
      */
     public function __construct(Order $order)
     {
@@ -48,7 +48,7 @@ class OrderCreatedNotification extends Notification
     {
         return (new MailMessage)
             ->subject('Order:' . $this->order->slug . ' was created')
-            ->view(
+            ->markdown(
                 'front.mails.orders.order-created', ['order' => $this->order]
             );
     }

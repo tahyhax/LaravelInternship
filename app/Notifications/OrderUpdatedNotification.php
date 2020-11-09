@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -20,7 +19,7 @@ class OrderUpdatedNotification extends Notification
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param Order $order
      */
     public function __construct(Order $order)
     {
