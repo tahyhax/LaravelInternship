@@ -11,14 +11,13 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
     {
-        $product->load('brand');
         return view('front.products.show')->with(
-            compact(['product'])
+            ['product' => $product->load('brand', 'images')]
         );
     }
 }

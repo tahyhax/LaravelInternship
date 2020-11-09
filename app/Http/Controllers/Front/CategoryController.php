@@ -23,8 +23,11 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $products = $category->products()->paginate($this->perPage);
-        return view('front.categories.show')->with(compact(['category', 'products']));
+        return view('front.categories.show')->with(
+            [
+                'category' => $category,
+                'products' => $category->products()->paginate($this->perPage)
+            ]);
     }
 
 }
