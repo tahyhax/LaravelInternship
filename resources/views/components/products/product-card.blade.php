@@ -2,7 +2,7 @@
     <a href="{{route('products.show', [
                 'product' => $product->slug,
             ])}}">
-        <img class="card-img-top" src="http://placehold.it/700x400" alt="image-title">
+        <img class="card-img-top" src="{{$product->imageMain}}" alt="image-title">
     </a>
     <div class="card-body">
         <h4 class="card-title">
