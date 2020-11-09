@@ -1,9 +1,5 @@
-{{--@component('mail::header', ['url' => config('app.url')])--}}
-
 @component('mail::message')
-    @component('mail::header')
-        # Order: **{{$order->slug}}** status ``{{$order->status}}``
-    @endcomponent
+    # Order: **{{$order->slug}}** status ``{{$order->status}}``
 
     @component('mail::table')
         Name  | Price  | Qty  | Total
