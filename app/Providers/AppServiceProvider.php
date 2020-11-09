@@ -45,6 +45,17 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::defaultView('front.blocks.pagination');
         Paginator::defaultSimpleView('front.blocks.pagination');
+
+        //NOTE  можно сделать так , или в каждом paginate настраивать как надо. Использовал второй вариант.
+        // как по мне ето более гибко
+        //@link https://github.com/laravel/framework/issues/19441
+
+//        $this->app->resolving(LengthAwarePaginator::class, static function (LengthAwarePaginator $paginator) {
+//            return $paginator->appends(request()->query());
+//        });
+//        $this->app->resolving(Paginator::class, static function (Paginator $paginator) {
+//            return $paginator->appends(request()->query());
+//        });
     }
 
     private function registerObservers()
