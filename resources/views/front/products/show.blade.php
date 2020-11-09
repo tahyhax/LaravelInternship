@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-5 col-sm-12 col-xs-12">
                     <div class="product-image">
-                        <x-carousel-component :items="$product->images"></x-carousel-component>
+                        <img src="{{$product->imageMain}}" alt="{{$product->name}}" width="500" >
                     </div>
                 </div>
 
