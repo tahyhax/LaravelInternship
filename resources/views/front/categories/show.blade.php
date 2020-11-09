@@ -21,6 +21,7 @@
                 </div>
             @endforeach
         </div>
-        {{$products->links()}}
+        {{$products->appends(request()->query())->links()}}
+
     </div>
 @endsection
