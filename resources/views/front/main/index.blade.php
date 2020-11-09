@@ -10,7 +10,7 @@
 @section('content')
     <div class="col-lg-9">
         <div class="mb-4">
-            <x-carousel-component :items="$slideImages"></x-carousel-component>
+            <x-carousel-component :items="$sliderProducts"></x-carousel-component>
         </div>
 
         <div class="row">
