@@ -62,9 +62,7 @@ class CheckoutController extends Controller
             $order->save();
             $order->products()->sync($products);
 
-//            $this->cartService->delete();
-
-
+            $this->cartService->delete();
 
             event(new OrderCreatedEvent($order));
 

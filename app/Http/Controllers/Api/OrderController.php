@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\OrderCreatedEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\OrderApiChangeStatusRequest;
 use App\Http\Requests\Dashboard\OrderApiStoreRequest;
@@ -44,6 +45,8 @@ class OrderController extends Controller
             $order->save();
 
             $order->products()->sync($request->get('orderItems', []));
+
+            event(new OrderCreatedEvent($order));
 
             return new OrderResource($order->load(['user', 'products.brand']));
 
