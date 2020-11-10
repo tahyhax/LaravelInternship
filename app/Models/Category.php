@@ -5,7 +5,13 @@ namespace App\Models;
 use App\Events\ImagesEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
+/**
+ * Class Category
+ * @package App\Models
+ * @property MorphMany images
+ */
 class Category extends Model
 {
     use HasFactory;
@@ -70,6 +76,7 @@ class Category extends Model
      */
     public function loadImagesToStore($images)
     {
+        $imagesList = [];
         foreach ($images as $image) {
             $path = $image->store(self::FILE_STORAGE_LINK);
             $name = substr($path, strlen(self::FILE_STORAGE_LINK . '/'));
@@ -79,7 +86,7 @@ class Category extends Model
         //TODO  как правильно ето сделать ?
         event(new ImagesEvent($this->images));
 
-        return isset($imagesList) ? $imagesList : [];
+        return $imagesList;
 
     }
 
