@@ -73,7 +73,6 @@ class Product extends Model
             ->latest();
     }
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -88,16 +87,17 @@ class Product extends Model
      */
     public function loadImagesToStore($images)
     {
+        $imagesList = [];
         foreach ($images as $image) {
             $path = $image->store(self::FILE_STORAGE_LINK);
             $name = substr($path, strlen(self::FILE_STORAGE_LINK . '/'));
-            $imagesList[] = new Image(['name' => $name, 'storage_link' => self::FILE_STORAGE_LINK ]);
+            $imagesList[] = new Image(['name' => $name, 'storage_link' => self::FILE_STORAGE_LINK]);
         }
 
         //TODO  как правильно ето сделать ?
         event(new ImagesEvent($this->images));
 
-        return isset($imagesList) ? $imagesList : [];
+        return $imagesList;
 
     }
 
