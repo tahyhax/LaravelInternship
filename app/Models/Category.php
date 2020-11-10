@@ -9,8 +9,24 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * Class Category
+ *
  * @package App\Models
  * @property MorphMany images
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property int|null $parent_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|Category[] $children
+ * @property-read int|null $children_count
+ * @property-read string $image_main
+// * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
+ * @property-read int|null $images_count
+ * @property-read \App\Models\Image|null $imagesMain
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
+ * @property-read int|null $products_count
+ * @mixin \Eloquent
  */
 class Category extends Model
 {

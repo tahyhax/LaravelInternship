@@ -5,6 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Post
+ *
+ * @property int $id
+ * @property string $title
+ * @property string $slug
+ * @property string|null $body
+ * @property int $views
+ * @property int $user_id
+ * @property mixed|null $created_at
+ * @property mixed|null $updated_at
+ * @property string|null $publish_at
+ * @property-read \App\Models\User $user
+ * @mixin \Eloquent
+ */
 class Post extends Model
 {
     use HasFactory;

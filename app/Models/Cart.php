@@ -7,8 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Cart
- * @package App\Models
  *
+ * @package App\Models
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
+ * @property-read int|null $products_count
+ * @property-read \App\Models\User $user
+ * @mixin \Eloquent
  */
 class Cart extends Model
 {

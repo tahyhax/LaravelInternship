@@ -9,7 +9,29 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Product
+ *
  * @package App\Models
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property string $sku
+ * @property string|null $description
+ * @property float $price
+ * @property int $in_stock
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $brand_id
+ * @property-read \App\Models\Brand $brand
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
+ * @property-read int|null $categories_count
+ * @property-read string $image_main
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
+ * @property-read int|null $images_count
+ * @property-read \App\Models\Image|null $imagesMain
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Order[] $orders
+ * @property-read int|null $orders_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Product filter(\App\Http\Filters\QueryFilters $filter)
+ * @mixin \Eloquent
  */
 class Product extends Model
 {
