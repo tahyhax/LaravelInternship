@@ -26,7 +26,8 @@ class ProductController extends Controller
     public function index(Request $request, ProductFilters $filters)
     {
         $perPage = $request->get('per_page') ?: $this->perPage;
-        $products = Product::query()->with(['categories', 'brand'])->filter($filters)->paginate($perPage);
+        $products = Product::query()->with(['categories', 'brand', 'imagesMain'])->filter($filters)->paginate($perPage);
+
 
         return new ProductResource($products);
     }
