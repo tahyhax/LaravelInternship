@@ -16,17 +16,14 @@ class MainController extends Controller
     protected $perPage = 12;
 
     /**
-     * @param ProductFilters $filters
-     * @see  ProductFilters
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function __invoke(ProductFilters $filters)
+    public function __invoke()
     {
         return view('front.main.index')->with(
             [
                 'products' =>
                     Product::query()->with('imagesMain')
-                    ->filter($filters)
                     ->orderByDesc('id')
                     ->paginate($this->perPage),
 
