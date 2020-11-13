@@ -13,6 +13,7 @@
                     {{ $customer->name }}
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
+
                     <a class="dropdown-item" href="{{ route('cabinet.main.index') }}">
                         Cabinet
                     </a>
