@@ -49,7 +49,7 @@ class Image extends Model
      */
     public function getImageAttribute()
     {
-        return asset($this->storage_link . '/' . $this->name);
+        return asset('storage/' . $this->storage_link . '/' . $this->name);
     }
 
 }
