@@ -14,7 +14,7 @@
 </head>
 <body>
 
-@include('front.layouts.partials._header', ['companyName' => 'InternShipPhp'])
+@include('front.layouts.partials.header._header', ['companyName' => 'InternShipPhp'])
 
 <div class="container">
 
