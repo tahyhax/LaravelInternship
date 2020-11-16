@@ -24,14 +24,14 @@ class MainController extends Controller
             [
                 'products' =>
                     Product::query()->with('imagesMain')
-                    ->orderByDesc('id')
-                    ->paginate($this->perPage),
+                        ->orderByDesc('id')
+                        ->paginate($this->perPage),
 
                 'sliderProducts' =>
                     Product::query()->whereHas('imagesMain')
-                    ->orderByDesc('id')
-                    ->limit(5)
-                    ->get()
+                        ->orderByDesc('id')
+                        ->limit(5)
+                        ->get()
             ]
         );
     }
