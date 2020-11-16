@@ -23,7 +23,7 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->with('roles')->first();
 
         if (!$user || !$this->checkHash($request, $user, 'password')) {
             throw ValidationException::withMessages([
@@ -35,6 +35,7 @@ class AuthController extends Controller
             'status_code' => Response::HTTP_OK,
             'access_token' => $user->createToken('authToken')->plainTextToken,
             'token_type' => 'Bearer',
+            'user' => $user,
         ]);
 
     }
