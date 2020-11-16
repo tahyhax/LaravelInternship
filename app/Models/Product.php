@@ -107,7 +107,7 @@ class Product extends Model
      * @param array $images files  from product request
      * @return array
      */
-    public function loadImagesToStore($images)
+    public function loadImagesToStore(array $images)
     {
         $imagesList = [];
         foreach ($images as $image) {
