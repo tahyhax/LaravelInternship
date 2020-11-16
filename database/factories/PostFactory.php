@@ -32,7 +32,8 @@ class PostFactory extends Factory
             'slug' => $slug,
             'body' => $this->faker->paragraphs(3, true),
             'user_id' => $userId,
-            'views' => $this->faker->biasedNumberBetween()
+            'views' => $this->faker->biasedNumberBetween(),
+            'publish_at' =>$this->faker->dateTimeBetween('-10 days','+10 days')
 
         ];
     }
