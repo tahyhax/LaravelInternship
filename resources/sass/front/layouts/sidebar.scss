@@ -1,0 +1,23 @@
+.sidebar-list-group > .sidebar-list-group {
+  //display: none;
+  margin-bottom: 0;
+}
+
+.list-group-item:focus + .sidebar-list-group {
+  display: block;
+}
+
+.sidebar-list-group > .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+}
+
+.sidebar-list-group > {
+  .list-group-item:first-child {
+    border-top-width: 0;
+  }
+
+  .sidebar-list-group > .list-group-item {
+    padding-left: 2.5em;
+  }
+}
