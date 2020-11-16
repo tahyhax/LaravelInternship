@@ -6,9 +6,9 @@
             Creator:
             <small class="text-muted">{{$post->user->name}}</small>
             {{--// NOTE временно сделано пока не разберуcь почему на работает $casts--}}
-            Created:
-            <small class="text-muted">{{ $post->created_at}}</small>
-            @if($post->created_at != $post->updated_at)
+            Published:
+            <small class="text-muted">{{ $post->publish_at}}</small>
+            @if($post->publish_at != $post->updated_at)
                 Updated:
                 <small class="text-muted">{{ $post->updated_at }}</small>
             @endif

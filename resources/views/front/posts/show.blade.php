@@ -12,9 +12,9 @@
                 <div class="mb-1">
                     Creator:
                     <small class="text-muted">{{$post->user->name}}</small>
-                    Created:
-                    <small class="text-muted">{{ $post->created_at}}</small>
-                    @if($post->created_at != $post->updated_at)
+                    Published:
+                    <small class="text-muted">{{ $post->publish_at}}</small>
+                    @if($post->publish_at != $post->updated_at)
                         Updated:
                         <small class="text-muted">{{ $post->updated_at }}</small>
                     @endif
