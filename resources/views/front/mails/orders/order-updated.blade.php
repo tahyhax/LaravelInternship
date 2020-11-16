@@ -17,8 +17,8 @@
                 'product' => $product->slug,
             ])}}">{{ $product->name }}</a></td>
             <td>{{ $product->orderItem->qty }}</td>
-            <td>{{ $product->price }}</td>
-            <td>{{ $product->orderItem->qty * $product->price }}</td>
+            <td>@money($product->price)</td>
+            <td>@money($product->orderItem->qty * $product->price)</td>
         </tr>
     @endforeach
     </tbody>
