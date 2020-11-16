@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Order[] $orders
- * @property-read int|null $orders_count
  * @mixin \Eloquent
  */
 class PaymentMethod extends Model
