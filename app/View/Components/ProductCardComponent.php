@@ -8,6 +8,11 @@ use Illuminate\View\Component;
 class ProductCardComponent extends Component
 {
     /**
+     * @var Product
+     */
+    protected $product;
+
+    /**
      * Create a new component instance.
      *
      * @return void
