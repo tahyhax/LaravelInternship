@@ -51,7 +51,7 @@ class CategoryController extends Controller
             $category->images()->saveMany($imagesList);
         }
 
-        return new CategoryResource($category->load('images'));
+        return new CategoryResource($category->load(['images', 'children']));
     }
 
     /**
@@ -91,7 +91,7 @@ class CategoryController extends Controller
         }
 
 
-        return new CategoryResource($category->load('images'));
+        return new CategoryResource($category->load(['images', 'children']));
     }
 
     /**
