@@ -15,6 +15,7 @@ class AddPublishAtInToPosts extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             $table->timestamp("publish_at")->nullable();
+            $table->index(['publish_at']);
         });
     }
 
@@ -26,6 +27,7 @@ class AddPublishAtInToPosts extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
+            $table->dropIndex(['publish_at']);
             $table->dropColumn(['publish_at']);
         });
     }
