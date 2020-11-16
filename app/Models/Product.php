@@ -129,7 +129,7 @@ class Product extends Model
      */
     public function getImageMainAttribute(): string
     {
-        return !empty($this->imagesMain) ? $this->imagesMain->image : 'http://placehold.it/700x400';
+        return $this->imagesMain ? $this->imagesMain->image : 'http://placehold.it/700x400';
     }
 
 }
