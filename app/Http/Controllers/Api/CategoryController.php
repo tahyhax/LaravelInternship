@@ -75,11 +75,11 @@ class CategoryController extends Controller
         try {
             $category->update($request->all());
 
-            if ($request->hasFile('images')) {
-                $imagesList = $category->loadImagesToStore($request->file('images'));
-                $category->images()->delete();
-                $category->images()->saveMany($imagesList);
-            }
+            $imagesList = $request->hasFile('images')
+                ? $category->loadImagesToStore($request->file('images'))
+                : [];
+            $category->images()->delete();
+            $category->images()->saveMany($imagesList);
 
             DB::commit();
 

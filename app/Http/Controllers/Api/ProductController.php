@@ -81,12 +81,11 @@ class ProductController extends Controller
             $product->update($request->all());
             $product->categories()->sync($request->get('categories', []));
 
-
-            if ($request->hasFile('images')) {
-                $imagesList = $product->loadImagesToStore($request->file('images'));
-                $product->images()->delete();
-                $product->images()->saveMany($imagesList);
-            }
+            $imagesList = $request->hasFile('images')
+                ? $product->loadImagesToStore($request->file('images'))
+                : [];
+            $product->images()->delete();
+            $product->images()->saveMany($imagesList);
 
             DB::commit();
 
