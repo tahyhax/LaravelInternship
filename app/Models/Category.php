@@ -52,12 +52,25 @@ class Category extends Model
         return 'slug';
     }
 
+    public function scopeRootLevel($query)
+    {
+        return $query->whereNull('parent_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function categories()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function children()
     {
-        return $this->hasMany(Category::class, 'parent_id', 'id');
+        return $this->hasMany(Category::class, 'parent_id', 'id')->with('children');
     }
 
     /**
@@ -99,7 +112,6 @@ class Category extends Model
             $imagesList[] = new Image(['name' => $name, 'storage_link' =>  self::FILE_STORAGE_LINK ]);
         }
 
-        //TODO  как правильно ето сделать ?
         event(new ImagesEvent($this->images));
 
         return $imagesList;
