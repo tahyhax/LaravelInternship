@@ -1,5 +1,3 @@
-
-
 <table class="table">
 
     <thead class="thead-dark">
@@ -23,12 +21,5 @@
             <td>{{ $product->orderItem->qty * $product->price }}</td>
         </tr>
     @endforeach
-
-    {{--<tr>--}}
-        {{--<th scope="row" colspan="6" class="text-right">--}}
-            {{--<p class="text-danger"><strong >Total:</strong> {{ $total }}</p>--}}
-        {{--</th>--}}
-    {{--</tr>--}}
-
     </tbody>
 </table>

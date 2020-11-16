@@ -18,6 +18,7 @@
                 {{$customer->email}}
             </div>
         </div>
-        <a class="btn btn-primary" href="{{route('cabinet.customer-info.edit', ['customer' => $customer->id])}}" role="button">Edit</a>
+        <a class="btn btn-primary" href="{{route('cabinet.customer-info.edit', ['customer' => $customer->id])}}"
+           role="button">Edit</a>
     </div>
 @endsection

@@ -54,11 +54,6 @@
 </table>
 @if($products)
     <div class="float-right">
-        {{--//TODO как правильно сделать, через контролле или так--}}
-        {{--<button wire:click="checkout()"--}}
-        {{--class=" btn btn-success">--}}
-        {{--Checkout--}}
-        {{--</button>--}}
         <a href="{{route('checkout.show')}}"
            class=" btn btn-success">
             {{__('Checkout')}}
