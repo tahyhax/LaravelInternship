@@ -15,7 +15,7 @@ mix.js('resources/js/front/app.js', 'public/js/front/')
     .sass('resources/sass/front/app.scss', 'public/css/front/')
     .version()
     
-    .js('resources/js/dashboard/app.js', 'public/js/dashboard/')
-    .sass('resources/sass/dashboard/app.scss', 'public/css/dashboard/')
+    .js('resources/js/cabinet/app.js', 'public/js/cabinet/')
+    .sass('resources/sass/cabinet/app.scss', 'public/css/cabinet/')
     .version();
     
