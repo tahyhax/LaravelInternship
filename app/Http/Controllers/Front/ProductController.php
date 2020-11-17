@@ -23,7 +23,7 @@ class ProductController extends Controller
         return view('front.products.index')->with(
             [
                 'products' =>
-                    Product::query()->with('imagesMain')
+                    Product::query()->with(['imagesMain', 'similar'])
                         ->filter($filters)
                         ->orderByDesc('id')
                         ->paginate($this->perPage),
