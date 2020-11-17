@@ -104,6 +104,17 @@ class Product extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function similar()
+    {
+        return $this->belongsToMany(Product::class,'product_similar',
+            'product_id',
+            'similar_id'
+        );
+    }
+
+    /**
      * @param array $images files  from product request
      * @return array
      */

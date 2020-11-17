@@ -46,13 +46,14 @@ class ProductController extends Controller
 
         $product->save();
         $product->categories()->sync($request->get('categories', []));
+        $product->similar()->sync($request->get('similar', []));
 
         if ($request->hasFile('images')) {
             $imagesList = $product->loadImagesToStore($request->file('images'));
             $product->images()->saveMany($imagesList);
         }
 
-        return new ProductResource($product->load(['brand', 'categories', 'images']));
+        return new ProductResource($product->load(['brand', 'categories', 'images', 'similar']));
     }
 
     /**
@@ -61,7 +62,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product->load(['categories', 'brand', 'images']);
+        $product->load(['categories', 'brand', 'images', 'similar']);
 
         return new ProductResource($product);
 
@@ -80,6 +81,8 @@ class ProductController extends Controller
             $product->brand()->associate($request->get('brand'));
             $product->update($request->all());
             $product->categories()->sync($request->get('categories', []));
+            $product->similar()->sync($request->get('similar', []));
+
 
             $imagesList = $request->hasFile('images')
                 ? $product->loadImagesToStore($request->file('images'))
@@ -100,7 +103,7 @@ class ProductController extends Controller
         //NOTE Transform the resource into an HTTP response. ->response()
         //TODO  https://laravel.com/docs/8.x/eloquent-resources
         //TODO'posts' => PostResource::collection($this->posts), разобратся как работает
-        return new ProductResource($product->load(['categories', 'brand', 'images']));
+        return new ProductResource($product->load(['categories', 'brand', 'images', 'similar.brand']));
 
     }
 
