@@ -9,10 +9,11 @@
 @endsection
 @section('content')
     <div class="col-lg-9">
-        <div class="mb-4">
-            <x-carousel-component :items="$category->images"></x-carousel-component>
-        </div>
-
+        @if(count($category->images))
+            <div class="mb-4">
+                <x-carousel-component :items="$category->images"></x-carousel-component>
+            </div>
+        @endif
         <div class="row">
             @foreach($products as $product)
                 <div class="col-lg-4 col-md-6 mb-4">
