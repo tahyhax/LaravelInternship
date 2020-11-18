@@ -43,6 +43,8 @@ class ProductApiStoreRequest extends FormRequest
             'brand' => 'required|integer|exists:brands,id',
             'images' => 'array|nullable',
             'images.*' => 'image',
+            'similar' => 'array|nullable',
+            'similar.*' => 'required|integer|exists:products,id',
         ];
     }
 }

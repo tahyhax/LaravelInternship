@@ -4,6 +4,7 @@ namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class ProductApiUpdateRequest extends FormRequest
 {
@@ -42,6 +43,8 @@ class ProductApiUpdateRequest extends FormRequest
             'brand' => 'required|integer|exists:brands,id',
             'images' => 'array|nullable',
             'images.*' => 'image',
+            'similar' => 'array|nullable',
+            'similar.*' => 'required|integer|exists:products,id',
         ];
     }
 
