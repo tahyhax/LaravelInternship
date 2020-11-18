@@ -17,6 +17,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read Model|\Eloquent $imageable
  * @property-read \App\Models\Product $product
  * @mixin \Eloquent
+ * @property string $imageable_type
+ * @property int $imageable_id
  */
 class Image extends Model
 {

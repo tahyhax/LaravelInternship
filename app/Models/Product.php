@@ -32,6 +32,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int|null $orders_count
  * @method static \Illuminate\Database\Eloquent\Builder|Product filter(\App\Http\Filters\QueryFilters $filter)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|Product[] $similar
+ * @property-read int|null $similar_count
  */
 class Product extends Model
 {

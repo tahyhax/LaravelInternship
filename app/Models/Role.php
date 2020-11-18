@@ -24,6 +24,16 @@ class Role extends Model
 {
     use HasFactory;
 
+    /**
+     * @var array
+     */
+    protected $fillable = ['name', 'slug', 'description'];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function users()
     {
         return $this->belongsToMany(User::class);

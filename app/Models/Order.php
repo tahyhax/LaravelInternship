@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int|null $products_count
  * @property-read \App\Models\User|null $user
  * @mixin \Eloquent
+ * @property-read mixed $full_name
  */
 class Order extends Model
 {

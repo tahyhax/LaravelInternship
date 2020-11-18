@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
  * @property-read int|null $products_count
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|Category[] $categories
+ * @property-read int|null $categories_count
  */
 class Category extends Model
 {
