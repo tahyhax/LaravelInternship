@@ -168,9 +168,7 @@
 								}
 							],
 							"options": {
-								"raw": {
-									"language": "json"
-								}
+								"formdata": {}
 							}
 						},
 						"url": {
@@ -672,7 +670,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"112333\",\n    \"description\": \"loram ipsum  loram ipsum loram ipsum loram ipsum loram ipsum loram ipsum \"\n}"
+							"raw": "{\n    \"name\": \"112333\",\n    \"description\": \"loram ipsum  loram ipsum loram ipsum loram ipsum loram ipsum loram ipsum \"\n}",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
 							"raw": "{{base_web_url}}/api/brands/112333",
@@ -852,7 +853,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"123\",\n    \"body\": \"l1123123oram ipsum  loram ipsum loram ipsum loram ipsum loram ipsum loram ipsum \",\n    \"user_id\":1,\n    \"views\":500\n   \n}"
+							"raw": "{\n    \"title\": \"123\",\n    \"body\": \"l1123123oram ipsum  loram ipsum loram ipsum loram ipsum loram ipsum loram ipsum \",\n    \"user_id\":1,\n    \"views\":500\n   \n}",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
 							"raw": "{{base_web_url}}/api/posts",
@@ -1084,7 +1088,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"address\": \"25 est 2342342322222333333123\",\n    \"user\": 2,\n    \"paymentMethods\": 2,\n    \"orderItems\": [\n        {\n            \"qty\": 5,\n            \"product_id\": 10\n        },\n        {\n            \"qty\": 50,\n            \"product_id\": 7\n        },\n        {\n            \"qty\": 1,\n            \"product_id\": 4\n        }\n    ]\n}"
+							"raw": "{\n    \"address\": \"25 est 2342342322222333333123\",\n    \"user\": 2,\n    \"paymentMethods\": 2,\n    \"orderItems\": [\n        {\n            \"qty\": 5,\n            \"product_id\": 10\n        },\n        {\n            \"qty\": 50,\n            \"product_id\": 7\n        },\n        {\n            \"qty\": 1,\n            \"product_id\": 4\n        }\n    ]\n}",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
 							"raw": "{{base_web_url}}/api/orders?",
@@ -1124,7 +1131,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"address\": \"25 est 86t4444\",\n    \"user\": 2,\n    \"paymentMethods\": 1,\n    \"orderItems\": [\n        {\n            \"qty\": 4,\n            \"product_id\": 23\n        },\n        {\n            \"qty\": 40,\n            \"product_id\": 4\n        },\n        {\n            \"qty\": 36,\n            \"product_id\": 1\n        },\n        {\n            \"qty\": 155,\n            \"product_id\": 3\n        }\n\n    ]\n}"
+							"raw": "{\n    \"address\": \"25 est 86t4444\",\n    \"user\": 2,\n    \"paymentMethods\": 1,\n    \"orderItems\": [\n        {\n            \"qty\": 4,\n            \"product_id\": 23\n        },\n        {\n            \"qty\": 40,\n            \"product_id\": 4\n        },\n        {\n            \"qty\": 36,\n            \"product_id\": 1\n        },\n        {\n            \"qty\": 155,\n            \"product_id\": 3\n        }\n\n    ]\n}",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
 							"raw": "{{base_web_url}}/api/orders/NTR-110320201515-51",
@@ -1166,10 +1176,13 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"status\": \"new\"\n}"
+							"raw": "{\n    \"status\": \"closed\"\n}",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
-							"raw": "{{base_web_url}}/api/orders/update-status/NTR-110320201515-51",
+							"raw": "{{base_web_url}}/api/orders/update-status/NTR-110720201059-38",
 							"host": [
 								"{{base_web_url}}"
 							],
@@ -1177,7 +1190,7 @@
 								"api",
 								"orders",
 								"update-status",
-								"NTR-110320201515-51"
+								"NTR-110720201059-38"
 							],
 							"query": [
 								{
@@ -1672,18 +1685,18 @@
 				"id": "98c7e0b7-7f78-45e1-b1aa-a4f02c3a36ed",
 				"type": "text/javascript",
 				"exec": [
-					"pm.sendRequest({",
-					"    url: pm.environment.get('base_web_url')+'/sanctum/csrf-cookie',",
-					"    method: 'GET'",
-					"}, function (error, {cookies}) {",
-					"    // console.log(response)",
-					"    // console.log(cookies.get('XSRF-TOKEN'));",
-					"    if (!error && cookies) {",
-					"        pm.environment.set('xsrf-token', cookies.get('XSRF-TOKEN'))",
-					"        // pm.environment.set('xsrf-cookie', cookies.get('XSRF-TOKEN'))",
-					"        // pm.request.headers.add({key: 'X-CSRF-TOKEN', value: cookies.get('XSRF-TOKEN') })",
-					"    }",
-					"});"
+					"// pm.sendRequest({",
+					"//     url: pm.environment.get('base_web_url')+'/sanctum/csrf-cookie',",
+					"//     method: 'GET'",
+					"// }, function (error, {cookies}) {",
+					"//     // console.log(response)",
+					"//     // console.log(cookies.get('XSRF-TOKEN'));",
+					"//     if (!error && cookies) {",
+					"//         pm.environment.set('xsrf-token', cookies.get('XSRF-TOKEN'))",
+					"//         // pm.environment.set('xsrf-cookie', cookies.get('XSRF-TOKEN'))",
+					"//         // pm.request.headers.add({key: 'X-CSRF-TOKEN', value: cookies.get('XSRF-TOKEN') })",
+					"//     }",
+					"// });"
 				]
 			}
 		},
