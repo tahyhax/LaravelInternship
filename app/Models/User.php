@@ -88,7 +88,7 @@ class User extends Authenticatable
     public function getAvatarAttribute($image)
     {
         $image = $image
-            ? asset('avatars/' . $image)
+            ? asset('/storage/avatars/' . $image)
             : " https://via.placeholder.com/100x100?text=$this->name";
 
         return $image;
