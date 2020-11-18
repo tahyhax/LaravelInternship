@@ -71,4 +71,9 @@ class Order extends Model
         return $this->belongsToMany(Product::class, 'order_items')
             ->withPivot('qty')->as('orderItem');
     }
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . $this->last_name;
+    }
 }
