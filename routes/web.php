@@ -46,4 +46,9 @@ Route::group(['as' => 'cabinet.', 'prefix' => 'cabinet', 'middleware' => ['auth'
 
         Route::put('/customer-info/{customer}/update', [\App\Http\Controllers\Cabinet\CustomerInfoController::class, 'update'])
             ->name('customer-info.update');
+
+        Route::get('/orders', [\App\Http\Controllers\Cabinet\OrderController::class, 'index'])
+            ->name('orders.index');
+        Route::get('/orders/{order}', [\App\Http\Controllers\Cabinet\OrderController::class, 'show'])
+            ->name('orders.show');
     });
