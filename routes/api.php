@@ -37,6 +37,7 @@ Route::group(['as' => 'api.', 'namespace' => '\App\Http\Controllers\Api', 'middl
 
     Route::apiResources([
         'roles' => RoleController::class,
+        'permissions' => PermissionController::class,
         'brands' => BrandController::class,
         'posts' => PostController::class,
         'payment-methods' => PaymentMethodController::class,

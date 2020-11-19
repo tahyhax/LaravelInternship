@@ -20,6 +20,23 @@ class Permission extends Model
 {
     use HasFactory;
 
+    /**
+     * @var array
+     */
+    protected $fillable = ['name', 'slug'];
+
+    /**
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function roles()
     {
         return $this->belongsToMany(Role::class);
