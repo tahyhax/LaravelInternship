@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use App\Services\Cart\Repositories\CartRepositoryInterface;
 use App\Services\Cart\Repositories\CartSessionRepository;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use App\Providers\Views\BladeStatements;
@@ -36,6 +38,8 @@ class AppServiceProvider extends ServiceProvider
         $this->registerPagination();
         $this->registerObservers();
 
+        $this->registerGateAbilities();
+
     }
 
     private function registerBindings()
@@ -63,5 +67,20 @@ class AppServiceProvider extends ServiceProvider
     private function registerObservers()
     {
         \App\Models\Order::observe(\App\Observers\OrderObserver::class);
+    }
+
+    /**
+     * черновой  вариант ,  всю проверку вынести  в  модель пользователя
+     */
+    private function registerGateAbilities()
+    {
+        \Illuminate\Support\Facades\Gate::define('access-route', function ($user, $route) {
+            return User::query()->whereHas('roles', function ($query) use ($route) {
+                $query->where('user_id', 1)
+                    ->whereHas('permissions', function ($query) use ($route) {
+                        $query->where('route_name', $route);
+                    });
+            })->exists();
+        });
     }
 }
