@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\RoleMiddleware;
+use App\Http\Middleware\VerifyRouteAccess;
 use App\Providers\Views\BladeStatements;
 use App\Services\Cart\Repositories\CartRepositoryInterface;
 use App\Services\Cart\Repositories\CartSessionRepository;
@@ -32,17 +34,20 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->bootBladeStatements();
-        $this->registerBindings();
-        $this->registerPagination();
-        $this->registerObservers();
 
-        $this->registerGateAbilities();
+        $this->registerBindings()
+            ->registerPagination()
+            ->registerObservers()
+            ->registerGateAbilities()
+            ->registerMiddleware();
 
     }
 
     private function registerBindings()
     {
         $this->app->bind(CartRepositoryInterface::class, CartSessionRepository::class);
+
+        return $this;
     }
 
     private function registerPagination()
@@ -60,11 +65,18 @@ class AppServiceProvider extends ServiceProvider
 //        $this->app->resolving(Paginator::class, static function (Paginator $paginator) {
 //            return $paginator->appends(request()->query());
 //        });
+
+        return $this;
     }
 
+    /**
+     *  register  Observers
+     */
     private function registerObservers()
     {
         \App\Models\Order::observe(\App\Observers\OrderObserver::class);
+
+        return $this;
     }
 
     /**
@@ -75,5 +87,22 @@ class AppServiceProvider extends ServiceProvider
         \Illuminate\Support\Facades\Gate::define('access-route', function ($user, $route) {
             return $user->hasRouteAccess($route);
         });
+
+        return $this;
+    }
+
+    /**
+     * register middleware
+     */
+    private function registerMiddleware()
+    {
+        $this->app['router']
+            ->aliasMiddleware('role', RoleMiddleware::class);
+
+        $this->app['router']
+            ->aliasMiddleware('verify-route-access', VerifyRouteAccess::class);
+
+        return $this;
+
     }
 }
