@@ -9,14 +9,13 @@ trait BladeStatements
 
     public function bootBladeStatements()
     {
-        $this->bootDirectiveDate();
-        $this->bootDirectiveMoney();
+        $this->bootDirectiveDate()
+            ->bootDirectiveMoney();
     }
 
     /**
      * @param null $format
-     *
-     * @date($date, 'd.m.Y')
+     * @return $this
      */
     private function bootDirectiveDate($format = null)
     {
@@ -24,10 +23,12 @@ trait BladeStatements
             $format = $format ?: 'd.m.Y';
             return "<?php echo ($expression)->format('$format'); ?>";
         });
+
+        return $this;
     }
 
     /**
-     * @money($value)
+     * @return $this
      */
     private function bootDirectiveMoney()
     {
@@ -35,6 +36,8 @@ trait BladeStatements
             $currency = config('app.currency', '$');
             return "<?php echo ('$currency ' . $expression); ?>";
         });
+
+        return $this;
     }
 
 }
