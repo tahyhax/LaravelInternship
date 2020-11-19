@@ -23,7 +23,8 @@ Route::group(['as' => 'api.'], function () {
 });
 
 
-Route::group(['as' => 'api.', 'namespace' => '\App\Http\Controllers\Api', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['as' => 'api.', 'namespace' => '\App\Http\Controllers\Api',
+    'middleware' => ['auth:sanctum']], function () {//, 'verify.route.access'
 
     Route::post('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
     Route::put('orders/update-status/{order}', [\App\Http\Controllers\Api\OrderController::class, 'updateStatus']);
