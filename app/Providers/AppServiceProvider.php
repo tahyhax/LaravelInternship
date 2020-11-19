@@ -75,12 +75,7 @@ class AppServiceProvider extends ServiceProvider
     private function registerGateAbilities()
     {
         \Illuminate\Support\Facades\Gate::define('access-route', function ($user, $route) {
-            return User::query()->whereHas('roles', function ($query) use ($route) {
-                $query->where('user_id', 1)
-                    ->whereHas('permissions', function ($query) use ($route) {
-                        $query->where('route_name', $route);
-                    });
-            })->exists();
+            return $user->hasRouteAccess($route);
         });
     }
 }

@@ -26,14 +26,18 @@ trait HasRolesAndPermissions
         return $this->roles()->where('slug', 'admin')->exists();
     }
 
-
-//    /**
-//     * @return mixed
-//     */
-//    public function permissions()
-//    {
-//        return $this->belongsToMany(Permission::class, 'users_permissions');
-//    }
+    /**
+     * @param string $route
+     * @return mixed
+     */
+    public function hasRouteAccess(string $route)
+    {
+        return $this->roles()->whereHas('permissions',
+            function ($query) use ($route) {
+                $query->where('route_name', $route);
+            }
+        )->exists();
+    }
 
     /**
      * Check if the user has Role
