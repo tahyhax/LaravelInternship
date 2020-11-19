@@ -2,13 +2,11 @@
 
 namespace App\Providers;
 
-use App\Models\User;
+use App\Providers\Views\BladeStatements;
 use App\Services\Cart\Repositories\CartRepositoryInterface;
 use App\Services\Cart\Repositories\CartSessionRepository;
-use Illuminate\Auth\Access\Gate;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
-use App\Providers\Views\BladeStatements;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -74,7 +72,7 @@ class AppServiceProvider extends ServiceProvider
      */
     private function registerGateAbilities()
     {
-        Gate::define('access-route', function ($user, $route) {
+        \Illuminate\Support\Facades\Gate::define('access-route', function ($user, $route) {
             return $user->hasRouteAccess($route);
         });
     }
