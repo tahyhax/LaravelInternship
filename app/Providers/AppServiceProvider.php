@@ -70,7 +70,7 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * черновой  вариант ,  всю проверку вынести  в  модель пользователя
+     *  Register  new gate
      */
     private function registerGateAbilities()
     {
