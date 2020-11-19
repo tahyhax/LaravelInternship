@@ -32,7 +32,8 @@ class PermissionApiStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:permissions'
+            'name' => 'required|unique:permissions',
+            'route_name' => 'required|min:5|max:75|unique:permissions'
         ];
     }
 }

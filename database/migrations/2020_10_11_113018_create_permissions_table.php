@@ -17,7 +17,11 @@ class CreatePermissionsTable extends Migration
             $table->id();
             $table->string('name', 50)->unique();
             $table->string('slug', 50)->unique();
+            $table->string('route_name', 75)->unique();
             $table->timestamps();
+
+            $table->index('slug');
+            $table->index('route_name');
         });
     }
 

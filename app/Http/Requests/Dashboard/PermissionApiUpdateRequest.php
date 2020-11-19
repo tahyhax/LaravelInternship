@@ -32,7 +32,9 @@ class PermissionApiUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:permissions,name,' . $this->permission->id
+            'name' => 'required|unique:permissions,name,' . $this->permission->id,
+            'route_name' => 'required|min:5|max:75|unique:permissions,name,' . $this->permission->id
+
         ];
     }
 }

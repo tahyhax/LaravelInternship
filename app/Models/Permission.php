@@ -23,7 +23,7 @@ class Permission extends Model
     /**
      * @var array
      */
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = ['name', 'slug', 'route_name'];
 
     /**
      * @return string
