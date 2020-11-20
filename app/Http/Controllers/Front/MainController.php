@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Http\Filters\ProductFilters;
 use App\Models\Product;
 use App\Traits\Filterable;
 
