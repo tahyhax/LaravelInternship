@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Dashboard;
 
+use App\Rules\isRouteExist;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 
@@ -31,9 +32,11 @@ class PermissionApiStoreRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'name' => 'required|unique:permissions',
-            'route_name' => 'required|min:5|max:75|unique:permissions'
+            'route_name' => ['required', 'min:5', 'max:75', 'unique:permissions', new isRouteExist]
         ];
     }
+
 }

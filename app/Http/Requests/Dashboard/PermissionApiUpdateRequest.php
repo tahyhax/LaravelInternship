@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests\Dashboard;
 
+use App\Rules\isRouteExist;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class PermissionApiUpdateRequest extends FormRequest
 {
@@ -33,7 +35,8 @@ class PermissionApiUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:permissions,name,' . $this->permission->id,
-            'route_name' => 'required|min:5|max:75|unique:permissions,name,' . $this->permission->id
+            'route_name' => ['required', 'min:5', 'max:75',
+                Rule::unique('permissions', 'name')->ignore($this->permission->id), new isRouteExist]
 
         ];
     }
