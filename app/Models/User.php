@@ -38,6 +38,11 @@ class User extends Authenticatable
 {
     use  HasFactory, Notifiable, HasApiTokens, HasRolesAndPermissions;
 
+
+    const ADMIN_SLUG = 'admin';
+
+    const SUPER_ADMIN_SLUG = 'super-admin';
+
     /**
      * The attributes that are mass assignable.
      *

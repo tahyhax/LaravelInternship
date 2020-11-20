@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Models\Role;
 use App\Models\Permission;
+use App\Models\User;
 
 trait HasRolesAndPermissions
 {
@@ -23,7 +24,17 @@ trait HasRolesAndPermissions
      */
     public function isAdmin()
     {
-        return $this->roles()->where('slug', 'admin')->exists();
+        return $this->roles()->where('slug', User::ADMIN_SLUG)->exists();
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return boolean
+     */
+    public function isSuperAdmin()
+    {
+        return $this->roles()->where('slug', User::SUPER_ADMIN_SLUG)->exists();
     }
 
     /**
@@ -32,7 +43,7 @@ trait HasRolesAndPermissions
      */
     public function hasRouteAccess(string $route)
     {
-        return $this->roles()->whereHas('permissions',
+        return $this->isSuperAdmin() ?: $this->roles()->whereHas('permissions',
             function ($query) use ($route) {
                 $query->where('route_name', $route);
             }
