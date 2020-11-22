@@ -26,14 +26,11 @@ class ProductFactory extends Factory
     {
         $name = $this->faker->unique()->sentence(3);
         $slug = Str::slug($name, '-');
-//         $file = UploadedFile::fake()->image('product.png', 600, 600);
-//        $cover = $this->faker->image(storage_path('images'), 600, 600);
 
         return [
             'sku' => $this->faker->numberBetween(0, 9999999999),
             'name' => $name,
             'slug'=> $slug,
-//            'cover' => $cover,
             'description' => $this->faker->paragraphs(4, true),
             'price' => rand(1000, 450000) / 100,
             'brand_id' => $this->getBrandId(),

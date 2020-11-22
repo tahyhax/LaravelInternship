@@ -24,13 +24,9 @@ class CategoryFactory extends Factory
     {
         $name = $this->faker->unique()->name;
         $slug = Str::slug($name, '-');
-//        $file = UploadedFile::fake()->image('category.png', 600, 600);
         return [
             'name' => $name,
             'slug'=> $slug,
-//            'parent_id' => 0
-            //'cover' => $file->store('categories', ['disk' => 'public'])
-
         ];
     }
 }
