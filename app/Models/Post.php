@@ -41,7 +41,6 @@ class Post extends Model
         'title', 'body', 'user_id', 'slug',
     ];
 
-    //TODO непонятно чегоне зочет работать
     protected $casts = [
         'created_at' => 'datetime:d/m/Y H:s',
         'updated_at' => 'datetime:d/m/Y H:s',
