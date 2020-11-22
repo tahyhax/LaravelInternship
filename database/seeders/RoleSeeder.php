@@ -18,7 +18,7 @@ class RoleSeeder extends Seeder
             [
                 'name' => 'SuperAdmin',
                 'slug' => 'super-admin',
-                'description' => 'this is  man like  jambo'
+                'description' => 'this is  man like ...'
             ],
             [
                 'name' => 'customer',
