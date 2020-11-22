@@ -35,7 +35,9 @@ class PermissionApiStoreRequest extends FormRequest
 
         return [
             'name' => 'required|unique:permissions',
-            'route_name' => ['required', 'min:5', 'max:75', 'unique:permissions', new isRouteExist]
+            'route_name' => ['required', 'min:5', 'max:75', 'unique:permissions', new isRouteExist],
+            'roles' => 'array|nullable',
+            'roles.*' => 'integer|exists:roles,id'
         ];
     }
 

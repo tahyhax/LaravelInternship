@@ -36,7 +36,9 @@ class PermissionApiUpdateRequest extends FormRequest
         return [
             'name' => 'required|unique:permissions,name,' . $this->permission->id,
             'route_name' => ['required', 'min:5', 'max:75',
-                Rule::unique('permissions', 'name')->ignore($this->permission->id), new isRouteExist]
+                Rule::unique('permissions', 'name')->ignore($this->permission->id), new isRouteExist],
+            'roles' => 'array|nullable',
+            'roles.*' => 'integer|exists:roles,id'
 
         ];
     }
