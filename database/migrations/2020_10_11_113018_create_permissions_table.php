@@ -23,6 +23,10 @@ class CreatePermissionsTable extends Migration
             $table->index('slug');
             $table->index('route_name');
         });
+
+        \Illuminate\Support\Facades\Artisan::call('db:seed', [
+            '--class' => \Database\Seeders\PermissionSeeder::class
+        ]);
     }
 
     /**
