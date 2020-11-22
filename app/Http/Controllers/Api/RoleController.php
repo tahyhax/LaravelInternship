@@ -36,9 +36,9 @@ class RoleController extends Controller
     {
         $role = new Role($request->all());
         $role->save();
-//        $role->permissions()->sync($request->get('permissions'));
+        $role->permissions()->sync($request->get('permissions'));
 
-        return new RoleResource($role);
+        return new RoleResource($role->load('permissions'));
     }
 
     /**
