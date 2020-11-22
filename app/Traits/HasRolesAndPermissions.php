@@ -43,7 +43,8 @@ trait HasRolesAndPermissions
      */
     public function hasRouteAccess(string $route)
     {
-        return $this->isSuperAdmin() ?: $this->roles()->whereHas('permissions',
+        return $this->isSuperAdmin() ?
+            : $this->roles()->whereHas('permissions',
             function ($query) use ($route) {
                 $query->where('route_name', $route);
             }
