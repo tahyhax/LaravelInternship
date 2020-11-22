@@ -41,7 +41,7 @@ class User extends Authenticatable
 
     const ADMIN_SLUG = 'admin';
 
-    const SUPER_ADMIN_SLUG = 'super-admin';
+    const SUPER_ADMIN_SLUG = 'superadmin';
 
     /**
      * The attributes that are mass assignable.
