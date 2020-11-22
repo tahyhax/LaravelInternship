@@ -33,7 +33,9 @@ class RoleApiStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:50|unique:roles',
-            'description' => 'required'
+            'description' => 'required',
+            'permissions' => 'array|nullable',
+            'permissions.*' => 'integer|exists:permissions,id'
         ];
     }
 }

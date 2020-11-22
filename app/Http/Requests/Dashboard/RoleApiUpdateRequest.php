@@ -34,7 +34,9 @@ class RoleApiUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:50|unique:roles,name,' . $this->role->id,
-            'description' => 'required'
+            'description' => 'required',
+            'permissions' => 'array|nullable',
+            'permissions.*' => 'integer|exists:permissions,id'
         ];
     }
 }
