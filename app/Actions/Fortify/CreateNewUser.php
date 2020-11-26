@@ -26,7 +26,7 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-        $role = Role::query()->where('slug', 'customer')->pluck('id')->first();
+        $role = Role::query()->where('slug', User::CUSTOMER_SLUG)->pluck('id')->first();
 
         $user = User::create([
             'name' => $input['name'],
