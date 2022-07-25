@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Cabinet;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Cabinet\UserUpdateRequest;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class CustomerInfoController extends Controller
@@ -14,9 +16,9 @@ class CustomerInfoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function show()
+    public function show(): Response
     {
         $customer = User::query()->findOrFail(Auth::id());
         return view('cabinet.customer-info.show')->with(compact('customer'));
@@ -26,9 +28,9 @@ class CustomerInfoController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  User $customer
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function edit(User $customer)
+    public function edit(User $customer): Response
     {
         return view('cabinet.customer-info.edit')->with(compact('customer'));
     }
@@ -37,9 +39,9 @@ class CustomerInfoController extends Controller
      * /**
      * @param UserUpdateRequest $request
      * @param User $customer
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function update(UserUpdateRequest $request, User $customer)
+    public function update(UserUpdateRequest $request, User $customer): RedirectResponse
     {
 
         $params = $request->all();
@@ -60,7 +62,7 @@ class CustomerInfoController extends Controller
      * @param Request $request
      * @return bool|string
      */
-    protected function storeImage(Request $request)
+    protected function storeImage(Request $request): bool|string
     {
         $avatar = $request->file('avatar');
         $path = $avatar->store('avatars');

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Traits\Filterable;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 
 class MainController extends Controller
 {
@@ -12,12 +14,12 @@ class MainController extends Controller
     /**
      * @var int $perPage
      */
-    protected $perPage = 12;
+    protected int $perPage = 12;
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
-    public function __invoke()
+    public function __invoke(): Factory|View
     {
         return view('front.main.index')->with(
             [

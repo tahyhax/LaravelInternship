@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -14,9 +15,10 @@ class AuthController extends Controller
 {
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
+     * @throws ValidationException
      */
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         $request->validate([
             'email' => 'email|required',
@@ -44,9 +46,9 @@ class AuthController extends Controller
      * Store a newly created resource in storage.
      * @see https://stackoverflow.com/questions/62496954/laravel-7-sanctum-logout
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function logout(Request $request)
+    public function logout(Request $request): JsonResponse
     {
         return response()->json([
             'status_code' => Response::HTTP_OK,
@@ -61,7 +63,7 @@ class AuthController extends Controller
      * @param string $field
      * @return bool
      */
-    protected function checkHash($request, $model, $field)
+    protected function checkHash(Request $request, Model $model, string $field): bool
     {
         return Hash::check($request->{$field}, $model->{$field}, []);
     }

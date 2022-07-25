@@ -13,10 +13,10 @@ class OrderObserver
     /**
      * Handle the order "updated" event.
      *
-     * @param  \App\Models\Order  $order
+     * @param Order $order
      * @return void
      */
-    public function updated(Order $order)
+    public function updated(Order $order): void
     {
         Notification::route('mail', $order->email)->notify(new OrderUpdatedNotification($order));
     }

@@ -4,17 +4,19 @@ namespace App\Http\Controllers\Cabinet;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class OrderController extends Controller
 {
     /**
      * @var integer
      */
-    const PERPAGE = 10;
+    const  PERPAGE = 10;
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -31,9 +33,9 @@ class OrderController extends Controller
 
     /**
      * @param Order $order
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
-    public function show(Order $order)
+    public function show(Order $order): Factory|View
     {
         return view('cabinet.orders.show')->with([
             'order' => $order->load(['paymentMethod']),

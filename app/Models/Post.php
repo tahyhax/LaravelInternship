@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Models\Post
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed|null $created_at
  * @property mixed|null $updated_at
  * @property string|null $publish_at
- * @property-read \App\Models\User $user
+ * @property-read User $user
  * @mixin \Eloquent
  */
 class Post extends Model
@@ -30,7 +31,7 @@ class Post extends Model
      *
      * @return void
      */
-    protected static function booted()
+    protected static function booted(): void
     {
         static::addGlobalScope('published', function (Builder $builder) {
             $builder->whereDate('publish_at', '<', date('Y-m-d H:i:s'));
@@ -47,15 +48,15 @@ class Post extends Model
     ];
 
 
-    public function getRouteKeyName()
+    public function getRouteKeyName(): string
     {
         return 'slug';
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

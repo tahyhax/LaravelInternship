@@ -21,7 +21,7 @@ class CategoryApiUpdateRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -32,7 +32,7 @@ class CategoryApiUpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => 'required|min:3|max:50|unique:categories,name,' . $this->category->id,

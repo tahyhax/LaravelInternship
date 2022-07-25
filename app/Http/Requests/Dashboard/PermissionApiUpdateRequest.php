@@ -21,7 +21,7 @@ class PermissionApiUpdateRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -31,7 +31,7 @@ class PermissionApiUpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => 'required|unique:permissions,name,' . $this->permission->id,

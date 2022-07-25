@@ -3,9 +3,14 @@
 namespace App\Models;
 
 use App\Events\ImagesEvent;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Carbon;
 
 /**
  * Class Category
@@ -16,18 +21,17 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  * @property string $name
  * @property string $slug
  * @property int|null $parent_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|Category[] $children
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection|Category[] $children
  * @property-read int|null $children_count
  * @property-read string $image_main
-// * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
  * @property-read int|null $images_count
- * @property-read \App\Models\Image|null $imagesMain
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
+ * @property-read Image|null $imagesMain
+ * @property-read Collection|Product[] $products
  * @property-read int|null $products_count
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|Category[] $categories
+ * @property-read Collection|Category[] $categories
  * @property-read int|null $categories_count
  */
 class Category extends Model
@@ -49,7 +53,7 @@ class Category extends Model
     /**
      * @return string
      */
-    public function getRouteKeyName()
+    public function getRouteKeyName(): string
     {
         return 'slug';
     }
@@ -60,41 +64,41 @@ class Category extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function categories()
+    public function categories(): HasMany
     {
         return $this->hasMany(Category::class, 'parent_id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function children()
+    public function children(): HasMany
     {
         return $this->hasMany(Category::class, 'parent_id', 'id')->with('children');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function products()
+    public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return MorphMany
      */
-    public function images()
+    public function images(): MorphMany
     {
         return $this->morphMany(Image::class, 'imageable');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     * @return MorphOne
      */
-    public function imagesMain()
+    public function imagesMain(): MorphOne
     {
         return $this->morphOne(Image::class, 'imageable')
             ->orderBy('id', 'DESC')
@@ -105,7 +109,7 @@ class Category extends Model
      * @param array $images files  from category request
      * @return array
      */
-    public function loadImagesToStore($images)
+    public function loadImagesToStore(array $images): array
     {
         $imagesList = [];
         foreach ($images as $image) {

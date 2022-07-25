@@ -15,13 +15,13 @@ class RoleController extends Controller
     /**
      * @var integer
      */
-    private $perPage = 10;
+    private int $perPage = 10;
 
     /**
      * @param Request $request
      * @return RoleResource
      */
-    public function index(Request $request)
+    public function index(Request $request): RoleResource
     {
         $perPage = $request->get('per_page') ?: $this->perPage;
         $roles = Role::query()->with('permissions')->paginate($perPage);
@@ -33,7 +33,7 @@ class RoleController extends Controller
      * @param RoleApiStoreRequest $request
      * @return RoleResource
      */
-    public function store(RoleApiStoreRequest $request)
+    public function store(RoleApiStoreRequest $request): RoleResource
     {
         $role = new Role($request->all());
         $role->save();
@@ -46,7 +46,7 @@ class RoleController extends Controller
      * @param Role $role
      * @return RoleResource
      */
-    public function show(Role $role)
+    public function show(Role $role): RoleResource
     {
         return new RoleResource($role->load('permissions'));
     }
@@ -56,7 +56,7 @@ class RoleController extends Controller
      * @param Role $role
      * @return RoleResource
      */
-    public function update(RoleApiUpdateRequest $request, Role $role)
+    public function update(RoleApiUpdateRequest $request, Role $role): RoleResource
     {
         $role->update($request->all());
         $role->permissions()->sync($request->get('permissions'));

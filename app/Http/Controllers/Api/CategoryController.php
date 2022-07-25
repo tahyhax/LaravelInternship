@@ -73,7 +73,7 @@ class CategoryController extends Controller
     {
         DB::beginTransaction();
         try {
-            $category->update($request->all());
+            $category->update($request->validated());
 
             $imagesList = $request->hasFile('images')
                 ? $category->loadImagesToStore($request->file('images'))

@@ -13,6 +13,6 @@ class PermissionRole extends Model
         'access'
     ];
     protected $casts = [
-      'access' => 'boolean'
+        'access' => 'boolean'
     ];
 }

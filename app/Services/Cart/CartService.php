@@ -30,6 +30,7 @@ class CartService
             return new Collection;
         }
 
+//        create  product repo
         return Product::whereIn('id', array_keys($cart))->get()
             ->map(function (Product $product) use ($cart) {
                 return (object)[

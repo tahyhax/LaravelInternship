@@ -5,19 +5,22 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Http\Filters\ProductFilters;
 use App\Models\Product;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class ProductController extends Controller
 {
     /**
      * @var int
      */
-    protected $perPage = 10;
+    protected int $perPage = 10;
 
     /**
      * @param ProductFilters $filters
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
-    public function index(ProductFilters $filters)
+    public function index(ProductFilters $filters): Factory|View
     {
 
         return view('front.products.index')->with(
@@ -34,10 +37,10 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product $product
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return Response
      */
-    public function show(Product $product)
+    public function show(Product $product): Response
     {
         return view('front.products.show')->with(
             ['product' => $product->load('brand', 'images')]

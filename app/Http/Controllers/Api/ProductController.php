@@ -16,18 +16,17 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
 
-    protected $perPage = 10;
+    protected int $perPage = 10;
 
     /**
      * @param Request $request
      * @param ProductFilters $filters
      * @return ProductResource
      */
-    public function index(Request $request, ProductFilters $filters)
+    public function index(Request $request, ProductFilters $filters): ProductResource
     {
         $perPage = $request->get('per_page') ?: $this->perPage;
         $products = Product::query()->with(['categories', 'brand', 'imagesMain'])->filter($filters)->paginate($perPage);
-
 
         return new ProductResource($products);
     }
@@ -36,7 +35,7 @@ class ProductController extends Controller
      * @param ProductApiStoreRequest $request
      * @return ProductResource
      */
-    public function store(ProductApiStoreRequest $request)
+    public function store(ProductApiStoreRequest $request): ProductResource
     {
         $product = new Product($request->all());
         $product->brand()->associate($request->get('brand'));
@@ -60,7 +59,7 @@ class ProductController extends Controller
      * @param Product $product
      * @return ProductResource
      */
-    public function show(Product $product)
+    public function show(Product $product): ProductResource
     {
         $product->load(['categories', 'brand', 'images', 'similar']);
 
@@ -72,8 +71,9 @@ class ProductController extends Controller
      * @param ProductApiUpdateRequest $request
      * @param Product $product
      * @return ProductResource
+     * @throws \Throwable
      */
-    public function update(ProductApiUpdateRequest $request, Product $product)
+    public function update(ProductApiUpdateRequest $request, Product $product): ProductResource
     {
         DB::beginTransaction();
         try {

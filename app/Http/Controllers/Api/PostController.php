@@ -13,13 +13,13 @@ use Illuminate\Http\Response;
 class PostController extends Controller
 {
 
-    protected $perPage = 10;
+    protected int $perPage = 10;
 
     /**
      * @param Request $request
      * @return PostResource
      */
-    public function index(Request $request)
+    public function index(Request $request): PostResource
     {
         $perPage = $request->get('per_page') ?: $this->perPage;
         $posts = Post::query()->orderBy('id', 'DESC')->paginate($perPage);
@@ -30,7 +30,7 @@ class PostController extends Controller
      * @param PostApiStoreRequest $request
      * @return PostResource
      */
-    public function store(PostApiStoreRequest $request)
+    public function store(PostApiStoreRequest $request): PostResource
     {
         $post = Post::create($request->all());
 
@@ -41,7 +41,7 @@ class PostController extends Controller
      * @param Post $post
      * @return PostResource
      */
-    public function show(Post $post)
+    public function show(Post $post): PostResource
     {
         return new PostResource($post);
     }
@@ -51,7 +51,7 @@ class PostController extends Controller
      * @param Post $post
      * @return PostResource
      */
-    public function update(PostApiUpdateRequest $request, Post $post)
+    public function update(PostApiUpdateRequest $request, Post $post): PostResource
     {
         $post->update($request->all());
 
@@ -60,8 +60,7 @@ class PostController extends Controller
 
     /**
      * @param Post $post
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     * @throws \Exception
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|Response
      */
     public function destroy(Post $post)
     {

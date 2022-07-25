@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 
 class PostController extends Controller
 {
@@ -11,12 +13,12 @@ class PostController extends Controller
     /**
      * @var int
      */
-    protected $perPage = 10;
+    protected int $perPage = 10;
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
-    public function index()
+    public function index(): Factory|View
     {
         return view('front.posts.index')->with(
             [
@@ -29,9 +31,9 @@ class PostController extends Controller
 
     /**
      * @param Post $post
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
-    public function show(Post $post)
+    public function show(Post $post): Factory|View
     {
         return view('front.posts.show')->with(['post' => $post->load('user')]);
     }

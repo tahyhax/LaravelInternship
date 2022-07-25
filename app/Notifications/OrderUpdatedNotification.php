@@ -12,18 +12,12 @@ class OrderUpdatedNotification extends Notification
     use Queueable;
 
     /**
-     * @var Order
-     */
-    private $order;
-
-    /**
      * Create a new notification instance.
      *
      * @param Order $order
      */
-    public function __construct(Order $order)
+    public function __construct(private readonly Order $order)
     {
-        $this->order = $order;
     }
 
     /**
@@ -41,9 +35,9 @@ class OrderUpdatedNotification extends Notification
      * Get the mail representation of the notification.
      *
      * @param  mixed $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail(mixed $notifiable): MailMessage
     {
         return (new MailMessage)
             ->subject('Order:' . $this->order->slug . ' was updated')
@@ -58,7 +52,7 @@ class OrderUpdatedNotification extends Notification
      * @param  mixed $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray(mixed $notifiable): array
     {
         return [
             //

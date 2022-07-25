@@ -16,7 +16,6 @@ class ImagesListener
      */
     public function __construct()
     {
-        //
     }
 
     /**

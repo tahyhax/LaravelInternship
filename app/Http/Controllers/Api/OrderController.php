@@ -16,13 +16,13 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class OrderController extends Controller
 {
 
-    protected $perPage = 10;
+    protected int $perPage = 10;
 
     /**
      * @param Request $request
      * @return OrderResource
      */
-    public function index(Request $request)
+    public function index(Request $request): OrderResource
     {
         $perPage = $request->get('per_page') ?: $this->perPage;
         $requests = Order::query()->with(['user', 'products.brand'])
@@ -36,7 +36,7 @@ class OrderController extends Controller
      * @param OrderApiStoreRequest $request
      * @return OrderResource
      */
-    public function store(OrderApiStoreRequest $request)
+    public function store(OrderApiStoreRequest $request): OrderResource
     {
         try {
             $order = new Order($request->all());
@@ -62,7 +62,7 @@ class OrderController extends Controller
      * @param Order $order
      * @return OrderResource
      */
-    public function show(Order $order)
+    public function show(Order $order): OrderResource
     {
         return new OrderResource($order->load(['user', 'products.brand']));
     }
@@ -72,7 +72,7 @@ class OrderController extends Controller
      * @param Order $order
      * @return OrderResource
      */
-    public function update(OrderApiUpdateRequest $request, Order $order)
+    public function update(OrderApiUpdateRequest $request, Order $order): OrderResource
     {
         $order->user()->associate($request->get('user'));
         $order->paymentMethod()->associate($request->get('paymentMethods'));
@@ -96,7 +96,7 @@ class OrderController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
     }
 
-    public function updateStatus(OrderApiChangeStatusRequest $request, Order $order)
+    public function updateStatus(OrderApiChangeStatusRequest $request, Order $order): OrderResource
     {
         $order->update($request->all());
 

@@ -2,14 +2,15 @@
 
 namespace App\Services\Cart\Repositories;
 
-interface CartRepositoryInterface {
+interface CartRepositoryInterface
+{
 
     /**
      * Get all items in the cart.
      *
      * @return array
      */
-    public function cart();
+    public function cart(): array;
 
     /**
      * @param int $id

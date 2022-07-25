@@ -9,33 +9,28 @@ use Illuminate\Support\Str;
 
 abstract class  QueryFilters
 {
-    /**
-     * @var Request
-     */
-    protected $request;
 
     /**
      * @var Builder
      */
-    protected $builder;
+    protected Builder $builder;
 
     /**
      * query string params delimiter for parse
      *
      * @var string
      */
-    protected $delimiter = ',';
+    protected string $delimiter = ',';
 
-    protected $betweenDelimiter = '-';
+    protected string $betweenDelimiter = '-';
 
 
     /**
      * QueryFilter constructor.
      * @param Request $request
      */
-    public function __construct(Request $request)
+    public function __construct(private readonly Request $request)
     {
-        $this->request = $request;
     }
 
 
@@ -72,7 +67,7 @@ abstract class  QueryFilters
      * @param Builder $builder
      * @return Builder
      */
-    public function apply(Builder $builder)
+    public function apply(Builder $builder): Builder
     {
         $this->builder = $builder;
 

@@ -12,11 +12,6 @@ use Illuminate\Contracts\Session\Session;
  */
 class CartSessionRepository implements CartRepositoryInterface
 {
-    /**
-     * @var Session 
-     */
-    private $session;
-
 
     /**
      * cart  key in session
@@ -25,9 +20,8 @@ class CartSessionRepository implements CartRepositoryInterface
     private const CART_KEY = 'cart';
 
 
-    public function __construct(Session $session)
+    public function __construct(private readonly Session $session)
     {
-        $this->session = $session;
     }
 
     /**
@@ -45,7 +39,7 @@ class CartSessionRepository implements CartRepositoryInterface
      *
      * @return array
      */
-    public function cart()
+    public function cart(): array
     {
         return $this->session->get(self::CART_KEY, []);
     }

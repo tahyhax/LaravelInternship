@@ -13,27 +13,21 @@ class OrderCreatedNotification extends Notification
     use Queueable;
 
     /**
-     * @var Order
-     */
-    private $order;
-
-    /**
      * Create a new notification instance.
      *
      * @param Order $order
      */
-    public function __construct(Order $order)
+    public function __construct(private readonly Order $order)
     {
-        $this->order = $order;
     }
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via(mixed $notifiable): array
     {
         return ['mail'];
     }
@@ -41,10 +35,10 @@ class OrderCreatedNotification extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @param mixed $notifiable
+     * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail(mixed $notifiable): MailMessage
     {
         return (new MailMessage)
             ->subject('Order:' . $this->order->slug . ' was created')
@@ -56,10 +50,10 @@ class OrderCreatedNotification extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray(mixed $notifiable): array
     {
         return [
             //

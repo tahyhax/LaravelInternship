@@ -7,12 +7,6 @@ use Illuminate\View\View;
 
 class SidebarCategoriesComposer
 {
-    /**
-     * The category model.
-     *
-     * @var $category
-     */
-    protected $category;
 
     /**
      * Create a new profile composer.
@@ -20,9 +14,8 @@ class SidebarCategoriesComposer
      * @param  Category $category
      * @return void
      */
-    public function __construct(Category $category)
+    public function __construct(protected readonly Category $category)
     {
-        $this->category = $category;
     }
 
     /**
@@ -31,9 +24,10 @@ class SidebarCategoriesComposer
      * @param  View $view
      * @return void
      */
-    public function compose(View $view)
+    public function compose(View $view): void
     {
-        $categories = $this->category->with(['products', 'children'])->withCount('products')
+        $categories = $this->category->with(['products', 'children'])
+            ->withCount('products')
             ->rootLevel()
             ->get();
         $view->with('categories', $categories);

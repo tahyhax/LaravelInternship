@@ -20,7 +20,7 @@ class PaymentMethodApiUpdateRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -30,7 +30,7 @@ class PaymentMethodApiUpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => 'required|min:1|max:25|unique:payment_methods,name,' . $this->payment_method->id

@@ -8,19 +8,16 @@ use App\Http\Requests\CheckoutOrderingRequest;
 use App\Models\Order;
 use App\Models\PaymentMethod;
 use App\Services\Cart\CartService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CheckoutController extends Controller
 {
-    /**
-     * @var CartService $cartService
-     */
-    private $cartService;
 
-    public function __construct(CartService $cartService)
+    public function __construct(private readonly CartService $cartService)
     {
-        $this->cartService = $cartService;
+
     }
 
     /**
@@ -37,9 +34,10 @@ class CheckoutController extends Controller
 
     /**
      * @param CheckoutOrderingRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
+     * @throws \Throwable
      */
-    public function ordering(CheckoutOrderingRequest $request)
+    public function ordering(CheckoutOrderingRequest $request): RedirectResponse
     {
 
         DB::beginTransaction();

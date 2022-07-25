@@ -15,7 +15,7 @@ class PaymentMethodController extends Controller
     /**
      * @return PaymentMethodResource
      */
-    public function index()
+    public function index(): PaymentMethodResource
     {
         $paymentMethods = PaymentMethod::query()->orderBy('id', 'DESC')->get();
 
@@ -26,7 +26,7 @@ class PaymentMethodController extends Controller
      * @param PaymentMethodApiStoreRequest $request
      * @return PaymentMethodResource
      */
-    public function store(PaymentMethodApiStoreRequest $request)
+    public function store(PaymentMethodApiStoreRequest $request): PaymentMethodResource
     {
         $paymentMethod = PaymentMethod::create($request->all());
 
@@ -35,9 +35,9 @@ class PaymentMethodController extends Controller
 
     /**
      * @param PaymentMethod $paymentMethod
-     * @return mixed
+     * @return PaymentMethodResource
      */
-    public function show(PaymentMethod $paymentMethod)
+    public function show(PaymentMethod $paymentMethod): PaymentMethodResource
     {
         return new PaymentMethodResource($paymentMethod);
     }
@@ -45,9 +45,9 @@ class PaymentMethodController extends Controller
     /**
      * @param PaymentMethodApiUpdateRequest $request
      * @param PaymentMethod $paymentMethod
-     * @return mixed
+     * @return PaymentMethodResource
      */
-    public function update(PaymentMethodApiUpdateRequest $request, PaymentMethod $paymentMethod)
+    public function update(PaymentMethodApiUpdateRequest $request, PaymentMethod $paymentMethod): PaymentMethodResource
     {
         $paymentMethod->update($request->all());
 

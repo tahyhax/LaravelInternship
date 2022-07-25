@@ -3,9 +3,17 @@
 namespace App\Models;
 
 use App\Events\ImagesEvent;
+use App\Http\Filters\QueryFilters;
 use App\Traits\Filterable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Carbon;
 
 /**
  * Class Product
@@ -18,21 +26,21 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $description
  * @property float $price
  * @property int $in_stock
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property int $brand_id
- * @property-read \App\Models\Brand $brand
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
+ * @property-read Brand $brand
+ * @property-read Collection|Category[] $categories
  * @property-read int|null $categories_count
  * @property-read string $image_main
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
+ * @property-read Collection|Image[] $images
  * @property-read int|null $images_count
- * @property-read \App\Models\Image|null $imagesMain
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Order[] $orders
+ * @property-read Image|null $imagesMain
+ * @property-read Collection|Order[] $orders
  * @property-read int|null $orders_count
- * @method static \Illuminate\Database\Eloquent\Builder|Product filter(\App\Http\Filters\QueryFilters $filter)
+ * @method static Builder|Product filter(QueryFilters $filter)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|Product[] $similar
+ * @property-read Collection|Product[] $similar
  * @property-read int|null $similar_count
  */
 class Product extends Model
@@ -58,39 +66,39 @@ class Product extends Model
         'price' => 'float'
     ];
 
-    public function getRouteKeyName()
+    public function getRouteKeyName(): string
     {
         return 'slug';
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function brand()
+    public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function categories()
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return MorphMany
      */
-    public function images()
+    public function images(): MorphMany
     {
         return $this->morphMany(Image::class, 'imageable');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     * @return MorphOne
      */
-    public function imagesMain()
+    public function imagesMain(): MorphOne
     {
         return $this->morphOne(Image::class, 'imageable')
             ->orderBy('id', 'DESC')
@@ -98,7 +106,7 @@ class Product extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
     public function orders()
     {
@@ -106,9 +114,9 @@ class Product extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function similar()
+    public function similar(): BelongsToMany
     {
         return $this->belongsToMany(Product::class,'product_similar',
             'product_id',
@@ -120,7 +128,7 @@ class Product extends Model
      * @param array $images files  from product request
      * @return array
      */
-    public function loadImagesToStore(array $images)
+    public function loadImagesToStore(array $images): array
     {
         $imagesList = [];
         foreach ($images as $image) {
@@ -136,6 +144,7 @@ class Product extends Model
 
     }
 
+    //есть дублика этого функционала  надо вынести в  трейт
     /**
      * get main image fro scope  images
      * @return string

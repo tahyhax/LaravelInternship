@@ -7,6 +7,7 @@ use App\Http\Requests\Dashboard\BrandApiStoreRequest;
 use App\Http\Requests\Dashboard\BrandApiUpdateRequest;
 use App\Http\Resources\Dashboard\BrandResource;
 use App\Models\Brand;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -15,13 +16,13 @@ class BrandController extends Controller
     /**
      * @var int $perPage
      */
-    protected $perPage = 10;
+    protected int $perPage = 10;
 
     /**
-     * @param $request
+     * @param Request $request
      * @return BrandResource
      */
-    public function index(Request $request)
+    public function index(Request $request): BrandResource
     {
         $perPage = $request->get('per_page') ?: $this->perPage;
         $brands = Brand::query()->orderBy('id', 'DESC')->paginate($perPage);
@@ -33,7 +34,7 @@ class BrandController extends Controller
      * @param BrandApiStoreRequest $request
      * @return BrandResource
      */
-    public function store(BrandApiStoreRequest $request)
+    public function store(BrandApiStoreRequest $request): BrandResource
     {
         $brand = Brand::create($request->all());
 
@@ -44,7 +45,7 @@ class BrandController extends Controller
      * @param Brand $brand
      * @return BrandResource
      */
-    public function show(Brand $brand)
+    public function show(Brand $brand): BrandResource
     {
         return new BrandResource($brand->load('images'));
     }
@@ -54,7 +55,7 @@ class BrandController extends Controller
      * @param Brand $brand
      * @return BrandResource
      */
-    public function update(BrandApiUpdateRequest $request, Brand $brand)
+    public function update(BrandApiUpdateRequest $request, Brand $brand): BrandResource
     {
         $brand->update($request->all());
 
@@ -63,10 +64,10 @@ class BrandController extends Controller
 
     /**
      * @param Brand $brand
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|Response
+     * @return ResponseFactory|Response
      * @throws \Exception
      */
-    public function destroy(Brand $brand)
+    public function destroy(Brand $brand): Response|ResponseFactory
     {
         $brand->delete();
 

@@ -15,13 +15,13 @@ class PermissionController extends Controller
     /**
      * @var int
      */
-    private $perPage = 10;
+    private int $perPage = 10;
 
     /**
      * @param Request $request
      * @return PermissionResource
      */
-    public function index(Request $request)
+    public function index(Request $request): PermissionResource
     {
         $perPage = $request->get('per_page') ?: $this->perPage;
         $permissions = Permission::query()->with('roles')->paginate($perPage);
@@ -33,7 +33,7 @@ class PermissionController extends Controller
      * @param PermissionApiStoreRequest $request
      * @return PermissionResource
      */
-    public function store(PermissionApiStoreRequest $request)
+    public function store(PermissionApiStoreRequest $request): PermissionResource
     {
         $permission = new Permission($request->all());
         $permission->save();
@@ -46,7 +46,7 @@ class PermissionController extends Controller
      * @param Permission $permission
      * @return PermissionResource
      */
-    public function show(Permission $permission)
+    public function show(Permission $permission): PermissionResource
     {
         return new PermissionResource($permission->load('roles'));
     }
@@ -56,7 +56,7 @@ class PermissionController extends Controller
      * @param Permission $permission
      * @return PermissionResource
      */
-    public function update(PermissionApiUpdateRequest $request, Permission $permission)
+    public function update(PermissionApiUpdateRequest $request, Permission $permission): PermissionResource
     {
         $permission->update($request->all());
         $permission->roles()->sync($request->get('roles', []));

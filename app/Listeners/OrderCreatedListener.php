@@ -14,16 +14,15 @@ class OrderCreatedListener
      */
     public function __construct()
     {
-        //
     }
 
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param object $event
      * @return void
      */
-    public function handle($event)
+    public function handle(object $event): void
     {
         Notification::route('mail', $event->order->email)->notify(new OrderCreatedNotification($event->order));
     }
